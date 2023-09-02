@@ -1,0 +1,87 @@
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+    
+      .sidebar {
+        height: 100%;
+        width: 100px;
+        background: radial-gradient(circle, #007bff, #0553fc);
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add box shadow */
+      }
+    
+      .sidebar a {
+        padding: 10px;
+        text-decoration: none;
+        font-size: 18px;
+        color: white;
+        display: block;
+        transition: 0.3s;
+      }
+    
+      .sidebar a:not(.logout-btn):not(.login-btn):hover {
+        background-color: #4d9ff7;
+      }
+  
+      .login-tab {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: #007bff;
+        text-align: center;
+      }
+    
+      .login-tab a {
+        display: block;
+        padding: 10px;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        margin-bottom: 20px
+      }  
+
+      .logout-btn{
+        background-color: #e83c3c;
+      }
+      .logout-btn:hover{
+        background-color: #fa0505;
+      }
+
+      .login-btn:hover{
+        background-color: #052afa
+      }
+</style>
+
+<div class="sidebar">
+    <a href="{% url 'home' %}">Home</a>
+    
+    {% if request.user.is_superuser %}
+      <a href="{% url 'student-tab' %}">Students</a>
+    {% endif %}      
+    
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'course-tab' %}">Courses</a>
+    {% endif %}
+      
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'contact' %}">Contact</a>
+    
+    {% if request.user.is_superuser %}
+      <a href="#">Enquiry</a>
+    {% endif %}
+    <div class="login-tab">
+      {% comment %} <hr> {% endcomment %}
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="login-btn">Login</a>
+      {% endif %}
+    </div>
+  </div>

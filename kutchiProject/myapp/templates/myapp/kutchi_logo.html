@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Heading Design</title>
+<style>
+
+  .heading-container {
+    margin-top: 180px;
+    text-align: center;
+  }
+
+  .sub-heading {
+    font-size: 80px;
+    color: #555;
+    transition: color 0.3s;
+  }
+
+  .sub-heading:hover {
+    color: #fa0505;
+  }
+
+  .main-heading {
+    position: relative;
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-top: -15px;
+    transition: color 0.3s;
+  }
+
+  .main-heading::before,
+  .main-heading::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background-color: #007bff;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+  }
+
+  .main-heading::before {
+    left: 280px;
+  }
+
+  .main-heading::after {
+    right: 280px; /* Adjusted value to make it closer */
+  }
+
+  .main-heading:hover {
+    color: #007bff;
+  }
+
+  .main-heading:hover::before,
+  .main-heading:hover::after {
+    background-color: #555;
+  }
+</style>
+</head>
+<body>
+  <div class="heading-container">
+    <div class="sub-heading">
+      Kutchi
+    </div>
+    <div class="main-heading">
+      Indian Technical Institute
+    </div>
+  </div>
+</body>
+</html>

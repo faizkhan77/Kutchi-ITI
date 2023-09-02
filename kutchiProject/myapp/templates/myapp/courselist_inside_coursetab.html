@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .table-container{
+            margin-top:50px
+        }
+
+        .container {
+            position: relative;
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: box-shadow 0.3s;
+        }
+
+        .container:hover{
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+            0 25px 60px 0 rgba(0,0,0,0.19);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #d9d4d4;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        .custom-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+            
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .custom-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <div class="container">
+            {% if request.user.is_superuser %}
+                <button class="custom-button" onclick="location.href='{% url 'addcourse' %}'">Add a new course</button>
+            {% endif %}
+            <h2>Course Information</h2>
+            <table>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course Duration</th>
+                    <th>Course Fees</th>
+                </tr>
+                {% for course in courses %}
+                <tr class="clickable-row" data-href="{% url 'coursedetails' course.id %}">
+                    <td>{{ course.coursename }}</td>
+                    <td>{{ course.courseduration }} Months</td>
+                    <td>&#8377;{{ course.coursefees }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+
+<style>
+    .studentReg{
+        margin-left: 120px
+    }
+</style>
+
+<div class="studentReg">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Register">
+    </form>
+</div>
+
+{% endblock content %}

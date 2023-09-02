@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .studentDetails{
+        margin-left: 120px;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        position: relative;
+        width: 95%;
+        margin: auto;
+        margin-top: 0px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .student-details {
+        margin-top: 20px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .detail {
+        color:white;
+        width: 48%;
+        padding: 10px;
+        background: linear-gradient(to bottom, #2518db, #0f5ef2,#0fa3f2);
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .detail:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+    }
+
+    h1 {
+        color:#0040ff
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #007bff;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+
+    .edit-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 5px;
+        margin-right:150px;
+        
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #007bff;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .edit-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+    
+    .delete-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 5px;
+        
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #bf512c;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .delete-button:hover {
+        background-color: #e00b0f;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="studentDetails">
+
+    <div>
+        <h1><b>Viewing Student Details</b></h1>
+        <hr>
+    </div>
+
+        {% comment %} <a href="{% url 'delete' students.id %}">Delete student</a> {% endcomment %}
+        {% comment %} <a href="{% url 'edit' students.id %}">Edit Student Details</a> {% endcomment %}
+    {% comment %} <div>
+        <h3>Full Name : {{student.firstname}} {{student.lastname}}</h3>
+        <h3>Age : {{student.age}}</h3>
+        <h3>Gender : {{student.gender}}</h3>
+        <h3>Phone number : {{student.phoneno}}</h3>
+        <h3>Email ID : {{student.emailid}}</h3>
+        <h3>Address : {{student.address}}</h3>
+        <h3>Course Name : {{student.coursename}}</h3>
+        <h3>Joining Date : {{student.joiningdate}}</h3>
+        <h3>Total Course Duration : {{duration.months}} Months, {{duration.days}} Days</h3>
+        <h3>Completion Date : {{student.completiondate}}</h3>
+        <h3>Total Course Fees : {{student.coursefees}}</h3>
+        <h3>Fees Paid : {{student.feespaid}}</h3>
+        <h3>Remaining Fees : {{remainingBalance}}</h3>
+    </div> {% endcomment %}
+    
+    <div class="container">
+        <button class="edit-button" onclick="location.href='{% url 'edit' students.id %}'">Edit</button>
+        <button class="delete-button" onclick="location.href='{% url 'delete' students.id %}'">Delete</button>
+        <h2><b>{{students.firstname}}'s Informations</b></h2>
+        
+        <div class="student-details">
+            <div class="detail">
+                <h3>Personal Information</h3>
+                <p><strong>Name:</strong> {{students.firstname}} {{ students.lastname }}</p>
+                <p><strong>Age:</strong>  {{ students.age }}</p>
+                <p><strong>Gender:</strong> {{ students.gender }}</p>
+                <p><strong>Phone:</strong> {{ students.phoneno }}</p>
+                <p><strong>Email:</strong> {{ students.emailid }}</p>
+            </div>
+            <div class="detail">
+                <!-- &#8377; is a rupees symbol -->
+                <h3>Course Information</h3>
+                <p><strong>Course:</strong> {{ students.coursename }}</p>
+                <p><strong>Joining Date:</strong> {{ students.joiningdate|date:"F d, Y" }}</p>
+                <p><strong>Completion Date:</strong>  {{ students.completiondate|date:"F d, Y" }}</p>
+                <p><strong>Total Course Duration:</strong> {{duration.years}} Years, {{ duration.months }} Months, {{ duration.days }} Days</p>
+                <p><strong>Total Fees:</strong> &#8377;{{ students.coursefees }}</p>    
+                <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
+                <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
+            </div>
+        </div>
+
+        <div class="student-details">
+            <div class="detail">
+                <h3>Address</h3>
+                <p>{{ students.address }}</p>
+                <!-- <p>City, State</p>
+                <p>Zip Code</p> -->
+            </div>
+            <div class="detail">
+                <h3>Emergency Contact</h3>
+                <p><strong>Name:</strong>  {{students.firstname}} {{ students.lastname }}</p>
+                <p><strong>Occupation:</strong> Student</p>
+                <p><strong>Phone:</strong> {{ students.phoneno }}</p>
+            </div>
+        </div>
+
+        <div class="student-details">
+            {% load custom_filters %}
+            <div class="detail">
+                <h3>Exam and Certification</h3>
+
+                <div class="exam-status">
+                    {% if students.exam_given %}
+                        <p><strong>Exam:</strong>  Given</p>
+                    {% else %}
+                        <p><strong>Exam:</strong>  Exam Pending</p>
+                    {% endif %}
+                </div>
+                
+                {% comment %} <p><strong>Exam Date:</strong> {{ students.completiondate|add_days:1|date:"F d, Y" }}</p> {% endcomment %}
+                <p><strong>Exam Date:</strong> {{ students.exam_date|date:"F d, Y"  }}</p>
+                <p><strong>Gender:</strong> {{ students.gender }}</p>
+                <p><strong>Phone:</strong> {{ students.phoneno }}</p>
+                <p><strong>Email:</strong> {{ students.emailid }}</p>
+            </div>
+            <div class="detail">
+                <!-- &#8377; is a rupees symbol -->
+                <h3>Remarks</h3>
+                {% comment %} <p><strong>Course:</strong> {{ students.coursename }}</p>
+                <p><strong>Joining Date:</strong> {{ students.joiningdate }}</p>
+                <p><strong>Completion Date:</strong> {{ students.completiondate }}</p>
+                <p><strong>Total Course Duration:</strong> {{duration.years}} Years, {{ duration.months }} Months, {{ duration.days }} Days</p>
+                <p><strong>Total Fees:</strong> &#8377;{{ students.coursefees }}</p>    
+                <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
+                <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p> {% endcomment %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

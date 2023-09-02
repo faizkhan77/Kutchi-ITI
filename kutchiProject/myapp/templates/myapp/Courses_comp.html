@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Courses{% endblock title %}
+
+
+{% block content %}
+
+    <style>
+        .courseTab{
+            margin-left: 120px
+        }
+
+        .header{
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        h1{
+            color:black;
+            font-family: 'Allerta Stencil'
+        }
+    </style>
+
+
+    <div class="header">
+        <b><h1>Courses</h1></b>
+    </div>
+
+    <div class="courseTab">
+        <div>            
+            {% comment %} {% if request.user.is_superuser %}
+                <a href="{% url 'addcourse' %}">Add a new Course</a>
+            {% endif %}
+                 {% endcomment %}
+            
+            {% include 'myapp/courselist_inside_coursetab.html' %}
+            {% comment %} {% for course in courses %}
+                <h3><a href="{% url 'coursedetails' course.id %}">{{course.coursename}}</a></h3>
+            {% endfor %} {% endcomment %}
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<style>
+
+    .mainbody{
+        margin-left: 120px
+    }
+
+    .heading{
+        margin-top: 10;
+        color: #007bff;
+        text-align: center
+    }
+
+
+</style>
+
+{% comment %} <div class="header">
+    <h1>KUTCHI ITI Home Page</h1>
+</div> {% endcomment %}
+
+<div class="mainbody">
+    <div>
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+            <br>
+            <p class="heading">LOGGED IN AS THE KUTCHI ITI ADMIN</p>
+            {% include 'myapp/kutchi_logo.html' %}
+        {% endif %}
+
+
+        {% if not request.user.is_superuser and request.user.is_authenticated %}
+            <div>
+                <h3 class="heading">You can view your admission and course details below</h3>
+                {% include 'myapp/loggedin_student_details.html' %}
+            </div>
+        {% endif %}
+        
+    </div>
+
+    <div class="home-container">
+        {% comment %} <div>
+            <h2>Courses</h2>
+            <a href="{% url 'addcourse' %}">Add a new Course</a>
+            <hr>
+            {% for course in courses %}
+                <h3><a href="{% url 'coursedetails' course.id %}">{{course.coursename}}</a></h3>
+            {% endfor %}
+        </div> {% endcomment %}
+        
+        {% comment %} <div>
+            <h2>Registered Students</h2>
+            {% for obj in students %}
+                <a href="{% url 'studentdetails' obj.id %}"><h3>{{obj.firstname}} {{obj.lastname}} -- {{obj.coursename}}</h3></a>
+            {% endfor %}
+        </div>  {% endcomment %}
+    </div>
+</div>
+{% endblock content %}

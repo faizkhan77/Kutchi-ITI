@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+        .courseform{
+            margin-left: 120px
+        }
+    </style>
+
+    <div class="courseform">
+        <form method="POST">
+            {% csrf_token %}
+            <h3>Add a new Course</h3>
+            {{form.as_p}}
+            <a href="{% url 'course-tab' %}">Back</a>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+
+{% endblock content %}

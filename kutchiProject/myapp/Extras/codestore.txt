@@ -1,0 +1,42 @@
+@login_required(login_url="login")
+def index(request):
+    
+    studentlist = studentsModel.objects.get(user=request.user)
+    courses = Courses.objects.all()
+    duration = relativedelta(studentlist.completiondate, studentlist.joiningdate)
+    remainingBalance = studentlist.coursefees - studentlist.feespaid
+    context = {
+        "students": studentlist,
+        "courses": courses,
+        "duration": duration,
+        "remainingBalance": remainingBalance,
+    }
+    return render(request, "myapp/home.html", context)
+
+
+
+    #007bff blue color
+
+
+----------------------------------COURSE ADD FORM--------------
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+        .courseform{
+            margin-left: 120px
+        }
+    </style>
+
+    <div class="courseform">
+        <form method="POST">
+            {% csrf_token %}
+            <h3>Add a new Course</h3>
+            {{form.as_p}}
+            <a href="{% url 'home' %}">Back</a>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+
+{% endblock content %}

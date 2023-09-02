@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Students{% endblock title %}
+
+{% block content %}
+
+<style>
+    .studentPage{
+        margin-left: 120px
+    }
+
+    .header{
+        background-color: #1169f7;
+        color: #fff;
+        text-align: center;
+        padding: 5px;
+    }
+
+</style>
+
+<div class="header">
+    <h1>Registered Students</h1>    
+</div> 
+
+<div class="studentPage"> 
+    <div>
+        {% comment %} <a href="{% url 'studentsignup' %}">Register a Student</a>
+        <hr> {% endcomment %}
+    </div>
+
+    {% include 'myapp/studentlist_inside_studenttab.html' %}
+
+
+    {% comment %} <div>
+        {% for obj in students %}
+            <a href="{% url 'studentdetails' obj.id %}"><h3>{{obj.firstname}} {{obj.lastname}} -- {{obj.coursename}}</h3></a>
+        {% endfor %}
+    </div> {% endcomment %}
+</div> 
+
+{% endblock content %}

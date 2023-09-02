@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock title %}
+
+{% block content %}
+
+<style>
+    .studentsignup{
+        margin-left: 120px
+    }
+</style>
+
+<div class="studentsignup">
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Next" />
+        </form>
+
+        <div>
+            <h3>If student is already registered click below</h3>
+            <a href="{% url 'student-register' %}">Already Registered</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

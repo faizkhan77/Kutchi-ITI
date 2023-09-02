@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        width: 95%;
+        margin: auto;
+        margin-top: 0px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .student-details {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .detail {
+        color:white;
+        width: 48%;
+        padding: 10px;
+        background: linear-gradient(to bottom, #2518db, #0f5ef2,#0fa3f2);
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .detail:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #007bff;
+    }
+
+    p {
+        margin: 5px 0;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Your Details</h2>
+    <div class="student-details">
+        <div class="detail">
+            <h3>Personal Information</h3>
+            <p><strong>Name:</strong> {{students.firstname}} {{ students.lastname }}</p>
+            <p><strong>Age:</strong>  {{ students.age }}</p>
+            <p><strong>Gender:</strong> {{ students.gender }}</p>
+            <p><strong>Phone:</strong> {{ students.phoneno }}</p>
+            <p><strong>Email:</strong> {{ students.emailid }}</p>
+        </div>
+        <div class="detail">
+            <!-- &#8377; is a rupees symbol -->
+            <h3>Course Information</h3>
+            <p><strong>Course:</strong> {{ students.coursename }}</p>
+            <p><strong>Joining Date:</strong> {{ students.joiningdate }}</p>
+            <p><strong>Completion Date:</strong> {{ students.completiondate }}</p>
+            <p><strong>Total Course Duration:</strong> {{duration.years}} Years, {{ duration.months }} Months, {{ duration.days }} Days</p>
+            <p><strong>Total Fees:</strong> &#8377;{{ students.coursefees }}</p>    
+            <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
+            <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
+        </div>
+    </div>
+    <div class="student-details">
+        <div class="detail">
+            <h3>Address</h3>
+            <p>{{ students.address }}</p>
+            <!-- <p>City, State</p>
+            <p>Zip Code</p> -->
+        </div>
+        <div class="detail">
+            <h3>Emergency Contact</h3>
+            <p><strong>Name:</strong>  {{students.firstname}} {{ students.lastname }}</p>
+            <p><strong>Occupation:</strong> Student</p>
+            <p><strong>Phone:</strong> {{ students.phoneno }}</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

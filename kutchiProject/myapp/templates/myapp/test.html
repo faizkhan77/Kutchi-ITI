@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create Course</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.coursename.id_for_label }}">Course Name:</label>
+                {{ form.coursename }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.coursedetails.id_for_label }}">Course Details:</label>
+                {{ form.coursedetails }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.courseduration.id_for_label }}">Course Duration:</label>
+                {{ form.courseduration }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.coursefees.id_for_label }}">Course Fees:</label>
+                {{ form.coursefees }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.file_path.id_for_label }}">PDF File Path:</label>
+                {{ form.file_path }}
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create Course">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

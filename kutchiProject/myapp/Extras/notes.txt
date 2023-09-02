@@ -1,0 +1,13 @@
+Things that needs to be added or fixed
+
+1. Search box and search Pattern
+2. fix login from admin and app
+3. Announcement Tab
+4. Attendance
+5. Students on leave
+6. Faculty Tab
+7. Students or Facultry profile picture
+8. contact form 
+
+
+infintyfree

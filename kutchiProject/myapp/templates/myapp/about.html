@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}About Kutchi ITI{% endblock title %}
+
+{% block content %}
+
+<style>
+
+    .about-tab{
+        margin-left: 100px
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+    .header {
+        background-color: #1169f7;
+        color: #fff;
+        text-align: center;
+        padding: 5px;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+    }
+    .container:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+    }
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    h2 {
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    p {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    ul {
+        margin-left: 20px;
+        padding-left: 20px;
+        list-style-type: disc;
+    }
+</style>
+
+<div class="about-tab">
+<div class="header">
+    <h1>Welcome to Kutchi ITI</h1>
+</div>
+<div class="container">
+    <h2>About Us</h2>
+    <p>
+        At Kutchi ITI, we are more than just an educational institution – we are a legacy of excellence,
+        innovation, and commitment in the field of Information Technology. For over three decades, we have
+        been at the forefront of shaping IT education, providing a comprehensive spectrum of courses that
+        cater to the dynamic demands of the industry.
+    </p>
+    <h2>Our Journey</h2>
+    <p>
+        Established three decades ago, Kutchi ITI has evolved into a pioneering institution, synonymous with
+        quality education in the IT domain. Our unwavering dedication to delivering cutting-edge knowledge and
+        industry-relevant skills has set us apart as a trusted and respected name in the field.
+    </p>
+    <h2>Our Courses</h2>
+    <p>
+        With a rich array of courses spanning MSCIT, Programming, Hardware, Web Development, Graphic Design,
+        and various other high-level IT disciplines, Kutchi ITI offers a diverse portfolio that equips our
+        students with the skills needed to thrive in a competitive landscape.
+    </p>
+    <h2>Our Commitment</h2>
+    <p>
+        At Kutchi ITI, we recognize that success in the IT sector is rooted in a strong foundation of knowledge
+        and skill. Therefore, we are committed to delivering education that goes beyond textbooks, fostering
+        critical thinking, problem-solving, and real-world application. Our courses are designed by industry experts
+        and seasoned educators, ensuring that our students are prepared to tackle the challenges of the ever-evolving
+        IT landscape.
+    </p>
+    <h2>Why Choose Kutchi ITI?</h2>
+    <ul>
+        <li><strong>Legacy of Excellence:</strong> Our 30-year journey is a testament to our commitment to excellence
+            in IT education.</li>
+        <li><strong>Comprehensive Courses:</strong> We offer an extensive range of courses that cater to various IT
+            disciplines, ensuring a holistic learning experience.</li>
+        <li><strong>Industry-Relevant Skills:</strong> Our curriculum is aligned with industry trends, equipping
+            students with practical skills that are in high demand.</li>
+        <li><strong>Expert Faculty:</strong> Our faculty comprises industry experts and educators who bring real-world
+            experience to the classroom.</li>
+        <li><strong>State-of-the-Art Facilities:</strong> Our modern infrastructure and well-equipped labs provide
+            an optimal learning environment.</li>
+        <li><strong>Holistic Development:</strong> Beyond technical skills, we focus on nurturing soft skills, teamwork,
+            and leadership qualities.</li>
+    </ul>
+    <p>
+        Join us at Kutchi ITI and embark on a transformative journey that will empower you to navigate the complex IT
+        landscape with confidence and expertise. Your aspirations are our inspiration, and together, we will shape a
+        future that is technologically advanced and full of promise.
+    </p>
+</div>
+</div>
+
+{% endblock content %}
