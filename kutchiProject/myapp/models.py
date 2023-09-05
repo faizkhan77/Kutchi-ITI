@@ -48,7 +48,7 @@ class studentsModel(models.Model):
         if self.joiningdate and self.coursename and self.coursename.courseduration:
             # Calculate completion date by adding course duration (in months)
             self.completiondate = self.joiningdate + relativedelta(
-                months=self.coursename.courseduration
+                months=self.coursename.coursedurationmk
             )
 
         # Always set exam date as 1 day after completion date
@@ -64,6 +64,12 @@ class studentsModel(models.Model):
 
     def __str__(self):
         return self.firstname
+
+
+class StudentRemarks(models.Model):
+    student = models.ForeignKey(studentsModel, on_delete=models.SET_NULL, null=True)
+    remark_date = models.DateField()
+    remarks = models.CharField(max_length=500)
 
 
 class SyllabusDownloadRecord(models.Model):
