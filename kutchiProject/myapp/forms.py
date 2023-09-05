@@ -1,5 +1,5 @@
 from django.forms import ModelForm, DateInput
-from .models import studentsModel, Courses, SyllabusDownloadRecord
+from .models import studentsModel, Courses, SyllabusDownloadRecord, StudentRemarks
 from django import forms
 
 
@@ -26,3 +26,9 @@ class SyllabusDownloadForm(forms.ModelForm):
     class Meta:
         model = SyllabusDownloadRecord
         fields = ["name", "email", "number"]
+
+
+class RemarksForm(ModelForm):
+    class Meta:
+        model = StudentRemarks
+        fields = ["remarks"]

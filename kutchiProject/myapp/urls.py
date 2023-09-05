@@ -36,4 +36,5 @@ urlpatterns = [
     ),
     path("syllabus/<int:pk>/", views.DownloadSyllabus, name="syllabusdownload"),
     path("download-pdf/<int:pk>/", views.download_pdf, name="download-pdf"),
+    path("remarks/<int:pk>/", views.StudentRemark, name="remarks"),
 ]

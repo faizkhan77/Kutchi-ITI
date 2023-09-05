@@ -1,10 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import (
-    StudentModelForm,
-    CourseModelForm,
-    SyllabusDownloadForm,
-)
-from .models import studentsModel, Courses, SyllabusDownloadRecord
+from .forms import StudentModelForm, CourseModelForm, SyllabusDownloadForm, RemarksForm
+from .models import studentsModel, Courses, SyllabusDownloadRecord, StudentRemarks
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -246,6 +242,7 @@ def courseUpdate(request, pk):
     # return render(request, "myapp/upload_pdf.html", context)
 
 
+# Form syllabus download
 def DownloadSyllabus(request, pk):
     course = get_object_or_404(Courses, id=pk)
     email_sent = False
@@ -329,6 +326,21 @@ def download_pdf(request, pk):
 
     # Redirect or show an error message if the file path is not available
     return redirect("home")
+
+
+def StudentRemark(request, pk):
+    students = studentsModel.objects.get(id=pk)
+    form = RemarksForm()
+    if request.method == "POST":
+        form = RemarksForm(request.POST)
+        if form.is_valid():
+            remarks = form.cleaned_data["remarks"]
+            StudentRemarks.objects.create(student=students, remarks=remarks)
+            return redirect("studentdetails", pk=pk)
+        else:
+            form = RemarksForm()
+    context = {"form": form, "students": students}
+    return render(request, "myapp/remarksForm.html", context)
 
 
 # --------------------------------------------------------------------------------

@@ -48,7 +48,7 @@ class studentsModel(models.Model):
         if self.joiningdate and self.coursename and self.coursename.courseduration:
             # Calculate completion date by adding course duration (in months)
             self.completiondate = self.joiningdate + relativedelta(
-                months=self.coursename.coursedurationmk
+                months=self.coursename.courseduration
             )
 
         # Always set exam date as 1 day after completion date
@@ -70,6 +70,15 @@ class StudentRemarks(models.Model):
     student = models.ForeignKey(studentsModel, on_delete=models.SET_NULL, null=True)
     remark_date = models.DateField()
     remarks = models.CharField(max_length=500)
+
+    def save(self, *args, **kwargs):
+        # Automatically set the remark_date to the current date if not provided
+        if not self.remark_date:
+            self.remark_date = date.today()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Remark for {self.student.firstname} on {self.remark_date}"
 
 
 class SyllabusDownloadRecord(models.Model):

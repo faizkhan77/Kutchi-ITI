@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+        .container{
+            margin-left: 120px
+        }
+    </style>
+
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">SAVE</button>
+        </form>
+    </div>
+
+{% endblock content %}

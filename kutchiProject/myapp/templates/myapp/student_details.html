@@ -103,6 +103,22 @@
         background-color: #e00b0f;
         transform: scale(1.05);
     }
+
+    .addremarkbtn{
+        display: inline-block;
+        padding: 5px 20px;
+        background-color: #bf512c;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    .addremarkbtn:hover{
+        background-color: #e00b0f;
+        transform: scale(1.05);
+    }
 </style>
 
 <div class="studentDetails">
@@ -191,16 +207,16 @@
                 <p><strong>Phone:</strong> {{ students.phoneno }}</p>
                 <p><strong>Email:</strong> {{ students.emailid }}</p>
             </div>
+
             <div class="detail">
                 <!-- &#8377; is a rupees symbol -->
                 <h3>Remarks</h3>
-                {% comment %} <p><strong>Course:</strong> {{ students.coursename }}</p>
-                <p><strong>Joining Date:</strong> {{ students.joiningdate }}</p>
-                <p><strong>Completion Date:</strong> {{ students.completiondate }}</p>
-                <p><strong>Total Course Duration:</strong> {{duration.years}} Years, {{ duration.months }} Months, {{ duration.days }} Days</p>
-                <p><strong>Total Fees:</strong> &#8377;{{ students.coursefees }}</p>    
-                <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
-                <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p> {% endcomment %}
+                <ul>
+                    {% for remark in students.studentremarks_set.all %}
+                        <li>{{ remark.remark_date|date:"F d, Y" }}: {{ remark.remarks }}</li>
+                    {% endfor %}
+                    <button class="addremarkbtn" onclick="location.href='{% url 'remarks' students.id %}'">Add a Remark</button>
+                </ul>
             </div>
         </div>
     </div>
