@@ -155,6 +155,9 @@
             <div class="detail">
                 <h3>Personal Information</h3>
                 <p><strong>Name:</strong> {{students.firstname}} {{ students.lastname }}</p>
+                <p><strong>Seriel Number:</strong>  </p>
+                <p><strong>Roll Number:</strong>  </p>
+
                 <p><strong>Age:</strong>  {{ students.age }}</p>
                 <p><strong>Gender:</strong> {{ students.gender }}</p>
                 <p><strong>Phone:</strong> {{ students.phoneno }}</p>
@@ -170,6 +173,8 @@
                 <p><strong>Total Fees:</strong> &#8377;{{ students.coursefees }}</p>    
                 <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
                 <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
+                <p><strong>Batch:</strong> </p>
+                <p><strong>Timing:</strong> </p>
             </div>
         </div>
 
@@ -195,17 +200,17 @@
 
                 <div class="exam-status">
                     {% if students.exam_given %}
-                        <p><strong>Exam:</strong>  Given</p>
+                        <p><strong>Exam Status:</strong>  Given</p>
                     {% else %}
-                        <p><strong>Exam:</strong>  Exam Pending</p>
+                        <p><strong>Exam Status:</strong>  Exam Pending</p>
                     {% endif %}
                 </div>
                 
                 {% comment %} <p><strong>Exam Date:</strong> {{ students.completiondate|add_days:1|date:"F d, Y" }}</p> {% endcomment %}
                 <p><strong>Exam Date:</strong> {{ students.exam_date|date:"F d, Y"  }}</p>
-                <p><strong>Gender:</strong> {{ students.gender }}</p>
-                <p><strong>Phone:</strong> {{ students.phoneno }}</p>
-                <p><strong>Email:</strong> {{ students.emailid }}</p>
+                <p><strong>Exam Fees:</strong> </p>
+                <p><strong>Certification:</strong> </p>
+                <p><strong>Exam Session:</strong> </p>
             </div>
 
             <div class="detail">
