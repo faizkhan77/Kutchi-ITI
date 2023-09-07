@@ -130,6 +130,7 @@ def studentSignup(request):
 
 
 def studentRegisterForm(request):
+    page = "registerstudent"
     form = StudentModelForm()
     if request.method == "POST":
         form = StudentModelForm(request.POST)
@@ -137,7 +138,7 @@ def studentRegisterForm(request):
             form.save()
             return redirect("student-tab")
 
-    context = {"form": form}
+    context = {"form": form, "page": page}
     return render(request, "myapp/studentRegister.html", context)
 
 
@@ -178,6 +179,7 @@ def editStudent(request, pk):
 
 
 def addCourse(request):
+    page = "addcourse"
     courseform = CourseModelForm()
 
     if request.method == "POST":
@@ -189,7 +191,7 @@ def addCourse(request):
     pdf_folder = os.path.join(settings.BASE_DIR, "pdfs")
     pdf_files = [file for file in os.listdir(pdf_folder) if file.endswith(".pdf")]
 
-    context = {"form": courseform, "pdf_files": pdf_files}
+    context = {"form": courseform, "pdf_files": pdf_files, "page": page}
     return render(request, "myapp/courseform.html", context)
 
 
@@ -211,6 +213,7 @@ def courseDelete(request, pk):
 
 
 def courseUpdate(request, pk):
+    page = "editcourse"
     updatecourse = Courses.objects.get(id=pk)
     updateform = CourseModelForm(instance=updatecourse)
     if request.method == "POST":
@@ -218,7 +221,7 @@ def courseUpdate(request, pk):
         if updateform.is_valid():
             updateform.save()
             return redirect("coursedetails", pk=updatecourse.id)
-    context = {"form": updateform}
+    context = {"form": updateform, "page": page}
     return render(request, "myapp/courseform.html", context)
 
     # def upload_pdf(request):

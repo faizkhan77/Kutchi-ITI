@@ -18,7 +18,13 @@
 
 <div class="studentReg">
     <div class="container mt-5">
-        <h2>Student Registration</h2>
+        
+        {% if page == registerstudent %}
+            <h2>Edit Student Details</h2>
+        {% else %}
+            <h2>Student Registration</h2>
+        {% endif %}
+            
         <form method="POST">
             {% csrf_token %}
             <div class="mb-3">
