@@ -13,6 +13,8 @@ class StudentModelForm(ModelForm):
             "completiondate": DateInput(attrs={"type": "date"}),
         }
 
+    coursename = forms.ModelChoiceField(queryset=Courses.objects.all())
+
 
 class CourseModelForm(ModelForm):
     file_path = forms.FilePathField(path="pdfs/", required=False)

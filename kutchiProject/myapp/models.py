@@ -16,15 +16,26 @@ class Courses(models.Model):
     courseduration = models.PositiveIntegerField(default=0)
     coursefees = models.IntegerField()
     file_path = models.CharField(max_length=200, null=True, blank=True)
+    # updated = models.DateTimeField(auto_now=True)
+    # created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.coursename
+
+
+class Batch(models.Model):
+    batch_day = models.CharField(max_length=100, null=True, blank=True)
+    batch_time = models.CharField(max_length=100, default="8:30 pm - 10:30 pm")
+
+    def __str__(self):
+        return f"{self.batch_day} - {self.batch_time}"
 
 
 class studentsModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
+    rollno = models.IntegerField(default=0)
     age = models.IntegerField()
     gender = models.CharField(max_length=20)
     phoneno = models.BigIntegerField()
@@ -36,6 +47,19 @@ class studentsModel(models.Model):
     exam_date = models.DateField(null=True, blank=True)
     exam_given = models.BooleanField(default=False)
     coursefees = models.IntegerField()
+    batch_day = models.ForeignKey(
+        Batch,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="students_with_batch_day",
+        blank=True,
+    )
+    batch_time = models.ForeignKey(
+        Batch,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="students_with_batch_time",
+    )
     feespaid = models.IntegerField(default=0)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -3,102 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Course</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 60%;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        h2 {
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            color: #333;
-        }
-
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        input[type="submit"] {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Student Form</title>
+    <!-- Add Bootstrap 5 CSS link here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h2>Create Course</h2>
+    <div class="container mt-5">
+        <h2>Student Form</h2>
         <form method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="{{ form.coursename.id_for_label }}">Course Name:</label>
-                {{ form.coursename }}
+            <div class="mb-3">
+                <label for="firstname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname">
             </div>
-            <div class="form-group">
-                <label for="{{ form.coursedetails.id_for_label }}">Course Details:</label>
-                {{ form.coursedetails }}
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname">
             </div>
-            <div class="form-group">
-                <label for="{{ form.courseduration.id_for_label }}">Course Duration:</label>
-                {{ form.courseduration }}
+            <div class="mb-3">
+                <label for="rollno" class="form-label">Roll Number</label>
+                <input type="number" class="form-control" id="rollno" name="rollno" value="0">
             </div>
-            <div class="form-group">
-                <label for="{{ form.coursefees.id_for_label }}">Course Fees:</label>
-                {{ form.coursefees }}
+            <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age">
             </div>
-            <div class="form-group">
-                <label for="{{ form.file_path.id_for_label }}">PDF File Path:</label>
-                {{ form.file_path }}
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <input type="text" class="form-control" id="gender" name="gender">
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create Course">
+            <div class="mb-3">
+                <label for="phoneno" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phoneno" name="phoneno">
             </div>
+            <div class="mb-3">
+                <label for="emailid" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailid" name="emailid">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="coursename" class="form-label">Course Name</label>
+                <input type="text" class="form-control" id="coursename" name="coursename">
+            </div>
+            <div class="mb-3">
+                <label for="joiningdate" class="form-label">Joining Date</label>
+                <input type="date" class="form-control" id="joiningdate" name="joiningdate">
+            </div>
+            <!-- Add more fields as needed -->
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    <!-- Add Bootstrap 5 JS and Popper.js scripts here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

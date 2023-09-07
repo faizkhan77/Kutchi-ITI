@@ -3,19 +3,88 @@
 {% block title %}Register{% endblock title %}
 
 {% block content %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Form</title>
+<!-- Add Bootstrap 5 CSS link here -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
     .studentReg{
         margin-left: 120px
     }
+    
 </style>
 
 <div class="studentReg">
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Register">
-    </form>
+    <div class="container mt-5">
+        <h2>Student Registration</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <hr><br>
+                <label for="user" class="form-label">User</label>
+                {{ form.user }}
+            </div>
+            <div class="mb-3">
+                <label for="firstname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" value="{{ form.instance.firstname }}">
+            </div>
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" value="{{ form.instance.lastname }}">
+            </div>
+            <div class="mb-3">
+                <label for="rollno" class="form-label">Roll Number</label>
+                <input type="number" class="form-control" id="rollno" name="rollno" value="{{ form.instance.rollno }}">
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age" value="{{ form.instance.age }}">
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <input type="text" class="form-control" id="gender" name="gender" value="{{ form.instance.gender }}">
+            </div>
+            <div class="mb-3">
+                <label for="phoneno" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phoneno" name="phoneno" value="{{ form.instance.phoneno }}">
+            </div>
+            <div class="mb-3">
+                <label for="emailid" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailid" name="emailid" value="{{ form.instance.emailid }}">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" id="address" name="address" rows="3">{{ form.instance.address }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="coursename" class="form-label">Course Name</label>
+                {{ form.coursename }}
+            </div>
+            <div class="mb-3">
+                <label for="feespaid" class="form-label">Fees Paid</label>
+                <input type="number" class="form-control" id="feespaid" name="feespaid" value="{{ form.instance.feespaid }}">
+            </div>
+            <div class="mb-3">
+                <label for="joiningdate" class="form-label">Joining Date</label>
+                <input type="date" class="form-control" id="joiningdate" name="joiningdate" value="{{ studentedit.joiningdate|date:'Y-m-d' }}">
+            </div>
+            
+
+            <div class="mb-3">
+                <label for="{{ form.batch_time.id_for_label }}" class="form-label">Batch and Timing</label>
+                {{ form.batch_time }}
+            </div>
+            
+            
+            <!-- Add more fields as needed -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Add Bootstrap 5 JS and Popper.js scripts here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </div>
 
 {% endblock content %}

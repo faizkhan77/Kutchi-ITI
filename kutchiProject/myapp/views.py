@@ -171,7 +171,9 @@ def editStudent(request, pk):
         if editform.is_valid():
             editform.save()
             return redirect("student-tab")
-    context = {"form": editform}
+        else:
+            print(editform.errors)
+    context = {"form": editform, "studentedit": studentedit}
     return render(request, "myapp/studentRegister.html", context)
 
 
