@@ -74,7 +74,7 @@
     <a href="{% url 'contact' %}">Contact</a>
     
     {% if request.user.is_superuser %}
-      <a href="#">Enquiry</a>
+      <a href="{% url 'enquiry' %}">Enquiry</a>
     {% endif %}
     <a href="#">Test</a>
     <div class="login-tab">

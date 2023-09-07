@@ -1,6 +1,18 @@
 from django.shortcuts import render, redirect
-from .forms import StudentModelForm, CourseModelForm, SyllabusDownloadForm, RemarksForm
-from .models import studentsModel, Courses, SyllabusDownloadRecord, StudentRemarks
+from .forms import (
+    StudentModelForm,
+    CourseModelForm,
+    SyllabusDownloadForm,
+    RemarksForm,
+    EnquiryForm,
+)
+from .models import (
+    studentsModel,
+    Courses,
+    SyllabusDownloadRecord,
+    StudentRemarks,
+    Enquiry,
+)
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -107,6 +119,13 @@ def contactTab(request):
 
 def aboutTab(request):
     return render(request, "myapp/about.html")
+
+
+def enquiryTab(request):
+    studentlist = studentsModel.objects.all()
+    enquirylist = Enquiry.objects.all()
+    context = {"enquirylist": enquirylist, "students": studentlist}
+    return render(request, "myapp/enquiry_comp.html", context)
 
 
 # ------------------------FUNCTIONS-------------------------------------------
@@ -348,6 +367,17 @@ def StudentRemark(request, pk):
     return render(request, "myapp/remarksForm.html", context)
 
 
+def addenquiry(request):
+    form = EnquiryForm()
+    if request.method == "POST":
+        form = EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("enquiry")
+    context = {"form": form}
+    return render(request, "myapp/enquiryform.html", context)
+
+
 # --------------------------------------------------------------------------------
 
 
@@ -390,3 +420,11 @@ def courselist_inside_coursetab(request):
 def sidebarmenu(request):
     context = {}
     return render(request, "myapp/sidebar_comp.html", context)
+
+
+@login_required(login_url="login")
+def enquiries_inside_enquirytab(request):
+    enquirylist = Enquiry.objects.all()
+    print(enquirylist)
+    context = {"enquirylist": enquirylist}
+    return render(request, "myapp/enquiries_inside_enquirytab.html", context)

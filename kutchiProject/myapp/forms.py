@@ -1,5 +1,11 @@
 from django.forms import ModelForm, DateInput
-from .models import studentsModel, Courses, SyllabusDownloadRecord, StudentRemarks
+from .models import (
+    studentsModel,
+    Courses,
+    SyllabusDownloadRecord,
+    StudentRemarks,
+    Enquiry,
+)
 from django import forms
 
 
@@ -34,3 +40,9 @@ class RemarksForm(ModelForm):
     class Meta:
         model = StudentRemarks
         fields = ["remarks"]
+
+
+class EnquiryForm(ModelForm):
+    class Meta:
+        model = Enquiry
+        fields = "__all__"

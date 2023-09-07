@@ -18,6 +18,7 @@ urlpatterns = [
     path("course-tab/", views.courseTab, name="course-tab"),
     path("contact-tab/", views.contactTab, name="contact"),
     path("about-tab/", views.aboutTab, name="about"),
+    path("enquiry-tab/", views.enquiryTab, name="enquiry"),
     path("sidebar/", views.sidebarmenu, name="sidebar"),
     path(
         "loggedin-students-details/",
@@ -27,14 +28,20 @@ urlpatterns = [
     path(
         "studentlist_inside_studenttab/",
         views.studentlist_inside_studenttab,
-        name="studentlist_inside_studenttab.html",
+        name="studentlist_inside_studenttab",
     ),
     path(
         "courselist_inside_coursetab/",
         views.courselist_inside_coursetab,
-        name="courselist_inside_coursetab.html",
+        name="courselist_inside_coursetab",
+    ),
+    path(
+        "enquiries_inside_enquirytab/",
+        views.enquiries_inside_enquirytab,
+        name="enquiries_inside_enquirytab",
     ),
     path("syllabus/<int:pk>/", views.DownloadSyllabus, name="syllabusdownload"),
     path("download-pdf/<int:pk>/", views.download_pdf, name="download-pdf"),
     path("remarks/<int:pk>/", views.StudentRemark, name="remarks"),
+    path("addenquiry", views.addenquiry, name="addenquiry"),
 ]
