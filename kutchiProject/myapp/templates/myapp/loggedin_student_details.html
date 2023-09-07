@@ -38,6 +38,19 @@
         0 25px 60px 0 rgba(0,0,0,0.19);
     }
 
+    .remarks-detail{
+        color:white;
+        width: 48%;
+        padding: 10px;
+        background: linear-gradient(to bottom, #e02b0b, #e00b0b);
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+    .remarks-detail:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+    }
+
     h2 {
         margin-top: 0;
         color: #007bff;
@@ -52,10 +65,14 @@
 
 <div class="container">
     <h2>Your Details</h2>
+    
     <div class="student-details">
         <div class="detail">
             <h3>Personal Information</h3>
             <p><strong>Name:</strong> {{students.firstname}} {{ students.lastname }}</p>
+            <p><strong>Seriel Number:</strong>  {{students.id}}</p>
+            <p><strong>Roll Number:</strong> {{students.rollno}} </p>
+
             <p><strong>Age:</strong>  {{ students.age }}</p>
             <p><strong>Gender:</strong> {{ students.gender }}</p>
             <p><strong>Phone:</strong> {{ students.phoneno }}</p>
@@ -65,14 +82,29 @@
             <!-- &#8377; is a rupees symbol -->
             <h3>Course Information</h3>
             <p><strong>Course:</strong> {{ students.coursename }}</p>
-            <p><strong>Joining Date:</strong> {{ students.joiningdate }}</p>
-            <p><strong>Completion Date:</strong> {{ students.completiondate }}</p>
+            <p><strong>Joining Date:</strong> {{ students.joiningdate|date:"F d, Y" }}</p>
+            <p><strong>Completion Date:</strong>  {{ students.completiondate|date:"F d, Y" }}</p>
             <p><strong>Total Course Duration:</strong> {{duration.years}} Years, {{ duration.months }} Months, {{ duration.days }} Days</p>
             <p><strong>Total Fees:</strong> &#8377;{{ students.coursefees }}</p>    
             <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
             <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
+            <p><strong>Batch and Timing:</strong> {{students.batch_time}}</p>
+            {% if students.extendeddate %}
+                <p style="background-color:red"><strong>Course Extention Date:</strong> {{students.extendeddate}}</p>
+            {% else %}
+                <p><strong>Course Extention Date:</strong> {{students.extendeddate}}</p>
+            {% endif %}
+
+        {% if request.user.is_superuser %}
+            {% if not students.extendeddate %}
+                <button class="extendbtn" onclick="location.href='{% url 'edit' students.id %}'">Extend Date?</button>
+            {% endif %}
+        {% endif %}
+                
+
         </div>
     </div>
+
     <div class="student-details">
         <div class="detail">
             <h3>Address</h3>
@@ -85,6 +117,41 @@
             <p><strong>Name:</strong>  {{students.firstname}} {{ students.lastname }}</p>
             <p><strong>Occupation:</strong> Student</p>
             <p><strong>Phone:</strong> {{ students.phoneno }}</p>
+        </div>
+    </div>
+
+    <div class="student-details">
+        {% load custom_filters %}
+        <div class="detail">
+            <h3>Exam and Certification</h3>
+
+            <div class="exam-status">
+                {% if students.exam_given %}
+                    <p><strong>Exam Status:</strong>  Given</p>
+                {% else %}
+                    <p><strong>Exam Status:</strong>  Exam Pending</p>
+                {% endif %}
+            </div>
+            
+            {% comment %} <p><strong>Exam Date:</strong> {{ students.completiondate|add_days:1|date:"F d, Y" }}</p> {% endcomment %}
+            <p><strong>Exam Date:</strong> {{ students.exam_date|date:"F d, Y"  }}</p>
+            <p><strong>Exam Fees:</strong> </p>
+            <p><strong>Certification:</strong> </p>
+            <p><strong>Exam Session:</strong> </p>
+        </div>
+
+        <div class="remarks-detail">
+            <!-- &#8377; is a rupees symbol -->
+            <h3>Remarks</h3>
+            <ul>
+                {% for remark in students.studentremarks_set.all %}
+                    <li>{{ remark.remark_date|date:"F d, Y" }}: {{ remark.remarks }}</li>
+                {% endfor %}
+
+                {% if request.user.is_superuser %}
+                    <button class="addremarkbtn" onclick="location.href='{% url 'remarks' students.id %}'">Add a Remark</button>
+                {% endif %}
+            </ul>
         </div>
     </div>
 </div>

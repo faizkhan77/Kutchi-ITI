@@ -82,6 +82,12 @@
                 <label for="{{ form.batch_time.id_for_label }}" class="form-label">Batch and Timing</label>
                 {{ form.batch_time }}
             </div>
+
+
+            <div class="mb-3">
+                <label for="extendeddate" class="form-label">Extension Date</label>
+                <input type="date" class="form-control" id="extendeddate" name="extendeddate" value="{{ studentedit.extendeddate|date:'Y-m-d' }}">
+            </div>
             
             
             <!-- Add more fields as needed -->

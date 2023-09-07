@@ -44,6 +44,7 @@ class studentsModel(models.Model):
     coursename = models.ForeignKey(Courses, on_delete=models.SET_NULL, null=True)
     joiningdate = models.DateField()
     completiondate = models.DateField()
+    extendeddate = models.DateField(null=True, blank=True)
     exam_date = models.DateField(null=True, blank=True)
     exam_given = models.BooleanField(default=False)
     coursefees = models.IntegerField()

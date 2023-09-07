@@ -48,6 +48,19 @@
         0 25px 60px 0 rgba(0,0,0,0.19);
     }
 
+    .remarks-detail{
+        color:white;
+        width: 48%;
+        padding: 10px;
+        background: linear-gradient(to bottom, #e02b0b, #e00b0b);
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+    .remarks-detail:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+    }
+
     h1 {
         color:#0040ff
     }
@@ -114,6 +127,7 @@
         font-size: 18px;
         border: none;
         border-radius: 25px;
+        margin-left:360px;
         cursor: pointer;
         transition: background-color 0.3s, transform 0.2s;
     }
@@ -121,6 +135,26 @@
         background-color: #e00b0f;
         transform: scale(1.05);
     }
+
+    .extendbtn{
+        display: inline-block;
+        margin-left:400px;
+        padding: 5px 20px;
+        background-color: #a84432;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .extendbtn:hover{
+        background-color: #e00b0f;
+        transform: scale(1.05);
+    }
+
+
 </style>
 
 <div class="studentDetails">
@@ -176,7 +210,17 @@
                 <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
                 <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
                 <p><strong>Batch and Timing:</strong> {{students.batch_time}}</p>
-                {% comment %} <p><strong>Timing:</strong> {{students.batch_time}}</p> {% endcomment %}
+                {% if students.extendeddate %}
+                    <p style="background-color:red"><strong>Course Extention Date:</strong> {{students.extendeddate}}</p>
+                {% else %}
+                    <p><strong>Course Extention Date:</strong> {{students.extendeddate}}</p>
+                {% endif %}
+
+                {% if not students.extendeddate %}
+                    <button class="extendbtn" onclick="location.href='{% url 'edit' students.id %}'">Extend Date?</button>
+                {% endif %}
+                    
+
             </div>
         </div>
 
@@ -215,7 +259,7 @@
                 <p><strong>Exam Session:</strong> </p>
             </div>
 
-            <div class="detail">
+            <div class="remarks-detail">
                 <!-- &#8377; is a rupees symbol -->
                 <h3>Remarks</h3>
                 <ul>
