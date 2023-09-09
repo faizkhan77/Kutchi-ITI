@@ -122,3 +122,10 @@ class Enquiry(models.Model):
 
     def __str__(self):
         return self.firstname + self.lastname
+
+
+class FeesInstallment(models.Model):
+    student = models.ForeignKey(studentsModel, on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+    amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
