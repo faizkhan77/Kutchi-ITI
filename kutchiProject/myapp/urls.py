@@ -19,6 +19,7 @@ urlpatterns = [
     path("contact-tab/", views.contactTab, name="contact"),
     path("about-tab/", views.aboutTab, name="about"),
     path("enquiry-tab/", views.enquiryTab, name="enquiry"),
+    path("fees-tab/", views.feesTab, name="feestab"),
     path("sidebar/", views.sidebarmenu, name="sidebar"),
     path(
         "loggedin-students-details/",
@@ -44,4 +45,6 @@ urlpatterns = [
     path("download-pdf/<int:pk>/", views.download_pdf, name="download-pdf"),
     path("remarks/<int:pk>/", views.StudentRemark, name="remarks"),
     path("addenquiry", views.addenquiry, name="addenquiry"),
+    path("payment_history/<int:pk>/", views.payment_history, name="payment_history"),
+    path("add_installment/<int:pk>/", views.add_installment, name="add_installment"),
 ]

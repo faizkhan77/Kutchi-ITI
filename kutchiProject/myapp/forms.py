@@ -5,6 +5,7 @@ from .models import (
     SyllabusDownloadRecord,
     StudentRemarks,
     Enquiry,
+    FeesInstallment,
 )
 from django import forms
 
@@ -13,7 +14,13 @@ class StudentModelForm(ModelForm):
     class Meta:
         model = studentsModel
         fields = "__all__"
-        exclude = ["completiondate", "coursefees", "exam_date", "exam_given"]
+        exclude = [
+            "completiondate",
+            "coursefees",
+            "exam_date",
+            "exam_given",
+            "feespaid",
+        ]
         widgets = {
             "joiningdate": DateInput(attrs={"type": "date"}),
             "completiondate": DateInput(attrs={"type": "date"}),
@@ -46,3 +53,13 @@ class EnquiryForm(ModelForm):
     class Meta:
         model = Enquiry
         fields = "__all__"
+
+
+class FeesInstallmentForm(forms.ModelForm):
+    class Meta:
+        model = FeesInstallment
+        fields = ["date", "time", "amount_paid"]
+        widgets = {
+            "date": DateInput(attrs={"type": "date"}),
+            "time": forms.TimeInput(attrs={"type": "time"}),
+        }

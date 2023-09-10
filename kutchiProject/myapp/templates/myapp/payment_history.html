@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .container {
+        margin: 120px;
+    }
+</style>
+
+<div class="container">
+    <h2>Payment History for {{ student.firstname }} {{ student.lastname }}</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Amount Paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for installment in installment_history %}
+            <tr>
+                <td>{{ installment.date|date:"Y-m-d" }}</td>
+                <td>{{ installment.time|time:"h:i A" }}</td>
+                <td>&#8377;{{ installment.amount_paid }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

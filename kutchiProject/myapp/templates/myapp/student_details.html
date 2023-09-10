@@ -61,6 +61,21 @@
         0 25px 60px 0 rgba(0,0,0,0.19);
     }
 
+    .fees-detail{
+        color:black;
+        margin-left: 240px;
+        width: 65%;
+        padding: 10px;
+        background: linear-gradient(to bottom, #61eb34, yellow);
+        border-radius: 35px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+    .fees-detail:hover{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+        background: linear-gradient(to bottom, #61eb34, #34eb8f);
+    }
+
     h1 {
         color:#0040ff
     }
@@ -154,6 +169,39 @@
         transform: scale(1.05);
     }
 
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* Vertically center the buttons */
+    }
+    .payhistorybtn{
+        padding: 5px 20px;
+        background-color: #8ac21b;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .feesbutton{
+        margin-left:480px;
+        padding: 5px 20px;
+        background-color: #8ac21b;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    } 
+    
+    .feesbutton:hover, .payhistorybtn:hover {
+        background-color: #2cc21b;
+        transform: scale(1.08);
+    }
+
 
 </style>
 
@@ -220,7 +268,20 @@
                 {% if not students.extendeddate %}
                     <button class="extendbtn" onclick="location.href='{% url 'edit' students.id %}'">Extend Date?</button>
                 {% endif %}
-                    
+            </div>
+        </div>
+
+        <div class="student-details">
+            <div class="fees-detail">
+                <h3>Fees Details</h3>
+                <p><strong>Total Fees:</strong> &#8377;{{ students.coursefees }}</p>    
+                <p><strong>Initial amount Paid:</strong> &#8377;{{ students.initial_payment }}</p>    
+                <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
+                <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
+                <div class="button-container">
+                    <button class="feesbutton" onclick="location.href='{% url 'add_installment' students.id %}'">Add Payment</button>
+                    <button class="payhistorybtn" onclick="location.href='{% url 'payment_history' students.id %}'">Payment History</button>
+                </div>
 
             </div>
         </div>
@@ -271,8 +332,10 @@
                 </ul>
             </div>
         </div>
-    </div>
 
+
+
+    </div>
 </div>
 
 {% endblock content %}

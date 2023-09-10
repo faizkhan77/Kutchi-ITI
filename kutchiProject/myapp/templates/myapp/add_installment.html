@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .container{
+        margin-left: 120px;
+    }
+</style>
+
+<div class="container">
+    <h1>Add Payment Below</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Add Payment</button>
+    </form>
+</div>
+
+{% endblock content %}

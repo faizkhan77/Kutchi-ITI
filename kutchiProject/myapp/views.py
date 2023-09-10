@@ -5,6 +5,7 @@ from .forms import (
     SyllabusDownloadForm,
     RemarksForm,
     EnquiryForm,
+    FeesInstallmentForm,
 )
 from .models import (
     studentsModel,
@@ -12,6 +13,7 @@ from .models import (
     SyllabusDownloadRecord,
     StudentRemarks,
     Enquiry,
+    FeesInstallment,
 )
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -26,6 +28,7 @@ from django.urls import reverse
 from django.template.loader import render_to_string
 import os
 from django.conf import settings
+from django.db.models import Sum
 
 
 # Create your views here.
@@ -126,6 +129,31 @@ def enquiryTab(request):
     enquirylist = Enquiry.objects.all()
     context = {"enquirylist": enquirylist, "students": studentlist}
     return render(request, "myapp/enquiry_comp.html", context)
+
+
+# ---------------NEED WORK-----------------------------------------------
+
+
+def feesTab(request):
+    students = studentsModel.objects.all()
+
+    for student in students:
+        # Calculate the total fees paid by summing up the related FeesInstallment amounts
+        total_amount_paid = FeesInstallment.objects.filter(student=student).aggregate(
+            total=Sum("amount_paid")
+        )["total"]
+
+        # Calculate the balance
+        if total_amount_paid is not None:
+            student.remaining_balance = student.coursefees - total_amount_paid
+        else:
+            # Handle the case where there are no payments yet
+            student.remaining_balance = student.coursefees
+
+    context = {
+        "students": students,
+    }
+    return render(request, "myapp/FeesTab.html", context)
 
 
 # ------------------------FUNCTIONS-------------------------------------------
@@ -376,6 +404,54 @@ def addenquiry(request):
             return redirect("enquiry")
     context = {"form": form}
     return render(request, "myapp/enquiryform.html", context)
+
+
+def add_installment(request, pk):
+    student = studentsModel.objects.get(id=pk)
+
+    if request.method == "POST":
+        form = FeesInstallmentForm(request.POST)
+        if form.is_valid():
+            amount_paid = form.cleaned_data["amount_paid"]
+            date = form.cleaned_data["date"]
+            time = form.cleaned_data["time"]
+
+            # Calculate the remaining balance
+            remaining_balance = student.coursefees - student.feespaid
+
+            if amount_paid > remaining_balance:
+                return render(
+                    request,
+                    "myapp/add_installment.html",
+                    {
+                        "form": form,
+                        "student": student,
+                        "error_message": "Amount paid exceeds remaining balance.",
+                    },
+                )
+
+            FeesInstallment.objects.create(
+                student=student, date=date, time=time, amount_paid=amount_paid
+            )
+
+            # Update the student's fees paid
+            student.feespaid += amount_paid
+            student.save()
+
+            return redirect("student-tab")
+
+    else:
+        form = FeesInstallmentForm()
+
+    context = {"form": form, "student": student}
+    return render(request, "myapp/add_installment.html", context)
+
+
+def payment_history(request, pk):
+    student = studentsModel.objects.get(id=pk)
+    installment_history = FeesInstallment.objects.filter(student=student)
+    context = {"installment_history": installment_history, "student": student}
+    return render(request, "myapp/payment_history.html", context)
 
 
 # --------------------------------------------------------------------------------

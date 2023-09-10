@@ -61,6 +61,7 @@ class studentsModel(models.Model):
         null=True,
         related_name="students_with_batch_time",
     )
+    initial_payment = models.IntegerField(default=0)
     feespaid = models.IntegerField(default=0)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -69,6 +70,9 @@ class studentsModel(models.Model):
         if self.coursename:
             # Autofill coursefees from related Courses
             self.coursefees = self.coursename.coursefees
+
+        if not self.feespaid:
+            self.feespaid = self.initial_payment
 
         if self.joiningdate and self.coursename and self.coursename.courseduration:
             # Calculate completion date by adding course duration (in months)
