@@ -38,6 +38,7 @@ class studentsModel(models.Model):
     rollno = models.IntegerField(default=0)
     age = models.IntegerField()
     gender = models.CharField(max_length=20)
+    occupation = models.CharField(max_length=200, default="Student")
     phoneno = models.BigIntegerField()
     emailid = models.EmailField()
     address = models.TextField(null=True, blank=True)
