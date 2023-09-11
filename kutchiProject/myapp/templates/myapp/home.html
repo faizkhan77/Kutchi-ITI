@@ -7,7 +7,7 @@
 <style>
 
     .mainbody{
-        margin-left: 120px
+        margin-left: 100px
     }
 
     .heading{
@@ -19,18 +19,11 @@
 
 </style>
 
-{% comment %} <div class="header">
-    <h1>KUTCHI ITI Home Page</h1>
-</div> {% endcomment %}
-
-<div class="mainbody">
-    <div>
+        {% comment %} {% include 'myapp/kutchi_logo.html' %} {% endcomment %}
+   
         {% if request.user.is_authenticated and request.user.is_superuser %}
-            <br>
-            <p class="heading">LOGGED IN AS THE KUTCHI ITI ADMIN</p>
-            {% include 'myapp/kutchi_logo.html' %}
+            {% include 'myapp/HomeCarousal.html' %}
         {% endif %}
-
 
         {% if not request.user.is_superuser and request.user.is_authenticated %}
             <div>
