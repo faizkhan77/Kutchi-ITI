@@ -316,7 +316,12 @@
                 <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
                 <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
                 <div class="button-container">
+                    
+                        
+                    {% if students.feespaid != students.coursefees %}
                     <button class="feesbutton" onclick="location.href='{% url 'add_installment' students.id %}'">Add Payment</button>
+                    {% endif %}
+
                     <button class="payhistorybtn" onclick="location.href='{% url 'payment_history' students.id %}'">Payment History</button>
                 </div>
 
