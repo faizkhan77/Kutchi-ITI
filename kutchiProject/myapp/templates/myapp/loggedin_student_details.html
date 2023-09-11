@@ -81,7 +81,11 @@
 <body>
 
 <div class="container">
-    <h2>Your Details</h2>
+    {% if students.is_admission_canceled %}
+        <h2 style="color:red"><b>YOUR ADMISSION HAS BEEN CANCELLED</b></h2>
+    {% else %}
+        <h2>Your Details</h2>
+    {% endif %}
     
     <div class="student-details">
         <div class="detail">

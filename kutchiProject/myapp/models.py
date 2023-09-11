@@ -64,6 +64,7 @@ class studentsModel(models.Model):
     )
     initial_payment = models.IntegerField(default=0)
     feespaid = models.IntegerField(default=0)
+    admissioncancel = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -91,6 +92,9 @@ class studentsModel(models.Model):
             self.exam_given = False
 
         super().save(*args, **kwargs)
+
+    def is_admission_canceled(self):
+        return self.admissioncancel
 
     def __str__(self):
         return self.firstname

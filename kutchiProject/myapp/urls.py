@@ -47,4 +47,5 @@ urlpatterns = [
     path("addenquiry", views.addenquiry, name="addenquiry"),
     path("payment_history/<int:pk>/", views.payment_history, name="payment_history"),
     path("add_installment/<int:pk>/", views.add_installment, name="add_installment"),
+    path("cancel_admission/<int:pk>/", views.cancel_admission, name="cancel_admission"),
 ]

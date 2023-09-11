@@ -70,6 +70,11 @@
         transform: scale(1.05);
     }
 
+    .canceled {
+        background-color: red; /* Change the background color to red */
+        color: white; /* Change the text color to white or any color that is readable on red */
+    }
+
 </style>
 
 <div class="table-container">
@@ -87,7 +92,7 @@
             <th>Balance</th>
         </tr>
         {% for student in students %}
-        <tr class="clickable-row" data-href="{% url 'studentdetails' student.id %}">
+        <tr class="clickable-row {% if student.is_admission_canceled %}canceled{% endif %}" data-href="{% url 'studentdetails' student.id %}">
             <td>{{ student.id }}</td>
             <td>{{ student.joiningdate }}</td>
             <td>{{ student.firstname }} {{ student.lastname }}</td>

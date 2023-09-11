@@ -38,7 +38,7 @@
         color:white;
         width: 48%;
         padding: 10px;
-        background: linear-gradient(to bottom, #2518db, #0f5ef2,#0fa3f2);
+        background: linear-gradient(to bottom, #4aa9e0, #0f5ef2);
         border-radius: 5px;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
     }
@@ -46,6 +46,8 @@
     .detail:hover{
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
         0 25px 60px 0 rgba(0,0,0,0.19);
+        background: linear-gradient(to bottom, #8b4ae0, #594ae0);
+
     }
 
     .remarks-detail{
@@ -94,7 +96,7 @@
         top: 0;
         right: 0;
         margin: 5px;
-        margin-right:150px;
+        margin-right:140px;
         
         display: inline-block;
         padding: 15px 30px;
@@ -202,6 +204,27 @@
         transform: scale(1.08);
     }
 
+    .cancel_admbtn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 5px;
+        margin-right:260px;
+        
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #bf512c;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+    .cancel_admbtn:hover{
+        background-color: #e00b0f;
+        transform: scale(1.05);
+    }
 
 </style>
 
@@ -233,8 +256,18 @@
     <div class="container">
         <button class="edit-button" onclick="location.href='{% url 'edit' students.id %}'">Edit</button>
         <button class="delete-button" onclick="location.href='{% url 'delete' students.id %}'">Delete</button>
+        {% if not students.is_admission_canceled %}
+            <form action="{% url 'cancel_admission' students.id %}">
+                <button class="cancel_admbtn" type="submit">Cancel Admission</button>
+            </form>
+        {% endif %}
         <h2><b>{{students.firstname}}'s Informations</b></h2>
         
+        {% if students.is_admission_canceled %}
+            <h2 style="color:red"><b>ADMISSION FOR THIS STUDENT HAS BEEN CANCELLED</b></h2>
+        {% endif %}
+            
+
         <div class="student-details">
             <div class="detail">
                 <h3>Personal Information</h3>

@@ -454,6 +454,18 @@ def payment_history(request, pk):
     return render(request, "myapp/payment_history.html", context)
 
 
+def cancel_admission(request, pk):
+    page = "canceladmission"
+    student = get_object_or_404(studentsModel, id=pk)
+
+    if request.method == "POST":
+        student.admissioncancel = True
+        student.save()
+        return redirect("studentdetails", pk=pk)
+    context = {"student": student, "page": page}
+    return render(request, "myapp/delete.html", context)
+
+
 # --------------------------------------------------------------------------------
 
 
