@@ -73,7 +73,13 @@
             <h3>Are you sure you want to Cancel Admission for <q>{{student.firstname}}</q> ?</h3>
         {% endif %}
             
-        <a href="{% url 'studentdetails' student.id %}">Go Back</a>
+        
+        {% if page == "deletestudent" %}
+            <a href="{% url 'studentdetails' student.id %}">Go Back</a>
+        {% else %}
+            <a href="{% url 'course-tab' %}">Go Back</a>
+        {% endif %}
+            
         <input type="submit" value="Confirm">
     </form>
 </div>
