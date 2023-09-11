@@ -315,6 +315,7 @@
                 <p><strong>Initial amount Paid:</strong> &#8377;{{ students.initial_payment }}</p>    
                 <p><strong>Fees Paid:</strong> &#8377;{{ students.feespaid }}</p>
                 <p><strong>Remaining Balance:</strong> &#8377;{{ remainingBalance }}</p>
+                <p><strong>Due date:</strong> </p>
                 <div class="button-container">
                     
                         
@@ -359,8 +360,12 @@
                 {% comment %} <p><strong>Exam Date:</strong> {{ students.completiondate|add_days:1|date:"F d, Y" }}</p> {% endcomment %}
                 <p><strong>Exam Date:</strong> {{ students.exam_date|date:"F d, Y"  }}</p>
                 <p><strong>Exam Fees:</strong>&#8377;100 </p>
-                <p><strong>Certification:</strong>  {{ students.coursename }}</p>
                 <p><strong>Exam Session:</strong> </p>
+                <p><strong>Exam Attempt:</strong> </p>
+                <p><strong>Re-Exam:</strong> </p>
+                <p><strong>Certification:</strong>  {{ students.coursename }}</p>
+                <p><strong>Certification no:</strong> </p>
+                <p><strong>Result Date:</strong> </p>
             </div>
 
             <div class="remarks-detail">
@@ -375,7 +380,27 @@
             </div>
         </div>
 
+        <div class="student-details">
+            <div class="fees-detail">
+                <h3>Examination Reports</h3>
+                <p><strong>Status:</strong> </p>    
+                <p><strong>Theoratical Marks:</strong> </p>    
+                <p><strong>Practical Marks:</strong> </p>
+                <p><strong>Total Marks:</strong> </p>
+                <p><strong>Percentage:</strong> </p>
+                <p><strong>Marksheet no:</strong> </p>
+                <div class="button-container">
+                    
+                        
+                    {% if students.feespaid != students.coursefees %}
+                    <button class="feesbutton" onclick="location.href='{% url 'add_installment' students.id %}'">Add Payment</button>
+                    {% endif %}
 
+                    <button class="payhistorybtn" onclick="location.href='{% url 'payment_history' students.id %}'">Payment History</button>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 </div>

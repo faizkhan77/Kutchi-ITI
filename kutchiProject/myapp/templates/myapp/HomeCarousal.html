@@ -70,6 +70,31 @@
     text-align: center;
     margin-bottom: 300px;
 }
+
+.main-heading2{
+  position: relative;
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin-top: -15px;
+  transition: color 0.3s;
+}
+.main-heading2::before {
+  left: 280px;
+}
+
+.main-heading2::after {
+  right: 280px; /* Adjusted value to make it closer */
+}
+
+.main-heading2:hover {
+  color: #007bff;
+}
+
+.main-heading2:hover::before,
+.main-heading2:hover::after {
+  background-color: #555;
+}
 </style>
 
 
@@ -98,7 +123,7 @@
                 <div class="sub-heading">
                     Kutchi
                 </div>
-                <div class="main-heading">
+                <div class="main-heading2">
                     Indian Technical Institute
                   </div>
             </div>
