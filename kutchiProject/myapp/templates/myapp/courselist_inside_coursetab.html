@@ -77,6 +77,24 @@
             transform: scale(1.05);
         }
 
+        
+    .search-bar{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px;
+        margin-right: 400px;
+        width: 500px;
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #f5f0e1;
+        color: black;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
     </style>
 </head>
 <body>
@@ -86,6 +104,10 @@
                 <button class="custom-button" onclick="location.href='{% url 'addcourse' %}'">Add a new course</button>
             {% endif %}
             <h2>Course Information</h2>
+            <form method="GET" action="{% url 'search_courses' %}">
+                <input class="search-bar" type="text" name="query" placeholder="Search...">
+            </form>
+            
             <table>
                 <tr>
                     <th>Course Name</th>

@@ -29,15 +29,9 @@
 
     <div class="courseTab">
         <div>            
-            {% comment %} {% if request.user.is_superuser %}
-                <a href="{% url 'addcourse' %}">Add a new Course</a>
-            {% endif %}
-                 {% endcomment %}
-            
+                     
             {% include 'myapp/courselist_inside_coursetab.html' %}
-            {% comment %} {% for course in courses %}
-                <h3><a href="{% url 'coursedetails' course.id %}">{{course.coursename}}</a></h3>
-            {% endfor %} {% endcomment %}
+
         </div>
     </div>
 

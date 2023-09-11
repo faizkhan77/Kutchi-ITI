@@ -76,12 +76,33 @@
         color: white; /* Change the text color to white or any color that is readable on red */
     }
 
+    .search-bar{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 10px;
+        margin-right: 400px;
+        width: 500px;
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #f5f0e1;
+        color: black;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
 </style>
 
 <div class="table-container">
 <div class="container">
     <button class="custom-button" onclick="location.href='{% url 'studentsignup' %}'">Register a Student</button>
+
     <h2>Student Information</h2>
+    <form method="GET" action="{% url 'search_students' %}">
+        <input class="search-bar" type="text" name="query" placeholder="Search...">
+    </form>
     <table>
         <tr>
             <th>Sr No</th>

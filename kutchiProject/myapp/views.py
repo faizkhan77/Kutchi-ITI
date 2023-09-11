@@ -29,6 +29,7 @@ from django.template.loader import render_to_string
 import os
 from django.conf import settings
 from django.db.models import Sum
+from django.db.models import Q
 
 
 # Create your views here.
@@ -271,27 +272,33 @@ def courseUpdate(request, pk):
     context = {"form": updateform, "page": page}
     return render(request, "myapp/courseform.html", context)
 
-    # def upload_pdf(request):
-    #     form = UploadPDFForm()  # Create an instance of the form
 
-    #     if request.method == "POST":
-    #         form = UploadPDFForm(request.POST, request.FILES)
-    #         if form.is_valid():
-    #             pdf_file = form.cleaned_data["pdf_file"]
-    #             title = pdf_file.name
-    #             pdf_path = (
-    #                 f"pdfs/{title}"  # Store PDFs in 'pdfs' folder within your media root
-    #             )
+def search_students(request):
+    query = request.GET.get("query")
+    students = studentsModel.objects.filter(
+        Q(firstname__icontains=query)
+        | Q(rollno__icontains=query)  # Search by firstname (case-insensitive)
+        | Q(lastname__icontains=query)
+        | Q(  # Search by roll no (case-insensitive)
+            id__icontains=query
+        )  # Search by id (case-insensitive)
+    )
+    for student in students:
+        student.remaining_balance = student.coursefees - student.feespaid
+    course = Courses.objects.filter(Q(coursename__icontains=query))
+    context = {"students": students, "course": course}
+    return render(request, "myapp/Students_comp.html", context)
 
-    #             with open(pdf_path, "wb") as destination:
-    #                 for chunk in pdf_file.chunks():
-    #                     destination.write(chunk)
 
-    #             SyllabusPDFFile.objects.create(title=title, file_path=pdf_path)
-    # return redirect("upload_success")  # Redirect to a success page
-
-    # context = {"form": form}
-    # return render(request, "myapp/upload_pdf.html", context)
+def search_courses(request):
+    query = request.GET.get("query")
+    courses = Courses.objects.filter(
+        Q(coursename__icontains=query)
+        | Q(courseduration__icontains=query)
+        | Q(coursefees__icontains=query)
+    )
+    context = {"courses": courses}
+    return render(request, "myapp/Courses_comp.html", context)
 
 
 # Form syllabus download
