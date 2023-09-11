@@ -358,8 +358,8 @@
                 
                 {% comment %} <p><strong>Exam Date:</strong> {{ students.completiondate|add_days:1|date:"F d, Y" }}</p> {% endcomment %}
                 <p><strong>Exam Date:</strong> {{ students.exam_date|date:"F d, Y"  }}</p>
-                <p><strong>Exam Fees:</strong> </p>
-                <p><strong>Certification:</strong> </p>
+                <p><strong>Exam Fees:</strong>&#8377;100 </p>
+                <p><strong>Certification:</strong>  {{ students.coursename }}</p>
                 <p><strong>Exam Session:</strong> </p>
             </div>
 
