@@ -390,13 +390,7 @@
                 <p><strong>Percentage:</strong> </p>
                 <p><strong>Marksheet no:</strong> </p>
                 <div class="button-container">
-                    
-                        
-                    {% if students.feespaid != students.coursefees %}
-                    <button class="feesbutton" onclick="location.href='{% url 'add_installment' students.id %}'">Add Payment</button>
-                    {% endif %}
-
-                    <button class="payhistorybtn" onclick="location.href='{% url 'payment_history' students.id %}'">Payment History</button>
+                    <button class="payhistorybtn" onclick="location.href='{% url 'examreport' students.id %}'">Add Exam Report</button>
                 </div>
 
             </div>

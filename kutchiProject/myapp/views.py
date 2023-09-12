@@ -6,6 +6,7 @@ from .forms import (
     RemarksForm,
     EnquiryForm,
     FeesInstallmentForm,
+    ExamReportsForm,
 )
 from .models import (
     studentsModel,
@@ -14,6 +15,7 @@ from .models import (
     StudentRemarks,
     Enquiry,
     FeesInstallment,
+    ExamReports,
 )
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -400,6 +402,17 @@ def StudentRemark(request, pk):
             form = RemarksForm()
     context = {"form": form, "students": students}
     return render(request, "myapp/remarksForm.html", context)
+
+
+def examReport(request, pk):
+    examform = ExamReportsForm()
+    if request.method == "POST":
+        examform = ExamReportsForm(request.POST)
+        if examform.is_valid():
+            examform.save()
+            return redirect("studentdetails", pk=pk)
+    context = {"form": examform}
+    return render(request, "myapp/exam_reportform.html", context)
 
 
 def addenquiry(request):

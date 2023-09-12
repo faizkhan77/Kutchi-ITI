@@ -20,6 +20,7 @@ urlpatterns = [
     path("about-tab/", views.aboutTab, name="about"),
     path("enquiry-tab/", views.enquiryTab, name="enquiry"),
     path("fees-tab/", views.feesTab, name="feestab"),
+    path("examreport/<int:pk>", views.examReport, name="examreport"),
     path("sidebar/", views.sidebarmenu, name="sidebar"),
     path(
         "loggedin-students-details/",

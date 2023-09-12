@@ -6,6 +6,7 @@ from .models import (
     StudentRemarks,
     Enquiry,
     FeesInstallment,
+    ExamReports,
 )
 from django import forms
 
@@ -63,3 +64,10 @@ class FeesInstallmentForm(forms.ModelForm):
             "date": DateInput(attrs={"type": "date"}),
             "time": forms.TimeInput(attrs={"type": "time"}),
         }
+
+
+class ExamReportsForm(forms.ModelForm):
+    class Meta:
+        model = ExamReports
+        fields = "__all__"
+        exclude = ["student", "coursename"]
