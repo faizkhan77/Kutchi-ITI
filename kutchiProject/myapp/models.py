@@ -138,3 +138,14 @@ class FeesInstallment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+class ExamReports(models.Model):
+    student = models.ForeignKey(studentsModel, on_delete=models.CASCADE)
+    coursename = models.ForeignKey(Courses, on_delete=models.SET_NULL, null=True)
+    exam_status = models.CharField(max_length=10, default="None")
+    theory_marks = models.IntegerField(default="None")
+    practical_marks = models.IntegerField(default=None)
+    total_marks = models.IntegerField(default=None)
+    percentage = models.IntegerField(default=None)
+    marksheet_no = models.IntegerField(default=None)
