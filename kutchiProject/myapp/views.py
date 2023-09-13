@@ -171,7 +171,7 @@ def studentSignup(request):
             student.username = student.username.lower()
             student.save()
             # login(request, student)
-            return redirect("student-register")
+            return redirect("student-register", user_id=student.id)
         else:
             messages.error(request, "An error occured during registration")
 
@@ -179,9 +179,11 @@ def studentSignup(request):
     return render(request, "myapp/signup.html", context)
 
 
-def studentRegisterForm(request):
+def studentRegisterForm(request, user_id):
     page = "registerstudent"
-    form = StudentModelForm()
+    user = User.objects.get(id=user_id)
+
+    form = StudentModelForm(initial={"user": user})
     if request.method == "POST":
         form = StudentModelForm(request.POST)
         if form.is_valid():
@@ -436,28 +438,47 @@ def add_installment(request, pk):
             date = form.cleaned_data["date"]
             time = form.cleaned_data["time"]
 
-            # Calculate the remaining balance
-            remaining_balance = student.coursefees - student.feespaid
+            # Check if this is the first installment (initial payment)
+            if student.feespaid == 0:
+                initial_amount = student.initial_payment
+                if amount_paid > initial_amount:
+                    return render(
+                        request,
+                        "myapp/add_installment.html",
+                        {
+                            "form": form,
+                            "student": student,
+                            "error_message": "Amount paid exceeds initial payment.",
+                        },
+                    )
 
-            if amount_paid > remaining_balance:
-                return render(
-                    request,
-                    "myapp/add_installment.html",
-                    {
-                        "form": form,
-                        "student": student,
-                        "error_message": "Amount paid exceeds remaining balance.",
-                    },
+                FeesInstallment.objects.create(
+                    student=student, date=date, time=time, amount_paid=initial_amount
                 )
 
-            FeesInstallment.objects.create(
-                student=student, date=date, time=time, amount_paid=amount_paid
-            )
+                student.feespaid += initial_amount
+            else:
+                # Calculate the remaining balance
+                remaining_balance = student.coursefees - student.feespaid
 
-            # Update the student's fees paid
-            student.feespaid += amount_paid
+                if amount_paid > remaining_balance:
+                    return render(
+                        request,
+                        "myapp/add_installment.html",
+                        {
+                            "form": form,
+                            "student": student,
+                            "error_message": "Amount paid exceeds remaining balance.",
+                        },
+                    )
+
+                FeesInstallment.objects.create(
+                    student=student, date=date, time=time, amount_paid=amount_paid
+                )
+
+                student.feespaid += amount_paid
+
             student.save()
-
             return redirect("student-tab")
 
     else:
@@ -470,6 +491,17 @@ def add_installment(request, pk):
 def payment_history(request, pk):
     student = studentsModel.objects.get(id=pk)
     installment_history = FeesInstallment.objects.filter(student=student)
+
+    # Check if initial payment exists and add it to installment history only if there are no installments yet
+    if student.feespaid > 0 and not installment_history.exists():
+        initial_installment = FeesInstallment.objects.create(
+            student=student,
+            date=student.joiningdate,
+            time=student.joiningtime,
+            amount_paid=student.initial_payment,
+        )
+        installment_history = [initial_installment] + list(installment_history)
+
     context = {"installment_history": installment_history, "student": student}
     return render(request, "myapp/payment_history.html", context)
 

@@ -44,6 +44,7 @@ class studentsModel(models.Model):
     address = models.TextField(null=True, blank=True)
     coursename = models.ForeignKey(Courses, on_delete=models.SET_NULL, null=True)
     joiningdate = models.DateField()
+    joiningtime = models.TimeField(auto_now_add=True)
     completiondate = models.DateField()
     extendeddate = models.DateField(null=True, blank=True)
     exam_date = models.DateField(null=True, blank=True)

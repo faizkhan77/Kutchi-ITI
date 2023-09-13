@@ -106,21 +106,25 @@
     <table>
         <tr>
             <th>Sr No</th>
+            <th>Roll No</th>
             <th>Admission Date</th>
             <th>Student Name</th>
             <th>Course Name</th>
             <th>Completion Date</th>
-            <th>Fees</th>
+            <th>Course Fees</th>
+            <th>Fees Paid</th>
             <th>Balance</th>
         </tr>
         {% for student in students %}
         <tr class="clickable-row {% if student.is_admission_canceled %}canceled{% endif %}" data-href="{% url 'studentdetails' student.id %}">
             <td>{{ student.id }}</td>
+            <td>{{ student.rollno }}</td>
             <td>{{ student.joiningdate }}</td>
             <td>{{ student.firstname }} {{ student.lastname }}</td>
             <td>{{ student.coursename }}</td>
             <td>{{ student.completiondate }}</td>
             <td>&#8377;{{ student.coursefees }}</td>
+            <td>&#8377;{{ student.feespaid }}</td>
             <td>&#8377;{{ student.remaining_balance }}</td>
         </tr>
         {% endfor %}

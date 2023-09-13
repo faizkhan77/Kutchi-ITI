@@ -5,7 +5,11 @@ urlpatterns = [
     path("login/", views.loginPage, name="login"),
     path("logout/", views.logoutPage, name="logout"),
     path("", views.index, name="home"),
-    path("studentregister/", views.studentRegisterForm, name="student-register"),
+    path(
+        "studentregister/<int:user_id>/",
+        views.studentRegisterForm,
+        name="student-register",
+    ),
     path("studentsignup/", views.studentSignup, name="studentsignup"),
     path("studentdetails/<int:pk>/", views.studentDetails, name="studentdetails"),
     path("deletestudent/<int:pk>/", views.deleteStudent, name="delete"),
