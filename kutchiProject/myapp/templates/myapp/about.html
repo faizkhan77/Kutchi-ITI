@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}About Kutchi ITI{% endblock title %}
 
 {% block content %}
@@ -35,6 +35,22 @@
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
         0 25px 60px 0 rgba(0,0,0,0.19);
     }
+
+    .myimg{
+        text-align: center;
+        margin-top: 45px;
+        margin-bottom: 30px;
+    }
+    .myimg img{
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+    }
+    .myimg img:hover{
+        transform: scale(1.05);
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+        0 25px 60px 0 rgba(0,0,0,0.19);
+    }
+
     h1 {
         font-size: 28px;
         margin-bottom: 20px;
@@ -60,26 +76,53 @@
 <div class="header">
     <h1>Welcome to Kutchi ITI</h1>
 </div>
+<div class="myimg">
+    <img src="{% static 'images/about-us-img.jpg' %}" alt="About Us Image">
+</div>
 <div class="container1">
-    <h2>About Us</h2>
+    <h2>About Kutchi-ITI</h2>
     <p>
         At Kutchi ITI, we are more than just an educational institution – we are a legacy of excellence,
         innovation, and commitment in the field of Information Technology. For over three decades, we have
         been at the forefront of shaping IT education, providing a comprehensive spectrum of courses that
         cater to the dynamic demands of the industry.
+        <br><br>
+        Serving Man is like serving God. The power of knowledge is passed from generation to another generation<br><br>
+
+        Without knowledge a normal man can never grow. Through Knowledge only one can reach his goal easily and fulfill his dream. Knowledge is the only way through which one will come to now about his own power.<br><br>
+
+        A knowledge able man is capable of passing through bad time easily, and is successfully in clearing all the hurdles which comes in his way.<br><br>
+
+        Knowledge plays a key role in founding a good and sophisticated society having responsible citizens.<br><br>
+
+        For the bright future of the students and to reach there goal, we are providing them a helping hand so that they become a respectful citizen of the society.<br><br>
+
+        For the same reason, to help the students of Mumbai and Thane and, to give them good knowledge and good talent we have taken this step. And with the blessing of our teacher and help of our beloved friends on 1st May 1994 we have established Kutchi I.T.I. And with your help and support we have completed 26 years successfully and in the 27 year we have broken all records. We are certified by the institute of I.T.E.S vocational and engineering examination board and is 9001:2008 certified and registered by District Industrial Center Service Industry Government of Maharashtra.<br><br>
+
+        We give full assurance that in our institute the students will come to know about the competitive world and how to get success in. We will also teach them technical course through which they will be able to live successfully in this competitive world.<br><br>
+
+        In our institute with technical knowledge we also give them chance to know about the living of illiterate people and the facilities provided to the illiterate people by the Government. Many students of this institute got successful not only in India but also in foreign countries.<br><br>
+
+        This happened only by the blessing of our teacher and help of our friends and also from the support of ex-students of this institute.<br><br>
+
+        They give us their idea and also confidence on how to provide more facilities to students. There is no doubt that this institute will make news in the world of technical world. We take care of our belonging but knowledge take care of us. We hope that you will give a favorable reply and extend your support to us and help us to move ahead.
     </p>
+
+    <hr>
     <h2>Our Journey</h2>
     <p>
         Established three decades ago, Kutchi ITI has evolved into a pioneering institution, synonymous with
         quality education in the IT domain. Our unwavering dedication to delivering cutting-edge knowledge and
         industry-relevant skills has set us apart as a trusted and respected name in the field.
     </p>
+    <hr>
     <h2>Our Courses</h2>
     <p>
         With a rich array of courses spanning MSCIT, Programming, Hardware, Web Development, Graphic Design,
         and various other high-level IT disciplines, Kutchi ITI offers a diverse portfolio that equips our
         students with the skills needed to thrive in a competitive landscape.
     </p>
+    <hr>
     <h2>Our Commitment</h2>
     <p>
         At Kutchi ITI, we recognize that success in the IT sector is rooted in a strong foundation of knowledge
@@ -88,6 +131,7 @@
         and seasoned educators, ensuring that our students are prepared to tackle the challenges of the ever-evolving
         IT landscape.
     </p>
+    <hr>
     <h2>Why Choose Kutchi ITI?</h2>
     <ul>
         <li><strong>Legacy of Excellence:</strong> Our 30-year journey is a testament to our commitment to excellence
