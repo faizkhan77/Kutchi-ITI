@@ -134,6 +134,10 @@ def enquiryTab(request):
     return render(request, "myapp/enquiry_comp.html", context)
 
 
+def rules_and_regulations(request):
+    return render(request, "myapp/rules_regulation.html")
+
+
 # ---------------NEED WORK-----------------------------------------------
 
 

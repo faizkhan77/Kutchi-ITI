@@ -24,6 +24,7 @@ urlpatterns = [
     path("about-tab/", views.aboutTab, name="about"),
     path("enquiry-tab/", views.enquiryTab, name="enquiry"),
     path("fees-tab/", views.feesTab, name="feestab"),
+    path("rulesregulation/", views.rules_and_regulations, name="rulesregulation"),
     path("examreport/<int:pk>", views.examReport, name="examreport"),
     path("sidebar/", views.sidebarmenu, name="sidebar"),
     path(

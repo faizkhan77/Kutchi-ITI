@@ -57,36 +57,84 @@
       .login-btn:hover{
         background-color: #1e3d56;
       }
+
+
+      <style>
+    /* ... (your existing styles) ... */
+    
+    /* Style for the dropdown container */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Style for the dropdown content */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #b20237;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /* Style for the dropdown links */
+    .dropdown-content a {
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Show the dropdown content on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 </style>
 
+
+
 <div class="sidebar">
-    <a href="{% url 'home' %}">Home</a>
-    
-    {% if request.user.is_superuser %}
-      <a href="{% url 'student-tab' %}">Students</a>
-    {% endif %}      
-    
-    {% if request.user.is_authenticated %}
-      <a href="{% url 'course-tab' %}">Courses</a>
-    {% endif %}
-    {% if request.user.is_superuser %}
-      <a href="{% url 'feestab' %}" style="color:red">Fees</a>
-    {% endif %}
-    <a href="{% url 'about' %}">About</a>
-    <a href="{% url 'contact' %}">Contact</a>
-    
-    {% if request.user.is_superuser %}
-      <a href="{% url 'enquiry' %}">Enquiry</a>
-    {% endif %}
-    {% if request.user.is_superuser %}
-      <a href="#">Faculties</a>
-    {% endif %}
-    <div class="login-tab">
-      {% comment %} <hr> {% endcomment %}
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
-      {% else %}
-        <a href="{% url 'login' %}" class="login-btn">Login</a>
-      {% endif %}
-    </div>
+  <a href="{% url 'home' %}">Home</a>
+  
+  {% if request.user.is_superuser %}
+    <a href="{% url 'student-tab' %}">Students</a>
+  {% endif %}      
+  
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'course-tab' %}">Courses</a>
+  {% endif %}
+  {% if request.user.is_superuser %}
+    <a href="{% url 'feestab' %}" style="color:red">Fees</a>
+  {% endif %}
+  
+  <a href="{% url 'about' %}">About</a>
+
+  <a href="{% url 'contact' %}">Contact</a>
+  
+  {% if request.user.is_superuser %}
+    <a href="{% url 'enquiry' %}">Enquiry</a>
+  {% endif %}
+
+  {% if request.user.is_superuser %}
+    <a href="#">Faculties</a>
+  {% endif %}
+
+  <!-- Add a container for the "About" dropdown -->
+  <div class="dropdown">
+    <a href="#">Others</a>
+    <div class="dropdown-content">
+      <a href="{% url 'rulesregulation' %}">Rules & Regulations</a>
+      <a href="#">Option 2</a>
   </div>
+</div>
+
+
+  <div class="login-tab">
+    {% comment %} <hr> {% endcomment %}
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="login-btn">Login</a>
+    {% endif %}
+  </div>
+</div>
