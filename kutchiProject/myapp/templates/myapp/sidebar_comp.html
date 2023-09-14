@@ -78,7 +78,9 @@
     {% if request.user.is_superuser %}
       <a href="{% url 'enquiry' %}">Enquiry</a>
     {% endif %}
-    <a href="#">Faculties</a>
+    {% if request.user.is_superuser %}
+      <a href="#">Faculties</a>
+    {% endif %}
     <div class="login-tab">
       {% comment %} <hr> {% endcomment %}
       {% if request.user.is_authenticated %}

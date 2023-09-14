@@ -53,7 +53,7 @@
     }
 
     .fees-detail{
-        color:black;
+        color:white;
         margin-left: 240px;
         width: 65%;
         padding: 10px;
@@ -160,9 +160,13 @@
             
             {% comment %} <p><strong>Exam Date:</strong> {{ students.completiondate|add_days:1|date:"F d, Y" }}</p> {% endcomment %}
             <p><strong>Exam Date:</strong> {{ students.exam_date|date:"F d, Y"  }}</p>
-            <p><strong>Exam Fees:</strong> </p>
-            <p><strong>Certification:</strong> </p>
+            <p><strong>Exam Fees:</strong>&#8377;100 </p>
             <p><strong>Exam Session:</strong> </p>
+            <p><strong>Exam Attempt:</strong> </p>
+            <p><strong>Re-Exam:</strong> </p>
+            <p><strong>Certification:</strong>  {{ students.coursename }}</p>
+            <p><strong>Certification no:</strong> </p>
+            <p><strong>Result Date:</strong> </p>
         </div>
 
         <div class="remarks-detail">
@@ -177,6 +181,19 @@
                     <button class="addremarkbtn" onclick="location.href='{% url 'remarks' students.id %}'">Add a Remark</button>
                 {% endif %}
             </ul>
+        </div>
+    </div>
+
+    <div class="student-details">
+        <div class="fees-detail">
+            <h3>Examination Reports</h3>
+            <p><strong>Status:</strong> </p>    
+            <p><strong>Theoratical Marks:</strong> </p>    
+            <p><strong>Practical Marks:</strong> </p>
+            <p><strong>Total Marks:</strong> </p>
+            <p><strong>Percentage:</strong> </p>
+            <p><strong>Marksheet no:</strong> </p>
+
         </div>
     </div>
 </div>

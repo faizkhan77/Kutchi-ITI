@@ -319,7 +319,11 @@ def DownloadSyllabus(request, pk):
             # send mail to user
             user_email = user_details.email
             user_subject = "Kutchi ITI"
-            user_message = f"Thank you for visiting us and for downloading our syllabus"
+            user_message = (
+                f"Hey {user_name}\n"
+                f"Thank you for visiting us and for downloading our syllabus\n"
+                f"for more information contact us or visit us"
+            )
             send_mail(
                 user_subject,
                 user_message,
@@ -333,6 +337,7 @@ def DownloadSyllabus(request, pk):
                 f"Name: {user_name}\n"
                 f"Email ID: {user_email}\n"
                 f"Mobile Number: {user_details.number}\n"
+                f"Downloaded Syllabus: {course.coursename}\n"
                 f"Download time and date : {user_details.download_time}"
             )
             send_mail(
