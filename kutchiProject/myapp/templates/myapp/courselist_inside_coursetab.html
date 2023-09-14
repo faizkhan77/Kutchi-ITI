@@ -14,7 +14,7 @@
             margin-top:50px
         }
 
-        .container {
+        .container1 {
             position: relative;
             width: 80%;
             margin: auto;
@@ -25,7 +25,7 @@
             transition: box-shadow 0.3s;
         }
 
-        .container:hover{
+        .container1:hover{
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
             0 25px 60px 0 rgba(0,0,0,0.19);
         }
@@ -99,7 +99,7 @@
 </head>
 <body>
     <div class="table-container">
-        <div class="container">
+        <div class="container1">
             {% if request.user.is_superuser %}
                 <button class="custom-button" onclick="location.href='{% url 'addcourse' %}'">Add a new course</button>
             {% endif %}

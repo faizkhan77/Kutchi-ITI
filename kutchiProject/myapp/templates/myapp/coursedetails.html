@@ -14,7 +14,7 @@
         background-color: #f4f4f4;
     }
 
-    .container {
+    .container1 {
         position: relative;
         width: 60%;
         margin: auto;
@@ -172,7 +172,7 @@
             <button class="delete-button" onclick="location.href='{% url 'delete-course' obj.id %}'">Delete</button> 
         {% endif %}
    
-        <div class="container">
+        <div class="container1">
   
             <h2><b>{{obj.coursename}}</b></h2>
             <div class="student-details" style="display: flex; justify-content: center;">
@@ -223,3 +223,5 @@
 </div>
 
 {% endblock content %}
+
+{% block footer %}{% endblock footer %}
