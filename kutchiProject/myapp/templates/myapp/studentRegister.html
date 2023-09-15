@@ -13,6 +13,13 @@
     .studentReg{
         margin-left: 120px
     }
+
+    button{
+        margin-bottom:50px;
+        margin-left: 380px;
+        height: 50px;
+        width: 500px;
+    }
     
 </style>
 
@@ -87,7 +94,8 @@
                 {{ form.batch_time }}
             </div>
 
-
+            <hr>
+            <p>If need to extend course date, Extend below</p>
             <div class="mb-3">
                 <label for="extendeddate" class="form-label">Extension Date</label>
                 <input type="date" class="form-control" id="extendeddate" name="extendeddate" value="{{ studentedit.extendeddate|date:'Y-m-d' }}">
