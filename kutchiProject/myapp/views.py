@@ -214,6 +214,8 @@ def deleteStudent(request, pk):
     page = "deletestudent"
     delstudent = studentsModel.objects.get(id=pk)
     if request.method == "POST":
+        if delstudent.user:
+            delstudent.user.delete()
         delstudent.delete()
         return redirect("student-tab")
     context = {"student": delstudent, "page": page}
