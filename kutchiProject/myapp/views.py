@@ -419,12 +419,13 @@ def StudentRemark(request, pk):
 
 def examReport(request, pk):
     examform = ExamReportsForm()
+    student = studentsModel.objects.get(id=pk)
     if request.method == "POST":
         examform = ExamReportsForm(request.POST)
         if examform.is_valid():
             examform.save()
             return redirect("studentdetails", pk=pk)
-    context = {"form": examform}
+    context = {"form": examform, "student": student}
     return render(request, "myapp/exam_reportform.html", context)
 
 
