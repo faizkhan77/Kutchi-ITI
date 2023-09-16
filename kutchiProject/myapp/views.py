@@ -200,12 +200,14 @@ def studentRegisterForm(request, user_id):
 
 def studentDetails(request, pk):
     student = studentsModel.objects.get(id=pk)
+    # Examreport = ExamReports.objects.get(id=pk)
     duration = relativedelta(student.completiondate, student.joiningdate)
     remainingBalance = student.coursefees - student.feespaid
     context = {
         "students": student,
         "duration": duration,
         "remainingBalance": remainingBalance,
+        # 'examreport' : Examreport
     }
     return render(request, "myapp/student_details.html", context)
 

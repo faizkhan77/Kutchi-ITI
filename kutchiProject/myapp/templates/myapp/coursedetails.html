@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Course Details Page{% endblock title %}
 
@@ -153,6 +154,15 @@
         background-color: #0056b3;
         transform: scale(1.05);
     }
+
+    .kutchilogo-image{
+        margin-left: 280px; 
+        margin-bottom: 60px;
+        margin-top: 50px
+    }
+    .kutchilogo-image:hover{
+        transform: scale(1.08);
+    }
 </style>
 
 <div class="coursedetails">
@@ -175,6 +185,8 @@
         <div class="container1">
   
             <h2><b>{{obj.coursename}}</b></h2>
+            <img src="{% static 'images/logo.png' %}" alt="Kutchi-ITI Logo" class="kutchilogo-image">
+
             <div class="student-details" style="display: flex; justify-content: center;">
                 <div class="detail1">
                     <h3>Basic Course Info</h3>

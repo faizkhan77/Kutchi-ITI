@@ -94,13 +94,14 @@
                 {{ form.batch_time }}
             </div>
 
-            <hr>
-            <p>If need to extend course date, Extend below</p>
-            <div class="mb-3">
-                <label for="extendeddate" class="form-label">Extension Date</label>
-                <input type="date" class="form-control" id="extendeddate" name="extendeddate" value="{{ studentedit.extendeddate|date:'Y-m-d' }}">
+            <div style="background-color: rgba(178, 2, 55, 0.2)">
+                <hr>
+                <p>If need to extend course date, Extend below</p>
+                <div class="mb-3">
+                    <label for="extendeddate" class="form-label">Extension Date</label>
+                    <input type="date" class="form-control" id="extendeddate" name="extendeddate" value="{{ studentedit.extendeddate|date:'Y-m-d' }}">
+                </div>
             </div>
-            
             
             <!-- Add more fields as needed -->
             <button type="submit" class="btn btn-primary">Submit</button>
