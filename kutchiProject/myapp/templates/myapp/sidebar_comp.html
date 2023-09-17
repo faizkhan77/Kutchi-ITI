@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 <style>
     body {
         margin: 0;
@@ -59,7 +60,6 @@
       }
 
 
-      <style>
     /* ... (your existing styles) ... */
     
     /* Style for the dropdown container */
@@ -89,11 +89,48 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
+
+    .icon i{
+      margin:1vw;
+      font-size:5vw;
+      display:none
+
+    }
+
+    @media (max-width:700px){
+
+      .sidebar{
+        width: 6vmax;
+      }
+
+      .icon i{
+        margin:0.4vw;
+        display:block;
+        font-size:5vmax;
+        color:white;
+      }
+
+      .sidebar a{
+        display:none
+      }
+
+      .sidebar.active {
+        width: 10vmax;
+      }
+      .sidebar.active a{
+        display: block;
+      }
+    }
 </style>
 
 
 
 <div class="sidebar">
+  
+  <div class="icon">
+    <i class="ri-menu-line" id="sidebarToggle"></i>
+  </div>
+
   <a href="{% url 'home' %}">Home</a>
   
   {% if request.user.is_superuser %}
@@ -138,3 +175,16 @@
     {% endif %}
   </div>
 </div>
+
+<script>
+  // Get references to the sidebar and sidebar toggle icon
+  const sidebar = document.querySelector('.sidebar');
+  const sidebarToggle = document.getElementById('sidebarToggle');
+
+  // Add a click event listener to the sidebar toggle icon
+  sidebarToggle.addEventListener('click', () => {
+      // Toggle the "active" class on both the sidebar and the icon
+      sidebar.classList.toggle('active');
+      sidebarToggle.classList.toggle('active');
+  });
+</script>
