@@ -163,6 +163,64 @@
     .kutchilogo-image:hover{
         transform: scale(1.08);
     }
+
+    @media (max-width:700px){
+        .coursedetails{
+            margin-left: 0vw;
+        }
+
+
+        .container1 {
+            position: relative;
+            width: 95vw;
+            margin: auto;
+            margin-top: 0px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .container1 h2{
+            font-size:5vw
+        }
+        .detail1 h3{
+            font-size:4vw
+        }
+        .container1 p{
+            font-size:3vw
+        }
+        .student-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+    
+        .detail1{
+            height: auto;
+            width: 90vw;
+        }
+        .detail2 {
+            height: auto;
+            width: 90vw;
+        }
+        .kutchilogo-image{
+            margin-left: 6vw; 
+            margin-bottom: 6vw;
+            margin-top: 5vw
+        }
+        .coursedetails {
+            flex-direction: column; /* Stack elements vertically */
+        }
+
+        .syllabus-button {
+            position: relative; /* Reset position */
+            margin: 10px auto; /* Center the button horizontally */
+            display: block; /* Make it a block element */
+            width: 90%; /* Adjust width as needed */
+            text-align: center; /* Center text within the button */
+        }
+    }
 </style>
 
 <div class="coursedetails">
