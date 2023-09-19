@@ -14,10 +14,28 @@
             margin: 0;
             padding: 0;
         }
+
+        @media (max-width:700px){
+
+            
+            .container h5{
+                font-size:4vw;
+            }
+    
+            .container p{
+                font-size:2vw;
+            }
+    
+    
+            #credit{
+                display:none
+            }
+        }
+
     </style>
 </head>
 <body>
-    <footer style="background-color: #1e3d56;" text-white py-4">
+    <footer style="background-color: #1e3d56; text-white py-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -52,11 +70,12 @@
                 </div>
             </div>
         </div>
+        
         <hr  class="text-white">
 
         <div class="container text-center">
             <span class="text-white" class="mb-0">All Rights Reserved &copy; 1994 - 2019. Kutchi ITI</span>
-            <span style="margin-left: 100px;" class="text-white" class="mb-0">Designed and made by Mohd Faiz Khan</span>
+            <span style="margin-left: 100px;" class="text-white" class="mb-0" id="credit">Designed and made by Mohd Faiz Khan</span>
         </div>
     </footer>
 

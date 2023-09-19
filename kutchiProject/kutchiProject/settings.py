@@ -154,3 +154,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "faizkhan.net7@gmail.com"
 EMAIL_HOST_PASSWORD = "szbgjyonbtltbhxj"
 EMAIL_USE_TLS = True
+
+# to view it in mobile or by any other hosts, Note - NOT RECOMMENDED
+ALLOWED_HOSTS = ["*"]
