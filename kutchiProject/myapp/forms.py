@@ -71,3 +71,8 @@ class ExamReportsForm(forms.ModelForm):
         model = ExamReports
         fields = "__all__"
         exclude = ["student", "coursename"]
+
+    exam_status = forms.BooleanField(
+        required=False,  # Checkbox field is not required
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+    )

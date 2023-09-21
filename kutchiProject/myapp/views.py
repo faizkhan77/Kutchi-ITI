@@ -200,14 +200,17 @@ def studentRegisterForm(request, user_id):
 
 def studentDetails(request, pk):
     student = studentsModel.objects.get(id=pk)
-    # Examreport = ExamReports.objects.get(id=pk)
+
+    # Retrieve the exam reports for the specific student
+    exam_reports = ExamReports.objects.filter(student=student)
+
     duration = relativedelta(student.completiondate, student.joiningdate)
     remainingBalance = student.coursefees - student.feespaid
     context = {
         "students": student,
         "duration": duration,
         "remainingBalance": remainingBalance,
-        # 'examreport' : Examreport
+        "exam_reports": exam_reports,
     }
     return render(request, "myapp/student_details.html", context)
 
@@ -420,14 +423,35 @@ def StudentRemark(request, pk):
 
 
 def examReport(request, pk):
-    examform = ExamReportsForm()
     student = studentsModel.objects.get(id=pk)
+
     if request.method == "POST":
         examform = ExamReportsForm(request.POST)
         if examform.is_valid():
+            # Set the 'student' field before saving the form
+            examform.instance.student = student
             examform.save()
             return redirect("studentdetails", pk=pk)
+    else:
+        examform = ExamReportsForm()
+
     context = {"form": examform, "student": student}
+    return render(request, "myapp/exam_reportform.html", context)
+
+
+def editExamReport(request, pk):
+    # Get the exam report instance to edit
+    exam_report = ExamReports.objects.get(id=pk)
+
+    if request.method == "POST":
+        examform = ExamReportsForm(request.POST, instance=exam_report)
+        if examform.is_valid():
+            examform.save()
+            return redirect("studentdetails", pk=exam_report.student.id)
+    else:
+        examform = ExamReportsForm(instance=exam_report)
+
+    context = {"form": examform, "exam_report": exam_report.student}
     return render(request, "myapp/exam_reportform.html", context)
 
 

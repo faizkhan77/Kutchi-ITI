@@ -144,9 +144,9 @@ class FeesInstallment(models.Model):
 class ExamReports(models.Model):
     student = models.ForeignKey(studentsModel, on_delete=models.CASCADE)
     coursename = models.ForeignKey(Courses, on_delete=models.SET_NULL, null=True)
-    exam_status = models.CharField(max_length=10, default="None")
-    theory_marks = models.IntegerField(default="None")
-    practical_marks = models.IntegerField(default=None)
-    total_marks = models.IntegerField(default=None)
-    percentage = models.IntegerField(default=None)
+    exam_status = models.BooleanField(default=False)  # Use BooleanField for checkbox
+    theory_marks = models.DecimalField(max_digits=5, decimal_places=2, default=None)
+    practical_marks = models.DecimalField(max_digits=5, decimal_places=2, default=None)
+    total_marks = models.DecimalField(max_digits=5, decimal_places=2, default=None)
+    percentage = models.DecimalField(max_digits=5, decimal_places=2, default=None)
     marksheet_no = models.IntegerField(default=None)
