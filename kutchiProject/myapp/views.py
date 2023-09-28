@@ -7,6 +7,7 @@ from .forms import (
     EnquiryForm,
     FeesInstallmentForm,
     ExamReportsForm,
+    ServiceForm,
 )
 from .models import (
     studentsModel,
@@ -16,6 +17,7 @@ from .models import (
     Enquiry,
     FeesInstallment,
     ExamReports,
+    Services,
 )
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -554,6 +556,24 @@ def cancel_admission(request, pk):
         return redirect("studentdetails", pk=pk)
     context = {"student": student, "page": page}
     return render(request, "myapp/delete.html", context)
+
+
+# def service_request(request):
+#     context = {}
+#     return render(request, "myapp/services_tab.html", context)
+
+
+def services_form(request):
+    services_form = ServiceForm()
+
+    if request.method == "POST":
+        services_form = ServiceForm(request.POST)
+        if services_form.is_valid():
+            services_form.save()
+            return redirect("home")
+
+    context = {"form": services_form}
+    return render(request, "myapp/services_form.html", context)
 
 
 # --------------------------------------------------------------------------------

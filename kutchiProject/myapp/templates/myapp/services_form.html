@@ -1,0 +1,306 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .servicesform {
+        margin-left: 120px;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+}
+.container:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 
+    0 25px 60px 0 rgba(0,0,0,0.19);
+}
+
+    h1 {
+        text-align: center;
+        margin-bottom:30px
+    }
+
+    h3{
+        text-align:center;
+        color: white;
+        background-color:black;
+        border-radius: 30px;
+        margin-bottom:50px
+
+    }
+
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-column {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 5px;
+        width: 20px;
+        height: 20px;
+    }
+
+    button[type="submit"] {
+        background-color: #007BFF;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .services-column {
+        display: flex;
+        justify-content: center; 
+    }
+    .form-columnA, .form-columnB, .form-columnC{
+        padding:20px;
+    }
+
+    /* Responsive design */
+    @media screen and (max-width: 700px) {
+
+        .servicesform {
+            margin-left: 0px;
+        }
+
+        .services-column {
+            flex-direction: column;
+        }
+
+        .form-columnA, .form-columnB, .form-columnC{
+            padding:10px
+        }
+
+        .form-column {
+            flex-direction: column;
+        }
+
+        .second-column {
+            margin-left: 0; /* Remove margin on small screens */
+        }
+    }
+</style>
+
+<div class="servicesform">
+    <div>
+        <div class="container">
+            <h1>Service Request Form</h1>
+
+            <h3>A TO Z SERVICES ONLY IN KUTCHI ITI</h3>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="{{ form.student_name.id_for_label }}">Student Name:</label>
+                        {{ form.student_name }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.rollno.id_for_label }}">Roll Number:</label>
+                        {{ form.rollno }}
+                    </div>
+                    <!-- Add other fields in the first column -->
+                </div>
+
+                <div class="form-column">
+                    <div class="form-group">
+                        <label for="{{ form.coursename.id_for_label }}">Course Name:</label>
+                        {{ form.coursename }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.phoneno.id_for_label }}">Phone Number:</label>
+                        {{ form.phoneno }}
+                    </div>
+                    <!-- Add other fields in the first column -->
+                </div>
+
+
+                <label>Services:</label>
+                <div class="services-column">
+                        
+                        <div class="form-columnA">
+                            <div>
+                                {{ form.change_batch_time }} Change Batch Time
+                            </div>
+                            <div>
+                                {{ form.course_rejoin }} Course Re-join
+                            </div>
+                            <div>
+                                {{ form.course_break }} Course Break
+                            </div>
+                            <div>
+                                {{ form.name_correction }} Name Correction
+                            </div>
+                            <div>
+                                {{ form.duplicate_id }} Duplicate ID
+                            </div>
+                            <div>
+                                {{ form.reissue_book }} Re-issue Book
+                            </div>
+                            <div>
+                                {{ form.recheck_exampaper }} Re-check Exam Paper
+                            </div>
+                            <div>
+                                {{ form.holiday_leave }} Holiday Leave
+                            </div>
+                            <div>
+                                {{ form.cancel_admission }} Cancel Admission
+                            </div>
+                        </div>
+                    
+
+                        <div class="form-columnB">
+                            <div>
+                                {{ form.extend_batch_time }} Extend Batch Time
+                            </div>
+                            <div>
+                                {{ form.course_extend }} Course Extend
+                            </div>
+                            <div>
+                                {{ form.fast_track }} Fast Track
+                            </div>
+                            <div>
+                                {{ form.installment_extend }} Extend Installment
+                            </div>
+                            <div>
+                                {{ form.duplicate_certificate }} Duplicate Certificate
+                            </div>
+                            <div>
+                                {{ form.reissue_hall_ticket }} Re-issue Hall Ticket
+                            </div>
+                            <div>
+                                {{ form.attendance_chart }} Attendance Chart
+                            </div>
+                            <div>
+                                {{ form.change_faculty }} Faculty Change
+                            </div>
+                            <div>
+                                {{ form.other_services }} Other service
+                            </div>
+                        </div>
+
+                        <div class="form-columnC">
+                            <div>
+                                {{ form.special_batch }} Special Batch
+                            </div>
+                            <div>
+                                {{ form.course_duration_extend }} Course Duration Extend
+                            </div>
+                            <div>
+                                {{ form.extra_practice }} Extra Practice
+                            </div>
+                            <div>
+                                {{ form.trust_letter }} Trust Letter
+                            </div>
+
+                            <div>
+                                {{ form.certificate_marksheet_bypost }} Certificate or Marksheet By Post
+                            </div>
+                            <div>
+                                {{ form.re_exam }} Re-Exam / Extend Exam Session
+                            </div>
+                            <div>
+                                {{ form.mobile_num_change }} Change Mobile Number
+                            </div>
+                            <div>
+                                {{ form.fine_or_penalty_waivedoff }} Waived off Fine / Penalty
+                            </div>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.request_details.id_for_label }}">Request Details:</label>
+                    {{ form.request_details }}
+                </div>
+                <div class="form-group">
+                    {{ form.policy_agreement }}I HEREBY REQUEST INSTITUE TO ALLOW ME TO ACCESS ABOVE TICKED SERVICES.<br> I AM READY TO PAY SERVICE CHARGES AS APPLICABLE<br>I UNDERSTOOD AND AGREE IF I AM NOT SINCERE AND REGULAR THEN SHALL ABOVE SERVICES WILL BE DISCONINUED WITHOUT MY PRIOR NOTICE<br>I AGREE TO FOLLOW ALL RULES & REGULATIONS OF THE INSTITUE</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--TO SHOW POP UP MESSAGE WHEN SUBMITTED-->
+<div id="popup" style="display: none;">
+    <p>Message sent successfully!</p>
+</div>
+
+<!-- JS TO SHOW POPUP MESSAGE WITH JQUERY AND AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Wait for the document to be ready
+    $(document).ready(function () {
+        // Handle form submission
+        $("form").submit(function (e) {
+            e.preventDefault(); // Prevent the form from submitting normally
+
+            // Submit the form using AJAX
+            $.ajax({
+                type: "POST",
+                url: "{% url 'servicesform' %}", // Replace with your form's URL
+                data: $(this).serialize(), // Serialize form data
+                // Inside the success callback
+                success: function (response) {
+                    console.log("Form submitted successfully!"); // For debugging (you can remove this line)
+                    
+                    // Create a pop-up message element
+                    var popupMessage = document.createElement("div");
+                    popupMessage.innerHTML = "Message sent successfully!";
+                    popupMessage.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);";
+                    
+                    // Append the message element to the body
+                    document.body.appendChild(popupMessage);
+
+                    // Automatically hide the pop-up message after 3 seconds (3000 milliseconds)
+                    setTimeout(function () {
+                        popupMessage.style.display = "none";
+                    }, 3000);
+                },
+
+            });
+        });
+    });
+</script>
+
+
+{% endblock content %}
+
+{% block footer %}{% endblock footer %}

@@ -150,3 +150,47 @@ class ExamReports(models.Model):
     total_marks = models.DecimalField(max_digits=5, decimal_places=2, default=None)
     percentage = models.DecimalField(max_digits=5, decimal_places=2, default=None)
     marksheet_no = models.IntegerField(default=None)
+
+
+class Services(models.Model):
+    # student = models.ForeignKey(studentsModel, on_delete=models.CASCADE)
+    student_name = models.CharField(max_length=100, default="student")
+    rollno = models.IntegerField(default=0)
+    coursename = models.CharField(max_length=100, default="course name")
+    phoneno = models.BigIntegerField()
+    request_date = models.DateField(auto_now_add=True)
+    is_completed = models.BooleanField(default=False)
+    # Servives
+    change_batch_time = models.BooleanField(default=False)
+    extend_batch_time = models.BooleanField(default=False)
+    special_batch = models.BooleanField(default=False)
+    course_rejoin = models.BooleanField(default=False)
+    course_extend = models.BooleanField(default=False)
+    course_duration_extend = models.BooleanField(default=False)
+    course_break = models.BooleanField(default=False)
+    fast_track = models.BooleanField(default=False)
+    extra_practice = models.BooleanField(default=False)
+    name_correction = models.BooleanField(default=False)
+    installment_extend = models.BooleanField(default=False)
+    trust_letter = models.BooleanField(default=False)
+    duplicate_id = models.BooleanField(default=False)
+    duplicate_certificate = models.BooleanField(default=False)
+    certificate_marksheet_bypost = models.BooleanField(default=False)
+    reissue_book = models.BooleanField(default=False)
+    reissue_hall_ticket = models.BooleanField(default=False)
+    re_exam = models.BooleanField(default=False)
+    recheck_exampaper = models.BooleanField(default=False)
+    attendance_chart = models.BooleanField(default=False)
+    mobile_num_change = models.BooleanField(default=False)
+    holiday_leave = models.BooleanField(default=False)
+    change_faculty = models.BooleanField(default=False)
+    fine_or_penalty_waivedoff = models.BooleanField(default=False)
+    cancel_admission = models.BooleanField(default=False)
+    other_services = models.BooleanField(default=False)
+    # request details
+    request_details = models.TextField(null=True, blank=True, default=None)
+    # agreement
+    policy_agreement = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Service Request for {self.student}"

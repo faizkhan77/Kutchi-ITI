@@ -7,6 +7,7 @@ from .models import (
     Enquiry,
     FeesInstallment,
     ExamReports,
+    Services,
 )
 from django import forms
 
@@ -76,3 +77,9 @@ class ExamReportsForm(forms.ModelForm):
         required=False,  # Checkbox field is not required
         widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
+
+
+class ServiceForm(ModelForm):
+    class Meta:
+        model = Services
+        fields = "__all__"

@@ -1,7 +1,57 @@
-<form method="POST">
-    {% csrf_token %}
-    <h3>Add a new Course</h3>
-    {{form.as_p}}
-    <a href="{% url 'course-tab' %}">Back</a>
-    <input type="submit" value="Add">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Columns</title>
+    <style>
+        /* Style for the container holding the columns */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Style for each column */
+        .column {
+            flex: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        /* Style for the list inside each column */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* Style for list items */
+        li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="column">
+            <h2>Column 1</h2>
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+            </ul>
+        </div>
+        <div class="column">
+            <h2>Column 2</h2>
+            <ul>
+                <li>Item A</li>
+                <li>Item B</li>
+                <li>Item C</li>
+                <li>Item D</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
