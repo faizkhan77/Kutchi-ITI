@@ -123,6 +123,8 @@
             <form method="post">
                 {% csrf_token %}
 
+                {{ form.errors }}
+
                 <div class="form-column">
                     <div class="form-group">
                         <label for="{{ form.student_name.id_for_label }}">Student Name:</label>
@@ -251,7 +253,7 @@
                     {{ form.policy_agreement }}I HEREBY REQUEST INSTITUE TO ALLOW ME TO ACCESS ABOVE TICKED SERVICES.<br> I AM READY TO PAY SERVICE CHARGES AS APPLICABLE<br>I UNDERSTOOD AND AGREE IF I AM NOT SINCERE AND REGULAR THEN SHALL ABOVE SERVICES WILL BE DISCONINUED WITHOUT MY PRIOR NOTICE<br>I AGREE TO FOLLOW ALL RULES & REGULATIONS OF THE INSTITUE</label>
                 </div>
                 <div class="form-group">
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="submit-button">Submit</button>
                 </div>
             </form>
         </div>
@@ -259,9 +261,9 @@
 </div>
 
 <!--TO SHOW POP UP MESSAGE WHEN SUBMITTED-->
-<div id="popup" style="display: none;">
+{% comment %} <div id="popup" style="display: none;">
     <p>Message sent successfully!</p>
-</div>
+</div> {% endcomment %}
 
 <!-- JS TO SHOW POPUP MESSAGE WITH JQUERY AND AJAX -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -270,7 +272,19 @@
     $(document).ready(function () {
         // Handle form submission
         $("form").submit(function (e) {
-            e.preventDefault(); // Prevent the form from submitting normally
+            // Check if the policy_agreement checkbox is not checked
+            if (!$("[name='policy_agreement']").is(":checked")) {
+                // Show an alert or message to inform the user
+                alert("Please agree to the policy before submitting the form.");
+                e.preventDefault(); // Prevent form submission
+                return;
+            }
+
+                    // Disable the submit button to prevent multiple clicks
+                    $("#submit-button").prop("disabled", true);
+
+                    // Prevent the default form submission behavior
+                    e.preventDefault();
 
             // Submit the form using AJAX
             $.ajax({
@@ -283,7 +297,7 @@
                     
                     // Create a pop-up message element
                     var popupMessage = document.createElement("div");
-                    popupMessage.innerHTML = "Message sent successfully!";
+                    popupMessage.innerHTML = "Request has been submitted!";
                     popupMessage.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);";
                     
                     // Append the message element to the body

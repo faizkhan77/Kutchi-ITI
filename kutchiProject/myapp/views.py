@@ -570,6 +570,77 @@ def services_form(request):
         services_form = ServiceForm(request.POST)
         if services_form.is_valid():
             services_form.save()
+
+            # Get the form data
+            student_name = services_form.cleaned_data.get("student_name")
+            rollno = services_form.cleaned_data.get("rollno")
+            coursename = services_form.cleaned_data.get("coursename")
+            phoneno = services_form.cleaned_data.get("phoneno")
+            request_details = services_form.cleaned_data.get("request_details")
+            request_date = (
+                services_form.instance.request_date
+            )  # Assuming you have a request_date field in your model
+
+            # Get the selected checkboxes
+            selected_services = [
+                field.label
+                for field in services_form
+                if field.name != "policy_agreement" and field.value()
+            ]
+
+            # Create the email message
+            message = f"Student Name: {student_name}\n"
+            message += f"Roll Number: {rollno}\n"
+            message += f"Course: {coursename}\n"
+            message += f"Phone Number: {phoneno}\n"
+            message += f"Request Date: {request_date}\n\n"
+
+            message += "Selected Services:\n"
+            checkbox_fields = [
+                "change_batch_time",
+                "course_rejoin",
+                "course_break",
+                "name_correction",
+                "duplicate_id",
+                "reissue_book",
+                "recheck_exampaper",
+                "holiday_leave",
+                "cancel_admission",
+                "extend_batch_time",
+                "course_extend",
+                "fast_track",
+                "extend_installment",
+                "duplicate_certificate",
+                "reissue_hall_ticket",
+                "attendance_chart",
+                "change_faculty",
+                "other_services",
+                "special_batch",
+                "course_duration_extend",
+                "extra_practice",
+                "trust_letter",
+                "certificate_marksheet_bypost",
+                "re_exam",
+                "mobile_num_change",
+                "fine_or_penalty_waivedoff",
+            ]
+
+            # Check each checkbox field and add it to the message if selected
+            for field_name in checkbox_fields:
+                if services_form.cleaned_data.get(field_name):
+                    message += field_name.replace("_", " ").title() + "\n\n"
+
+            message += f"Request Details: {request_details}\n"
+
+            # Send the email
+            subject = "Service Form"
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [
+                "randygaming.net@gmail.com"
+            ]  # Replace with your email address
+
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
             return redirect("home")
 
     context = {"form": services_form}

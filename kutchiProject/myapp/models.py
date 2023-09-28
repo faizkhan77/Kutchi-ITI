@@ -154,9 +154,9 @@ class ExamReports(models.Model):
 
 class Services(models.Model):
     # student = models.ForeignKey(studentsModel, on_delete=models.CASCADE)
-    student_name = models.CharField(max_length=100, default="student")
-    rollno = models.IntegerField(default=0)
-    coursename = models.CharField(max_length=100, default="course name")
+    student_name = models.CharField(max_length=100)
+    rollno = models.IntegerField()
+    coursename = models.CharField(max_length=100)
     phoneno = models.BigIntegerField()
     request_date = models.DateField(auto_now_add=True)
     is_completed = models.BooleanField(default=False)
