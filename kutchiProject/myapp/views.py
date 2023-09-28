@@ -581,12 +581,12 @@ def services_form(request):
                 services_form.instance.request_date
             )  # Assuming you have a request_date field in your model
 
-            # Get the selected checkboxes
-            selected_services = [
-                field.label
-                for field in services_form
-                if field.name != "policy_agreement" and field.value()
-            ]
+            # Get the selected checkboxes (Not needed)
+            # selected_services = [
+            #     field.label
+            #     for field in services_form
+            #     if field.name != "policy_agreement" and field.value()
+            # ]
 
             # Create the email message
             message = f"Student Name: {student_name}\n"
