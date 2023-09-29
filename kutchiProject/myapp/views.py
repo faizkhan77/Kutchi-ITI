@@ -8,6 +8,7 @@ from .forms import (
     FeesInstallmentForm,
     ExamReportsForm,
     ServiceForm,
+    contactForm,
 )
 from .models import (
     studentsModel,
@@ -18,6 +19,7 @@ from .models import (
     FeesInstallment,
     ExamReports,
     Services,
+    contact,
 )
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -122,7 +124,32 @@ def courseTab(request):
 
 
 def contactTab(request):
-    return render(request, "myapp/contact.html")
+    contactform = contactForm()
+
+    if request.method == "POST":
+        contactform = contactForm(request.POST)
+        if contactform.is_valid():
+            contactform.save()
+
+            # Sending email logic
+            name = contactform.cleaned_data.get("name")
+            useremail = contactform.cleaned_data.get("useremail")
+            user_message = contactform.cleaned_data.get("message")
+
+            subject = "NEW CONTACT MESSAGE!!"
+            from_email = useremail
+            message = f"New Contact Message from {name}\n\n"
+            message += f"User's Name : {name} \n"
+            message += f"User's Email : {useremail} \n\n"
+            message += f"Message:- \n{user_message}"
+            recipient_mail = ["faizkhan.net7@gmail.com"]
+
+            send_mail(subject, message, from_email, recipient_mail, fail_silently=False)
+
+            return redirect("home")
+
+    context = {"form": contactform}
+    return render(request, "myapp/contact.html", context)
 
 
 def aboutTab(request):
@@ -344,6 +371,8 @@ def DownloadSyllabus(request, pk):
                 [user_email],
                 fail_silently=False,
             )
+
+            # send mail to admin
 
             admin_subject = "New Syllabus Download"
             admin_message = (
@@ -580,13 +609,6 @@ def services_form(request):
             request_date = (
                 services_form.instance.request_date
             )  # Assuming you have a request_date field in your model
-
-            # Get the selected checkboxes (Not needed)
-            # selected_services = [
-            #     field.label
-            #     for field in services_form
-            #     if field.name != "policy_agreement" and field.value()
-            # ]
 
             # Create the email message
             message = f"Student Name: {student_name}\n"

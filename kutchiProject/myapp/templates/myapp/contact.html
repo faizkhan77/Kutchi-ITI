@@ -125,9 +125,15 @@
         <div id="contact">
             <h2>Send Direct Message Below</h2>
             <form action="#" method="post">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
+                {% csrf_token %}
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ form.instance.name }}">
+
+                <label for="useremail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="useremail" name="useremail" value="{{ form.instance.useremail }}">
+
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="3">{{ form.instance.message }}</textarea>
                 <button type="submit">Send</button>
             </form>
         </div>

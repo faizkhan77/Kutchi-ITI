@@ -8,6 +8,7 @@ from .models import (
     FeesInstallment,
     ExamReports,
     Services,
+    contact,
 )
 from django import forms
 
@@ -82,4 +83,10 @@ class ExamReportsForm(forms.ModelForm):
 class ServiceForm(ModelForm):
     class Meta:
         model = Services
+        fields = "__all__"
+
+
+class contactForm(ModelForm):
+    class Meta:
+        model = contact
         fields = "__all__"

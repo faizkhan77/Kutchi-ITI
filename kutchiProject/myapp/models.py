@@ -116,6 +116,12 @@ class StudentRemarks(models.Model):
         return f"Remark for {self.student.firstname} on {self.remark_date}"
 
 
+class contact(models.Model):
+    name = models.CharField(max_length=100)
+    useremail = models.EmailField()
+    message = models.TextField()
+
+
 class SyllabusDownloadRecord(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
