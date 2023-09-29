@@ -274,14 +274,21 @@ def addCourse(request):
     page = "addcourse"
     courseform = CourseModelForm()
 
+    # Get the list of PDF files from the 'pdfs' folder
+    pdf_folder = os.path.join(settings.BASE_DIR, "pdfs")
+    pdf_files = [file for file in os.listdir(pdf_folder) if file.endswith(".pdf")]
+
     if request.method == "POST":
         courseform = CourseModelForm(request.POST)
         if courseform.is_valid():
             courseform.save()
-            return redirect("course-tab")
 
-    pdf_folder = os.path.join(settings.BASE_DIR, "pdfs")
-    pdf_files = [file for file in os.listdir(pdf_folder) if file.endswith(".pdf")]
+            # After saving, update the list of PDF files
+            pdf_files = [
+                file for file in os.listdir(pdf_folder) if file.endswith(".pdf")
+            ]
+
+            return redirect("course-tab")
 
     context = {"form": courseform, "pdf_files": pdf_files, "page": page}
     return render(request, "myapp/courseform.html", context)
