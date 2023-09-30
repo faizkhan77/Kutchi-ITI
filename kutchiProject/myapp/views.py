@@ -167,6 +167,10 @@ def rules_and_regulations(request):
     return render(request, "myapp/rules_regulation.html")
 
 
+def faculties(request):
+    return render(request, "myapp/faculties_tab.html")
+
+
 # ---------------NEED WORK-----------------------------------------------
 
 
@@ -657,9 +661,9 @@ def services_form(request):
             # Check each checkbox field and add it to the message if selected
             for field_name in checkbox_fields:
                 if services_form.cleaned_data.get(field_name):
-                    message += field_name.replace("_", " ").title() + "\n\n"
+                    message += field_name.replace("_", " ").title() + "\n"
 
-            message += f"Request Details: {request_details}\n"
+            message += f"\nRequest Details: {request_details}\n"
 
             # Send the email
             subject = "Service Form"

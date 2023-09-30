@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Kutchi ITI Faculties{% endblock title %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<style>
+    .faculty-tab{
+        margin-left: 110px;
+    }
+
+    h1{
+        text-align: center;
+        margin-bottom:30px
+    }
+
+    h3{
+        text-align:center;
+        color: white;
+        background-color:#b20237;
+        border-radius: 30px;
+        margin-bottom:50px;
+        padding: 10px 10px;
+    }
+
+    .row{
+        margin-bottom: 100px;
+    }
+    
+    .card{
+        padding-right:-10px;
+    }
+
+    .card-header{
+        background-color:#b20237;
+        color: white;
+    }
+    
+
+    @media (max-width:700px){
+        .faculty-tab{
+            margin-left: 0px;
+        }
+        
+        .col{
+            margin-bottom: 30px;  
+        }
+
+        .row{
+            margin-bottom: 30px;
+        }
+
+        img{
+            max-width: 450px;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+</style>
+
+<div class="faculty-tab">
+
+    <div class="tabcontainer">
+
+    <div>
+        <h1>Leadership Team</h1>
+
+        <h3>Professional Faculties of Kutchi ITI</h3>
+    </div>
+
+    <div class="faculties-details">
+
+        <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/shahana.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">S. M. Khan</h5>
+                  <p class="card-text">English Speaking Faculty</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/mustaqueem.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">M. M. Alam</h5>
+                  <p class="card-text">Lab Incharge</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/manoj.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">R. Gopal</h5>
+                  <p class="card-text">Computer Faculty</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/husain.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">H. I. Bhanpurawala</h5>
+                  <p class="card-text">Computer Faculty</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="row row-cols-1 row-cols-md-5 g-4 justify-content-center">
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/zakir.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Z. H. Sayed</h5>
+                  <p class="card-text">Software Faculty</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/abdullah-sir.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">A. Hazari</h5>
+                  <p class="card-text">Center Manager</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/m-rathod.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">M. Rathod</h5>
+                  <p class="card-text">Animation Faculty</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+            <div class="card-header">KUTCHI ITI</div>
+              <div class="card h-100">
+                <img src="{% static 'images/faculties-images/fatema.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">F. M. Udaipurwala</h5>
+                  <p class="card-text">Office Assistant</p>
+                  <a href="#" class="btn btn-primary">Update</a>
+                  <a href="#" class="btn btn-primary">Delete</a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
+
+{% block footer %}{% endblock footer %}

@@ -155,7 +155,7 @@
   {% endif %}
 
   {% if request.user.is_superuser %}
-    <a href="#">Faculties</a>
+    <a href="{% url 'faculties' %}">Faculties</a>
   {% endif %}
 
   <!-- Add a container for the "About" dropdown -->
