@@ -21,6 +21,16 @@
             font-family: 'Allerta Stencil'
         }
 
+        .center-button{
+            margin-top:30px;
+            display: flex;
+            justify-content: center; /* Horizontally center */
+        }
+        .center-button button{
+            width: 1200px;
+            border-radius: 50px;
+        }
+
         @media (max-width:700px){
             .courseTab{
                 margin-left: 0vw
@@ -34,6 +44,28 @@
     </div>
 
     <div class="courseTab">
+
+        <div class="center-button">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Kutchi ITI Courses</button>
+        </div>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">KUTCHI ITI</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+               <h1>Welcome to Kutchi ITI Course list</h1>
+               <hr>
+               <p>
+                Kutchi ITI is a leading institute specializing in a wide range of computer-related courses, empowering students with the skills and knowledge needed for today's tech-driven world. With a diverse offering of programs, Kutchi ITI ensures that individuals can thrive in various aspects of the digital landscape. From programming to hardware and software engineering, web development to graphic design, Kutchi ITI is the go-to destination for comprehensive tech education.
+               </p>
+            </div>
+        </div>
+        </div>
+
+
         <div>            
                      
             {% include 'myapp/courselist_inside_coursetab.html' %}
