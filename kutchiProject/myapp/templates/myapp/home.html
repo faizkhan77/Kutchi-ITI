@@ -25,11 +25,10 @@
 </style>
 
         {% comment %} {% include 'myapp/kutchi_logo.html' %} {% endcomment %}
-        <div class="large-screen">
-            {% if request.user.is_authenticated and request.user.is_superuser %}
-                {% include 'myapp/HomeCarousal.html' %}
-            {% endif %}
-        </div>
+   
+        {% if request.user.is_authenticated and request.user.is_superuser %}
+            {% include 'myapp/HomeCarousal.html' %}
+        {% endif %}
 
         {% if not request.user.is_superuser and request.user.is_authenticated %}
             <div>
