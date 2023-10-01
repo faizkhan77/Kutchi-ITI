@@ -88,6 +88,10 @@
         padding:20px;
     }
 
+    span{
+        font-weight: bold;
+    }
+
     /* Responsive design */
     @media screen and (max-width: 700px) {
 
@@ -109,6 +113,11 @@
 
         .second-column {
             margin-left: 0; /* Remove margin on small screens */
+        }
+
+        span{
+            font-size:4vw;
+            font-weight: bold;
         }
     }
 </style>
@@ -249,7 +258,7 @@
                     {{ form.request_details }}
                 </div>
                 <div class="form-group">
-                    {{ form.policy_agreement }}I HEREBY REQUEST INSTITUE TO ALLOW ME TO ACCESS ABOVE TICKED SERVICES.<br> I AM READY TO PAY SERVICE CHARGES AS APPLICABLE<br>I UNDERSTOOD AND AGREE IF I AM NOT SINCERE AND REGULAR THEN SHALL ABOVE SERVICES WILL BE DISCONINUED WITHOUT MY PRIOR NOTICE<br>I AGREE TO FOLLOW ALL RULES & REGULATIONS OF THE INSTITUE</label>
+                    {{ form.policy_agreement }}<span>I HEREBY REQUEST INSTITUE TO ALLOW ME TO ACCESS ABOVE TICKED SERVICES.<br> I AM READY TO PAY SERVICE CHARGES AS APPLICABLE<br>I UNDERSTOOD AND AGREE IF I AM NOT SINCERE AND REGULAR THEN SHALL ABOVE SERVICES WILL BE DISCONINUED WITHOUT MY PRIOR NOTICE<br>I AGREE TO FOLLOW ALL RULES & REGULATIONS OF THE INSTITUE</span>
                 </div>
                 <div class="form-group">
                     <button type="submit" id="submit-button">Submit</button>
