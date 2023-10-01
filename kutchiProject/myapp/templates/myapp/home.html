@@ -16,14 +16,20 @@
         text-align: center
     }
 
+    @media (max-width:700px){
+        .mainbody{
+            margin-left: 0px
+        }
+    }
 
 </style>
 
         {% comment %} {% include 'myapp/kutchi_logo.html' %} {% endcomment %}
-   
-        {% if request.user.is_authenticated and request.user.is_superuser %}
-            {% include 'myapp/HomeCarousal.html' %}
-        {% endif %}
+        <div class="large-screen">
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+                {% include 'myapp/HomeCarousal.html' %}
+            {% endif %}
+        </div>
 
         {% if not request.user.is_superuser and request.user.is_authenticated %}
             <div>
