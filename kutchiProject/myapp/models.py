@@ -151,11 +151,11 @@ class ExamReports(models.Model):
     student = models.ForeignKey(studentsModel, on_delete=models.CASCADE)
     coursename = models.ForeignKey(Courses, on_delete=models.SET_NULL, null=True)
     exam_status = models.BooleanField(default=False)  # Use BooleanField for checkbox
-    theory_marks = models.DecimalField(max_digits=5, decimal_places=2, default=None)
-    practical_marks = models.DecimalField(max_digits=5, decimal_places=2, default=None)
-    total_marks = models.DecimalField(max_digits=5, decimal_places=2, default=None)
-    percentage = models.DecimalField(max_digits=5, decimal_places=2, default=None)
-    marksheet_no = models.IntegerField(default=None)
+    theory_marks = models.DecimalField(max_digits=5, decimal_places=2)
+    practical_marks = models.DecimalField(max_digits=5, decimal_places=2)
+    total_marks = models.DecimalField(max_digits=5, decimal_places=2)
+    percentage = models.DecimalField(max_digits=5, decimal_places=2)
+    marksheet_no = models.IntegerField()
 
 
 class Services(models.Model):

@@ -669,7 +669,7 @@ def services_form(request):
             subject = "Service Form"
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = [
-                "randygaming.net@gmail.com"
+                "faizkhan.net7@gmail.com"
             ]  # Replace with your email address
 
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
@@ -692,6 +692,7 @@ def loggedin_student_details(request):
     studentlist = studentsModel.objects.get(user=request.user)
     duration = relativedelta(studentlist.completiondate, studentlist.joiningdate)
     remainingBalance = studentlist.coursefees - studentlist.feespaid
+    exam_reports = ExamReports.objects.filter(student=studentlist)
     courses = Courses.objects.all()
 
     context = {
@@ -699,6 +700,7 @@ def loggedin_student_details(request):
         "courses": courses,
         "duration": duration,
         "remainingBalance": remainingBalance,
+        "exam_reports": exam_reports,
     }
     return render(request, "myapp/loggedin_student_details.html", context)
 

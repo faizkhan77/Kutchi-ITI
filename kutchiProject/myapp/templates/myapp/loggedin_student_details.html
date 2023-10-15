@@ -195,13 +195,27 @@
     <div class="student-details">
         <div class="fees-detail">
             <h3>Examination Reports</h3>
-            <p><strong>Status:</strong> </p>    
-            <p><strong>Theoratical Marks:</strong> </p>    
-            <p><strong>Practical Marks:</strong> </p>
-            <p><strong>Total Marks:</strong> </p>
-            <p><strong>Percentage:</strong> </p>
-            <p><strong>Marksheet no:</strong> </p>
-
+            
+            {% if exam_reports %}
+                <!-- Iterate through the exam_reports queryset -->
+                {% for exam_report in exam_reports %}
+                    <p><strong>Status:</strong>
+                    {% if exam_report.exam_status %}
+                        Given
+                    {% else %}
+                        Not Given
+                    {% endif %}
+                    </p>    
+                    <p><strong>Theoretical Marks:</strong> {{ exam_report.theory_marks }} Marks</p>    
+                    <p><strong>Practical Marks:</strong> {{ exam_report.practical_marks }} Marks</p>
+                    <p><strong>Total Marks:</strong> {{ exam_report.total_marks }} Marks</p>
+                    <p><strong>Percentage:</strong> {{ exam_report.percentage }}%</p>
+                    <p><strong>Marksheet no:</strong> {{ exam_report.marksheet_no }}</p>
+                    
+                {% endfor %}
+            {% else %}
+                <p>No exam reports available.</p>
+            {% endif %}
         </div>
     </div>
 </div>

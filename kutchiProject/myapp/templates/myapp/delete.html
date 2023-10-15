@@ -77,7 +77,7 @@
         {% if page == "deletestudent" %}
             <a href="{% url 'studentdetails' student.id %}">Go Back</a>
         {% else %}
-            <a href="{% url 'course-tab' %}">Go Back</a>
+            <a href="{% url 'home' %}">Go Back</a>
         {% endif %}
             
         <input type="submit" value="Confirm">
