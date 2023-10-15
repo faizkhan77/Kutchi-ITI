@@ -685,14 +685,10 @@ def services_form(request):
 
 @login_required(login_url="login")
 def loggedin_student_details(request):
-    # studentlist = studentsModel.objects.all()
-    # duration = None
-    # remainingBalance = None
-    # if not request.user.is_superuser:
     studentlist = studentsModel.objects.get(user=request.user)
     duration = relativedelta(studentlist.completiondate, studentlist.joiningdate)
     remainingBalance = studentlist.coursefees - studentlist.feespaid
-    exam_reports = ExamReports.objects.filter(student=studentlist)
+    # exam_reports = ExamReports.objects.filter(student=mystudent)
     courses = Courses.objects.all()
 
     context = {
@@ -700,9 +696,28 @@ def loggedin_student_details(request):
         "courses": courses,
         "duration": duration,
         "remainingBalance": remainingBalance,
-        "exam_reports": exam_reports,
+        # "exam_reports": exam_reports,
     }
     return render(request, "myapp/loggedin_student_details.html", context)
+
+
+# for Testing Only
+@login_required(login_url="login")
+def print_exam_reports(request):
+    # Get the student associated with the currently logged-in user
+    user = request.user
+    try:
+        studentlist = studentsModel.objects.get(user=user)
+    except studentsModel.DoesNotExist:
+        studentlist = None
+
+    if studentlist:
+        exam_reports = ExamReports.objects.filter(student=studentlist)
+    else:
+        exam_reports = []
+
+    context = {"exam_reports": exam_reports}
+    return render(request, "myapp/loggedin_student_Examreport.html", context)
 
 
 @login_required(login_url="login")

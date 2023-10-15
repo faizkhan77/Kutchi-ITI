@@ -59,4 +59,5 @@ urlpatterns = [
     path("cancel_admission/<int:pk>/", views.cancel_admission, name="cancel_admission"),
     path("search/", views.search_students, name="search_students"),
     path("searchcourse/", views.search_courses, name="search_courses"),
+    path("print_exam_reports/", views.print_exam_reports, name="print_exam_reports"),
 ]

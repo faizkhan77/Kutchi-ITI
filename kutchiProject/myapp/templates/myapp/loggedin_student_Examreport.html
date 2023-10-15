@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    .examreport{
+        margin-left:120px;
+    }
+</style>
+
+<div class="examreport">
+    {% if exam_reports %}
+    <!-- Iterate through the exam_reports queryset -->
+    {% for exam_report in exam_reports %}
+        <p><strong>Status:</strong>
+        {% if exam_report.exam_status %}
+            Given
+        {% else %}
+            Not Given
+        {% endif %}
+        </p>    
+        <p><strong>Theoretical Marks:</strong> {{ exam_report.theory_marks }} Marks</p>    
+        <p><strong>Practical Marks:</strong> {{ exam_report.practical_marks }} Marks</p>
+        <p><strong>Total Marks:</strong> {{ exam_report.total_marks }} Marks</p>
+        <p><strong>Percentage:</strong> {{ exam_report.percentage }}%</p>
+        <p><strong>Marksheet no:</strong> {{ exam_report.marksheet_no }}</p>
+        
+    {% endfor %}
+{% else %}
+    <p>No exam reports available.</p>
+{% endif %}
+</div>
+
+{% endblock content %}

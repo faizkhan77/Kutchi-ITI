@@ -76,6 +76,23 @@
         margin: 5px 0;
     }
 
+    .examreportbtn{
+        display: inline-block;
+        padding: 5px 20px;
+        background-color: #bf512c;
+        color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 25px;
+        margin-left:0px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s; 
+    }
+    .examreportbtn:hover{
+        background-color: #e00b0f;
+        transform: scale(1.05);
+    }
+
     /* Media Query for screens 700px and below */
     @media (max-width: 700px) {
         .detail, .remarks-detail, .fees-detail {
@@ -195,8 +212,9 @@
     <div class="student-details">
         <div class="fees-detail">
             <h3>Examination Reports</h3>
+            <button class="examreportbtn" onclick="location.href='{% url 'print_exam_reports' %}'">view exam report</button>
             
-            {% if exam_reports %}
+            {% comment %} {% if exam_reports %}
                 <!-- Iterate through the exam_reports queryset -->
                 {% for exam_report in exam_reports %}
                     <p><strong>Status:</strong>
@@ -215,9 +233,10 @@
                 {% endfor %}
             {% else %}
                 <p>No exam reports available.</p>
-            {% endif %}
+            {% endif %} {% endcomment %}
         </div>
     </div>
+    
 </div>
 
 </body>
