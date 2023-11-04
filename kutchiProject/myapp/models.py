@@ -156,6 +156,7 @@ class ExamReports(models.Model):
     total_marks = models.DecimalField(max_digits=5, decimal_places=2)
     percentage = models.DecimalField(max_digits=5, decimal_places=2)
     marksheet_no = models.IntegerField()
+    hallticket_no = models.IntegerField(default=0)
 
 
 class Services(models.Model):
