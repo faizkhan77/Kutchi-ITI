@@ -603,8 +603,15 @@ def cancel_admission(request, pk):
 #     return render(request, "myapp/services_tab.html", context)
 
 
+@login_required
 def services_form(request):
-    services_form = ServiceForm()
+    # Get the logged-in student
+    if request.user.is_superuser:
+        services_form = ServiceForm()
+    else:
+        # Get the logged-in student
+        student = studentsModel.objects.get(user=request.user)
+        services_form = ServiceForm()
 
     if request.method == "POST":
         services_form = ServiceForm(request.POST)
@@ -675,6 +682,18 @@ def services_form(request):
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
             return redirect("home")
+    else:
+        if not request.user.is_superuser:
+            # Initialize the form with default values for regular users
+            services_form = ServiceForm(
+                initial={
+                    "student": student,
+                    "student_name": f"{student.firstname} {student.lastname}",
+                    "rollno": student.rollno,
+                    "coursename": student.coursename.coursename,
+                    "phoneno": student.phoneno,
+                }
+            )
 
     context = {"form": services_form}
     return render(request, "myapp/services_form.html", context)

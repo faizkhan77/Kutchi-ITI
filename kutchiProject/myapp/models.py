@@ -160,7 +160,10 @@ class ExamReports(models.Model):
 
 
 class Services(models.Model):
-    # student = models.ForeignKey(studentsModel, on_delete=models.CASCADE)
+    student = models.ForeignKey(
+        studentsModel, on_delete=models.CASCADE, null=True, default=None
+    )
+
     student_name = models.CharField(max_length=100)
     rollno = models.IntegerField()
     coursename = models.CharField(max_length=100)

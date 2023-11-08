@@ -148,7 +148,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # SESSION_ENGINE = (
 #     "django.contrib.sessions.backends.cache"  # Use your desired session engine
 # )
-
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "faizkhan.net7@gmail.com"
