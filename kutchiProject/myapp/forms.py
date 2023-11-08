@@ -81,6 +81,11 @@ class ExamReportsForm(forms.ModelForm):
 
 
 class ServiceForm(ModelForm):
+    # def __init__(self, *args, **kwargs):
+    #     super(ServiceForm, self).__init__(*args, **kwargs)
+
+    #     # Disable the "Student" dropdown field
+    #     self.fields['student'].widget.attrs['disabled'] = 'disabled'
     class Meta:
         model = Services
         fields = "__all__"

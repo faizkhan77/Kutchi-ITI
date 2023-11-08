@@ -134,6 +134,12 @@
                 {{ form.errors }}
 
                 <div class="form-column">
+
+                    <div class="form-group">
+                        <label for="{{ form.student.id_for_label }}">Student:</label>
+                        {{ form.student }}
+                    </div>
+
                     <div class="form-group">
                         <label for="{{ form.student_name.id_for_label }}">Student Name:</label>
                         {{ form.student_name }}

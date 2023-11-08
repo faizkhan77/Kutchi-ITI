@@ -234,6 +234,9 @@ def studentRegisterForm(request, user_id):
 def studentDetails(request, pk):
     student = studentsModel.objects.get(id=pk)
 
+    # Retrieve the services requested by the specific student
+    services = Services.objects.filter(student=student)
+
     # Retrieve the exam reports for the specific student
     exam_reports = ExamReports.objects.filter(student=student)
 
@@ -244,6 +247,7 @@ def studentDetails(request, pk):
         "duration": duration,
         "remainingBalance": remainingBalance,
         "exam_reports": exam_reports,
+        "services": services,
     }
     return render(request, "myapp/student_details.html", context)
 
@@ -613,87 +617,92 @@ def services_form(request):
         student = studentsModel.objects.get(user=request.user)
         services_form = ServiceForm()
 
-    if request.method == "POST":
-        services_form = ServiceForm(request.POST)
-        if services_form.is_valid():
-            services_form.save()
+        if request.method == "POST":
+            services_form = ServiceForm(request.POST)
+            if services_form.is_valid():
+                services_form.save()
 
-            # Get the form data
-            student_name = services_form.cleaned_data.get("student_name")
-            rollno = services_form.cleaned_data.get("rollno")
-            coursename = services_form.cleaned_data.get("coursename")
-            phoneno = services_form.cleaned_data.get("phoneno")
-            request_details = services_form.cleaned_data.get("request_details")
-            request_date = (
-                services_form.instance.request_date
-            )  # Assuming you have a request_date field in your model
+                # Get the form data
+                student_name = services_form.cleaned_data.get("student_name")
+                rollno = services_form.cleaned_data.get("rollno")
+                coursename = services_form.cleaned_data.get("coursename")
+                phoneno = services_form.cleaned_data.get("phoneno")
+                request_details = services_form.cleaned_data.get("request_details")
+                request_date = (
+                    services_form.instance.request_date
+                )  # Assuming you have a request_date field in your model
 
-            # Create the email message
-            message = f"Student Name: {student_name}\n"
-            message += f"Roll Number: {rollno}\n"
-            message += f"Course: {coursename}\n"
-            message += f"Phone Number: {phoneno}\n"
-            message += f"Request Date: {request_date}\n\n"
+                # Create the email message
+                message = f"Student Name: {student_name}\n"
+                message += f"Roll Number: {rollno}\n"
+                message += f"Course: {coursename}\n"
+                message += f"Phone Number: {phoneno}\n"
+                message += f"Request Date: {request_date}\n\n"
 
-            message += "Selected Services:\n"
-            checkbox_fields = [
-                "change_batch_time",
-                "course_rejoin",
-                "course_break",
-                "name_correction",
-                "duplicate_id",
-                "reissue_book",
-                "recheck_exampaper",
-                "holiday_leave",
-                "cancel_admission",
-                "extend_batch_time",
-                "course_extend",
-                "fast_track",
-                "extend_installment",
-                "duplicate_certificate",
-                "reissue_hall_ticket",
-                "attendance_chart",
-                "change_faculty",
-                "other_services",
-                "special_batch",
-                "course_duration_extend",
-                "extra_practice",
-                "trust_letter",
-                "certificate_marksheet_bypost",
-                "re_exam",
-                "mobile_num_change",
-                "fine_or_penalty_waivedoff",
-            ]
+                message += "Selected Services:\n"
+                checkbox_fields = [
+                    "change_batch_time",
+                    "course_rejoin",
+                    "course_break",
+                    "name_correction",
+                    "duplicate_id",
+                    "reissue_book",
+                    "recheck_exampaper",
+                    "holiday_leave",
+                    "cancel_admission",
+                    "extend_batch_time",
+                    "course_extend",
+                    "fast_track",
+                    "extend_installment",
+                    "duplicate_certificate",
+                    "reissue_hall_ticket",
+                    "attendance_chart",
+                    "change_faculty",
+                    "other_services",
+                    "special_batch",
+                    "course_duration_extend",
+                    "extra_practice",
+                    "trust_letter",
+                    "certificate_marksheet_bypost",
+                    "re_exam",
+                    "mobile_num_change",
+                    "fine_or_penalty_waivedoff",
+                ]
 
-            # Check each checkbox field and add it to the message if selected
-            for field_name in checkbox_fields:
-                if services_form.cleaned_data.get(field_name):
-                    message += field_name.replace("_", " ").title() + "\n"
+                # Check each checkbox field and add it to the message if selected
+                for field_name in checkbox_fields:
+                    if services_form.cleaned_data.get(field_name):
+                        message += field_name.replace("_", " ").title() + "\n"
 
-            message += f"\nRequest Details: {request_details}\n"
+                message += f"\nRequest Details: {request_details}\n"
 
-            # Send the email
-            subject = "Service Form"
-            from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [
-                "faizkhan.net7@gmail.com"
-            ]  # Replace with your email address
+                # Send the email
+                subject = "Service Form"
+                from_email = settings.DEFAULT_FROM_EMAIL
+                recipient_list = [
+                    "faizkhan.net7@gmail.com"
+                ]  # Replace with your email address
 
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+                send_mail(
+                    subject, message, from_email, recipient_list, fail_silently=False
+                )
 
-            return redirect("home")
-    else:
-        if not request.user.is_superuser:
-            # Initialize the form with default values for regular users
-            services_form = ServiceForm(
-                initial={
-                    "student": student,
-                    "student_name": f"{student.firstname} {student.lastname}",
-                    "rollno": student.rollno,
-                    "coursename": student.coursename.coursename,
-                    "phoneno": student.phoneno,
-                }
-            )
+                return redirect("home")
+            else:
+                print(services_form.errors)
+
+        else:
+            if not request.user.is_superuser:
+                # Initialize the form with default values for regular users
+                services_form = ServiceForm(
+                    initial={
+                        "student": student,
+                        "student_name": f"{student.firstname} {student.lastname}",
+                        "rollno": student.rollno,
+                        "coursename": student.coursename.coursename,
+                        "phoneno": student.phoneno,
+                    }
+                )
 
     context = {"form": services_form}
     return render(request, "myapp/services_form.html", context)

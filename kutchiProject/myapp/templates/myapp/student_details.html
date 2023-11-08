@@ -231,6 +231,10 @@
         transform: scale(1.05);
     }
 
+    table, th, td{
+        color:white
+    }
+
 </style>
 
 <div class="studentDetails">
@@ -384,6 +388,54 @@
         <div class="student-details">
             <div class="fees-detail">
                 <h3>Services</h3>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Service Request Date</th>
+                            <th>Type of Services</th>
+                            <th>Request Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in services %}
+                        <tr>
+                            <td>{{ service.request_date }}</td>
+                            <td>
+                                {% if service.change_batch_time %}Change Batch Time<br>{% endif %}
+                                {% if service.extend_batch_time %}Extend Batch Time<br>{% endif %}
+                                {% if service.special_batch %}Special Batch<br>{% endif %}
+                                {% if service.course_rejoin %}Course Rejoin<br>{% endif %}
+                                {% if service.course_extend %}Course Extend<br>{% endif %}
+                                {% if service.course_duration_extend %}Course Duration Extend<br>{% endif %}
+                                {% if service.course_break %}Course Break<br>{% endif %}
+                                {% if service.fast_track %}Fast Track<br>{% endif %}
+                                {% if service.extra_practice %}Extra Practice<br>{% endif %}
+                                {% if service.name_correction %}Name Correction<br>{% endif %}
+                                {% if service.installment_extend %}Extend Installment<br>{% endif %}
+                                {% if service.trust_letter %}Trust Letter<br>{% endif %}
+                                {% if service.duplicate_id %}Duplicate ID<br>{% endif %}
+                                {% if service.duplicate_certificate %}Duplicate Certificate<br>{% endif %}
+                                {% if service.certificate_marksheet_bypost %}Certificate/Marksheet By Post<br>{% endif %}
+                                {% if service.reissue_book %}Reissue Book<br>{% endif %}
+                                {% if service.reissue_hall_ticket %}Reissue Hall Ticket<br>{% endif %}
+                                {% if service.re_exam %}Re-Exam<br>{% endif %}
+                                {% if service.recheck_exampaper %}Recheck Exam Paper<br>{% endif %}
+                                {% if service.attendance_chart %}Attendance Chart<br>{% endif %}
+                                {% if service.mobile_num_change %}Change Mobile Number<br>{% endif %}
+                                {% if service.holiday_leave %}Holiday Leave<br>{% endif %}
+                                {% if service.change_faculty %}Change Faculty<br>{% endif %}
+                                {% if service.fine_or_penalty_waivedoff %}Fine/Penalty Waived Off<br>{% endif %}
+                                {% if service.cancel_admission %}Cancel Admission<br>{% endif %}
+                                {% if service.other_services %}Other Services<br>{% endif %}
+                            </td>
+                            <td>{{ service.request_details }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+
 
             </div>
         </div>

@@ -161,7 +161,7 @@ class ExamReports(models.Model):
 
 class Services(models.Model):
     student = models.ForeignKey(
-        studentsModel, on_delete=models.CASCADE, null=True, default=None
+        studentsModel, on_delete=models.SET_NULL, null=True, default=None
     )
 
     student_name = models.CharField(max_length=100)
