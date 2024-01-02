@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"rel="stylesheet"/>
+      
+
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  --color-hover: linear-gradient(90deg, rgba(1, 35, 47, 1) 0%, rgba(0, 80, 148, 1) 18%, rgba(125, 233, 255, 1) 100%);
+  --transition: all 0.2s ease;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 78px;
+  height: 100%;
+  background: #EDF3F7;
+  padding: 8px 16px;
+  transition: var(--transition);
+}
+
+/* ADDED LINE OF CODE */
+ol, ul{
+    padding-left: 0;
+    margin-left: 0;
+}
+
+
+.sidebar.expand {
+  width: 250px;
+  transition: var(--transition);
+}
+
+.nav-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.nav-header .logo {
+  color: #000;
+  font-size: 23px;
+  font-weight: 600;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.sidebar.expand .nav-header .logo {
+  opacity: 1;
+  transition: var(--transition);
+}
+
+.nav-header .btn-menu {
+  position: absolute;
+  color: #000;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 23px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.sidebar.expand .nav-header .btn-menu {
+  margin-right: 0;
+}
+
+.nav-links {
+  margin-top: 20px;
+  height: 100%;
+}
+
+.nav-links li {
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+
+.nav-links i {
+  color: #000;
+  height: 50px;
+  min-width: 50px;
+  font-size: 23px;
+  text-align: center;
+  line-height: 50px;
+}
+
+
+
+.nav-links input {
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+  outline: none;
+  height: 40px;
+  width: 50%;
+  border: none;
+  border-radius: 12px;
+  background: #e2e2e2;
+  padding: 0;
+}
+
+.sidebar.expand .nav-links input {
+  width: 100%;
+  padding: 0 20px 0 40px;
+}
+
+.nav-links li a {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  background: #fff;
+}
+
+.nav-links li:hover a {
+  background: var(--color-hover);
+}
+
+.nav-links li:hover i {
+  color: #fff;
+}
+
+.nav-links li a .title {
+  color: #000;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  display: none;
+  transition: var(--transition);
+}
+
+.sidebar.expand .nav-links li a .title {
+  display: block;
+  transition: var(--transition);
+}
+
+.nav-links li:hover a .title {
+  color: #fff;
+}
+
+.nav-links li .tooltip {
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 14px;
+  font-size: 15px;
+  white-space: nowrap;
+  border-radius: 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0s;
+}
+
+.sidebar li:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transition: var(--transition);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.sidebar.expand .tooltip {
+  display: none;
+}
+
+.nav-links .search-btn {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-25px);
+  font-size: 23px;
+  color: #000;
+  border-radius: 12px;
+  background: #fff;
+  transition: var(--transition);
+}
+
+.sidebar.expand .nav-links .search-btn {
+  background: transparent;
+  transition: var(--transition);
+}
+
+.sidebar.expand .nav-links li:hover .search-btn {
+  color: #000;
+}
+
+.nav-links .search-btn:hover {
+  background: var(--color-hover);
+}
+
+.theme-wrapper {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  width: 250px;
+  left: 0;
+  padding: 8px 16px;
+}
+
+.theme-wrapper .theme-icon {
+  font-size: 20px;
+  color: #000;
+  display: none;
+  transition: var(--transition);
+}
+
+.sidebar.expand .theme-wrapper .theme-icon {
+  display: block;
+}
+
+.theme-wrapper p {
+  font-size: 16px;
+  color: #000;
+  font-weight: 400;
+  display: none;
+  transition: var(--transition);
+}
+
+.sidebar.expand .theme-wrapper p {
+  display: block;
+}
+
+.theme-wrapper .theme-btn {
+  width: 40px;
+  height: 20px;
+  background: #e2e2e2;
+  border-radius: 30px;
+  position: relative;
+}
+
+.theme-wrapper .theme-btn .theme-ball {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #000;
+  border-radius: 50%;
+  top: 2px;
+  left: 3px;
+}
+
+.home {
+  position: relative;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  min-height: 100vh;
+  background: #c4cbd1;
+  z-index: 6;
+  transition: var(--transition);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homesection {
+  position: absolute;
+  height: 75vh;
+  border-radius: 20px;
+  border: 5px solid rgb(0, 47, 75);
+  width: 75vw;
+  background-color: #013556;
+  margin: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  padding: 50px;
+  opacity: 0.5;
+}
+
+.backgroundimage {
+  height: 100vh;
+  width: 100vw;
+  border-radius: 5px;
+}
+
+.sidebar.expand~.home {
+  left: 250px;
+  width: calc(100% - 250px);
+  transition: var(--transition);
+}
+
+/* SUBMENU */
+.more-item .submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 10px);
+    background: #fff;
+    min-width: 120px;
+    z-index: 999;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.more-item:hover .submenu {
+    display: block;
+}
+
+.more-item .submenu li {
+    list-style: none;
+    padding: 12px 20px;
+}
+
+.more-item .submenu li:hover {
+    background-color: #f0f0f0;
+}
+
+.submenu li a{
+    color:white
+}
+
+
+      </style>
+  </head>
+  <body>
+    <section class="sidebar">
+      <div class="nav-header">
+        <p class="logo">Kutchi ITI</p>
+        <i class="bx bx-menu-alt-right btn-menu"></i>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="{% url 'home' %}">
+            <i class="fa-solid fa-house"></i>
+            <span class="title">Home</span>
+          </a>
+          <span class="tooltip">Home</span>
+        </li>
+        <li>
+          <a href="{% url 'about' %}">
+            <i class="fa-solid fa-circle-info"></i>
+            <span class="title">About</span>
+          </a>
+          <span class="tooltip">About</span>
+        </li>
+        <li>
+          <a href="{% url 'student-tab' %}">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span class="title">Students</span>
+          </a>
+          <span class="tooltip">Students</span>
+        </li>
+        <li>
+            <a href="#">
+              <i class="fa-solid fa-book-open"></i>
+              <span class="title">Courses</span>
+            </a>
+            <span class="tooltip">Courses</span>
+          </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-phone"></i>
+            <span class="title">Contact Us</span>
+          </a>
+          <span class="tooltip">Contact Us</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-toolbox"></i>
+            <span class="title">Services</span>
+          </a>
+          <span class="tooltip">Services</span>
+        </li>
+        <li>
+
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                <span class="title">Rules & Regulations</span>
+            </a>
+            <span class="tooltip">Rules & Regulations</span>
+            </li>
+
+
+
+            <li class="more-item">
+                <a href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="title">More</span>
+                </a>
+                <span class="tooltip">More</span>
+                <ul class="submenu">
+                    <li><a href="#">Option 1</a></li>
+                    <li><a href="#">Option 2</a></li>
+                    <li><a href="#">Option 3</a></li>
+                </ul>
+            </li>
+      </ul>
+
+
+
+      <div class="theme-wrapper">
+        {% if request.user.is_authenticated %}
+            {% comment %} <i class='bx bx-log-out-circle' ></i> {% endcomment %}
+            <a href="{% url 'logout' %}"><p>Logout</p></a>
+        {% else %}
+            <i class='bx bx-log-in-circle'></i>
+            <a href="{% url 'login' %}"><p>Login</p></a>
+        {% endif %}
+      </div>
+      
+    </section>
+    
+
+    <script>
+      const btn_menu = document.querySelector(".btn-menu");
+      const side_bar = document.querySelector(".sidebar");
+
+      btn_menu.addEventListener("click", function () {
+        side_bar.classList.toggle("expand");
+        changebtn();
+      });
+
+      function changebtn() {
+        if (side_bar.classList.contains("expand")) {
+          btn_menu.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else {
+          btn_menu.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+      }
+    </script>
+  </body>
+</html>
