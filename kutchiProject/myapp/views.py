@@ -149,7 +149,7 @@ def contactTab(request):
             return redirect("home")
 
     context = {"form": contactform}
-    return render(request, "myapp/contact.html", context)
+    return render(request, "myapp/TestTemplates/contacttemp.html", context)
 
 
 def aboutTab(request):
