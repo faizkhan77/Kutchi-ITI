@@ -30,7 +30,9 @@
         {% comment %} {% include 'myapp/kutchi_logo.html' %} {% endcomment %}
    
         {% if request.user.is_authenticated and request.user.is_superuser %}
-            {% include 'myapp/HomeCarousal.html' %}
+            {% comment %} {% include 'myapp/HomeCarousal.html' %} {% endcomment %}
+    {% include 'myapp/TestTemplates/blob.html' %}
+
         {% endif %}
 
         {% if not request.user.is_superuser and request.user.is_authenticated %}
