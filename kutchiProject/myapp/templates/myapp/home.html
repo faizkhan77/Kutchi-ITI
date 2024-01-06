@@ -19,9 +19,23 @@
         text-align: center
     }
 
+    .blobsmall{
+        display:none;
+    }
+
     @media (max-width:700px){
         .mainbody{
             margin-left: 0px
+        }
+    }
+
+    @media(max-width:431px){
+        .blobbig{
+            display:none;
+        }
+
+        .blobsmall{
+            display:block;
         }
     }
 
@@ -31,7 +45,13 @@
    
         {% if request.user.is_authenticated and request.user.is_superuser %}
             {% comment %} {% include 'myapp/HomeCarousal.html' %} {% endcomment %}
-    {% include 'myapp/TestTemplates/blob.html' %}
+            <div class="blobbig">
+            {% include 'myapp/TestTemplates/blob.html' %}
+            </div>
+
+            <div class="blobsmall">
+                {% include 'myapp/TestTemplates/blob2.html' %}
+            </div>
 
         {% endif %}
 
