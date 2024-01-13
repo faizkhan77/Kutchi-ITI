@@ -46,7 +46,9 @@
         {% if request.user.is_authenticated and request.user.is_superuser %}
             {% comment %} {% include 'myapp/HomeCarousal.html' %} {% endcomment %}
             <div class="blobbig">
-            {% include 'myapp/TestTemplates/blob.html' %}
+            {% comment %} {% include 'myapp/TestTemplates/blob.html' %} {% endcomment %}
+            {% include 'myapp/TestTemplates/dashboard.html' %}
+
             </div>
 
             <div class="blobsmall">
