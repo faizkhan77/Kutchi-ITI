@@ -51,7 +51,7 @@
             backdrop-filter: blur(7px);
             box-shadow: 0 .4rem .8rem #0005;
             border-radius: .8rem;
-        
+            padding-bottom: 40px;
             overflow: hidden;
         }
 
@@ -367,6 +367,34 @@
                 display:none;
             }
         }
+
+
+
+
+        .pagination {
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            justify-content: center;
+          }
+          
+          .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+          }
+          
+          .pagination a.active {
+            background-color: lightblue;
+            color: white;
+            border-radius: 5px;
+          }
+          
+          .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+          }
      </style>
  </head>
  
@@ -565,6 +593,17 @@
                  </tbody>
              </table>
          </section>
+
+         <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="#">1</a>
+            <a href="#" class="active">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+          </div>
      </main>
      <script>
          const search = document.querySelector('.input-group input'),
