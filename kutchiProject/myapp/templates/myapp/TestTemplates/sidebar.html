@@ -355,6 +355,9 @@ ol, ul{
           </a>
           <span class="tooltip">About</span>
         </li>
+
+        
+        {% if request.user.is_superuser %}
         <li>
           <a href="{% url 'student-tab' %}">
             <i class="fa-solid fa-user-graduate"></i>
@@ -362,13 +365,20 @@ ol, ul{
           </a>
           <span class="tooltip">Students</span>
         </li>
+        {% endif %}
+          
+        
+        {% if request.user.is_superuser %}
         <li>
-            <a href="{% url 'course-tab' %}">
-              <i class="fa-solid fa-book-open"></i>
-              <span class="title">Courses</span>
-            </a>
-            <span class="tooltip">Courses</span>
-          </li>
+          <a href="{% url 'course-tab' %}">
+            <i class="fa-solid fa-book-open"></i>
+            <span class="title">Courses</span>
+          </a>
+          <span class="tooltip">Courses</span>
+        </li>
+        {% endif %}
+          
+
         <li>
           <a href="{% url 'contact' %}">
             <i class="fa-solid fa-phone"></i>
@@ -377,7 +387,7 @@ ol, ul{
           <span class="tooltip">Contact Us</span>
         </li>
         <li>
-          <a href="#">
+          <a href="{% url 'servicesform' %}">
             <i class="fa-solid fa-toolbox"></i>
             <span class="title">Services</span>
           </a>

@@ -68,7 +68,8 @@ def loginPage(request):
             messages.error(request, "Username or password is not correct!")
 
     context = {"page": page}
-    return render(request, "myapp/login.html", context)
+    # return render(request, "myapp/login.html", context)
+    return render(request, "myapp/TestTemplates/new-login.html", context)
 
 
 def logoutPage(request):
@@ -607,7 +608,7 @@ def cancel_admission(request, pk):
 #     return render(request, "myapp/services_tab.html", context)
 
 
-@login_required
+@login_required(login_url="login")
 def services_form(request):
     # Get the logged-in student
     if request.user.is_superuser:
