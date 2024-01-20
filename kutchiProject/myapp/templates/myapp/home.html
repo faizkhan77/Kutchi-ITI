@@ -45,8 +45,6 @@
             {% comment %} {% include 'myapp/TestTemplates/dashboard.html' %} {% endcomment %}
             {% include 'myapp/TestTemplates/in_home.html' %}
 
-
-
         {% endif %}
 
         {% if not request.user.is_superuser and request.user.is_authenticated %}

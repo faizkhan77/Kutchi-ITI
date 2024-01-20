@@ -35,21 +35,15 @@
 
 
 
-      @media (max-width:700px){
-
-        .mynav{
-          display:block;
-        }
-
-        .foot{
-          margin-left: 0vw;
-        }
-      }
 
       /*Hide sidebar for small screen TEMPORARIRLY*/
       @media (max-width:430px){
         .mysidebar{
           display:none;
+        }
+
+        .mynav{
+          display:block
         }
 
         .maincontent{
@@ -99,6 +93,10 @@
   </head>
   <body>
 
+    <div class="mynav">
+      {% include "myapp/navbar.html" %}  
+    </div> 
+
     {% comment %} /* --------------WHATSAPP LOGO-------------- */ {% endcomment %}
     {% block whatsapp %}
     <a href="https://wa.me/+917506984906" class="float" target="_blank" style="text-decoration: none;">
@@ -107,10 +105,8 @@
     {% endblock whatsapp %}
     {% comment %} /* --------------------------------------------*/ {% endcomment %}
 
+ 
 
-    {% comment %} <div class="mynav">
-      {% include "myapp/navbar.html" %}
-    </div> {% endcomment %}
 
        
 
@@ -138,6 +134,10 @@
           {% comment %} {% include 'myapp/sidebar_comp.html' %} {% endcomment %}
         {% include 'myapp/TestTemplates/sidebar.html' %}
         </div>
+
+        
+   
+       
     {% endif %}
       
 

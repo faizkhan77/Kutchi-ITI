@@ -2,7 +2,7 @@
 
 <style>
 .custom-navbar {
-    background-color: #b20237;
+    background: #004EB0;
 }
 .navbar-brand{
     color:white
@@ -40,6 +40,13 @@
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
           </li>
 
+          {% if request.user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'student-tab' %}">Students</a>
+          </li>
+        {% endif %}
+
+
         {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'course-tab' %}">Courses</a>
@@ -53,11 +60,6 @@
             <a class="nav-link" href="{% url 'contact' %}">Contact</a>
           </li>
 
-        {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'faculties' %}">Faculties</a>
-          </li>
-        {% endif %}
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,6 +69,12 @@
               <li><a class="dropdown-item" href="{% url 'rulesregulation' %}">Rules and Regulations</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'servicesform' %}">Services</a></li>
+              <li><hr class="dropdown-divider"></li>
+              {% if request.user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'faculties' %}">Faculties</a></li>
+              {% endif %}
+
+
             </ul>
           </li>
           <li class="nav-item">
@@ -77,10 +85,7 @@
             {% endif %}
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+  
       </div>
     </div>
   </nav>
