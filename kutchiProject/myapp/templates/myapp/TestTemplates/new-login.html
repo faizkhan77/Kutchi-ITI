@@ -768,7 +768,8 @@
 
           <form method="POST" class="sign-up-form">
             {% csrf_token %}
-            <h2 class="title">Sign in</h2>
+            <h2 class="title">Login with your credentials</h2>
+            <p>Enroll from KUTCHI ITI to get your credentials</p>
 
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -811,7 +812,7 @@
             <nav>
               {% comment %} <a href="#" class="nava" id="sign-up-btn">Login</a> {% endcomment %}
               <a href="{% url 'about' %}" class="nava">About</a>
-              <a href="#" class="nava">Courses</a>
+              <a href="{% url 'course-tab' %}" class="nava">Courses</a>
               {% comment %} <a href="#" class="nava">Services</a> {% endcomment %}
               <a href="{% url 'contact' %}" class="nava">Contact</a>
               <div class="animation start-home"></div>

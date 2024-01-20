@@ -36,6 +36,7 @@ import os
 from django.conf import settings
 from django.db.models import Sum
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -57,7 +58,8 @@ def loginPage(request):
             user = User.objects.get(username=username)
             # messages.error(request, "User exist")
         except:
-            messages.error(request, "User doesn't exist")
+            pass
+            # messages.error(request, "User doesn't exist")
 
         user = authenticate(request, username=username, password=password)
 
@@ -65,7 +67,8 @@ def loginPage(request):
             login(request, user)
             return redirect("home")
         else:
-            messages.error(request, "Username or password is not correct!")
+            pass
+            # messages.error(request, "Username or password is not correct!")
 
     context = {"page": page}
     # return render(request, "myapp/login.html", context)
@@ -111,13 +114,34 @@ def index(request):
 @user_passes_test(is_superuser, login_url="home")
 def studentTab(request):
     studentlist = studentsModel.objects.all()
-    for student in studentlist:
+
+    # Number of students to display per page
+    students_per_page = 10
+
+    # Get the page number from the request's GET parameters
+    page = request.GET.get("page", 1)
+
+    # Create a Paginator object
+    paginator = Paginator(studentlist, students_per_page)
+
+    try:
+        # Get the specified page
+        students = paginator.page(page)
+    except PageNotAnInteger:
+        # If the page parameter is not an integer, show the first page
+        students = paginator.page(1)
+    except EmptyPage:
+        # If the page is out of range (e.g., 9999), deliver the last page
+        students = paginator.page(paginator.num_pages)
+
+    for student in students:
         student.remaining_balance = student.coursefees - student.feespaid
-    context = {"students": studentlist}
+
+    context = {"students": students}
     return render(request, "myapp/Students_comp.html", context)
 
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def courseTab(request):
     courses = Courses.objects.all()
     context = {"courses": courses}
