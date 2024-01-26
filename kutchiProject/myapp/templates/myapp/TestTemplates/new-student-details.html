@@ -1,0 +1,874 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+
+<head>
+    <!-- ===== ===== Custom Css ===== ===== -->
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- ===== ===== Remix Font Icons Cdn ===== ===== -->
+    <link rel="stylesheet" href="fonts/remixicon.css">
+
+
+    <style>
+        /* ===== =====  Poppins Google Font  ===== =====  */
+        @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
+
+        /* ===== =====>>  Universal Selector  <<===== =====  */
+        * {
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        font-family: sans-serif;
+        list-style: none;
+        text-decoration: none;
+        font-family: "Poppins", sans-serif;
+        }
+
+        /* ===== =====>>  Body Font Size  <<===== =====  */
+        html {
+        font-size: 10px;
+        }
+
+        /* ===== =====>> Css Variables  <<===== =====  */
+        :root {
+        /* =====>>  Font Color  <<===== */
+        --f1-color: #fff;
+        --f2-color: #000;
+        --f3-color: rgba(0, 0, 0, 0.8);
+        --f4-color: rgba(0, 0, 0, 0.6);
+        --f5-color: #0099cc;
+        --f6-color: #88cee6;
+
+        /* =====>>  Background Color  <<===== */
+        --bg1-color: #fff;
+        --bg2-color: #000;
+        --bg3-color: #33ccff;
+        --bg4-color: #33cc33;
+        --bg5-color: #0099cc;
+        --bg6-color: rgba(0, 0, 0, 0.4);
+        --bg7-color: rgba(0, 0, 0, 0.2);
+        --glass-bg: linear-gradient(to right bottom,
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.3));
+        --C-lg-bg: linear-gradient(45deg, #ff3399, #ff9933);
+
+        /* ===== =====>>  Font Size  <<===== =====  */
+        --xxxl-fs: 2.2rem;
+        --xxl-fs: 1.8rem;
+        --xl-fs: 1.6rem;
+        --l-fs: 1.4rem;
+        --m-fs: 1.2rem;
+        --s-fs: 1.1rem;
+        --xs-fs: 1rem;
+
+        /* =====>>  Margin  <<===== */
+        --m-2-5: 2.5rem;
+        --m-1-8: 1.8rem;
+        --m-1-5: 1.5rem;
+        --m-0-6: 0.6rem;
+        --m-0-5: 0.5rem;
+        --m-0-3: 0.3rem;
+
+        /* =====>>  Padding  <<===== */
+        --p-2-5: 2.5rem;
+        --p-1-5: 1.5rem;
+        --p-1-0: 1rem;
+        --p-0-8: 0.8rem;
+        --p-0-5: 0.5rem;
+        --p-0-4: 0.4rem;
+        --p-0-3: 0.3rem;
+        }
+
+        /* ===== =====>>  Body Css  <<===== =====  */
+        body {
+        /*display: flex; */
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        }
+
+        /* ===== =====>>  Body Main-Background Css  <<===== =====  */
+        .main_bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+        background-position: left;
+        z-index: -1;
+        filter: blur(10px);
+        }
+
+        /* ===== =====>>  Main-Container Css  <<===== =====  */
+        .container {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+            "header header"
+            "userProfile userDetails"
+            "work_skills timeline_about"
+            "work_skills timeline_about";
+        width: 100%;
+        height: 90vh;
+        background: var(--glass-bg);
+        padding: var(--p-1-5);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ===== =====>>  Container Cards Grid-Area Css Start  <<===== =====  */
+        header {
+        grid-area: header;
+        }
+
+        .userProfile {
+        grid-area: userProfile;
+        }
+
+        .work_skills {
+        grid-area: work_skills;
+        }
+
+        .userDetails {
+        grid-area: userDetails;
+        }
+
+        .timeline_about {
+        grid-area: timeline_about;
+        }
+
+        /* ===== =====>>  Container Cards Css  <<===== =====  */
+        .container .card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(3rem);
+        border-radius: 0.5rem;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.05);
+        padding: var(--p-1-5);
+        }
+
+        /* ===== =====>>  Container Header/Navbar Css  <<===== =====  */
+        .container header {
+        padding: 0 var(--p-2-5);
+        }
+
+        .container header .brandLogo {
+        display: flex;
+        align-items: center;
+        }
+
+        .container header .brandLogo figure img {
+        width: 3.5rem;
+        height: 3.5rem;
+        }
+
+        .container header .brandLogo span {
+        font-size: var(--xl-fs);
+        font-weight: 700;
+        margin-left: var(--m-0-5);
+        }
+
+        /* ===== =====>>  User Main-Profile Css Start  <<===== ===== */
+        .container .userProfile {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+        }
+
+        .container .userProfile .profile figure img {
+        width: 14rem;
+        height: 18rem;
+        border-radius: 10%;
+        }
+
+        /* ===== =====>>  Work & Skills Css Start  <<===== ===== */
+        .container .work_skills {
+        padding: var(--p-1-5);
+        }
+
+        .work_skills .work .heading,
+        .work_skills .skills .heading {
+        position: relative;
+        font-size: var(--xs-fs);
+        color: rgba(0, 0, 0, 0.6);
+        text-transform: uppercase;
+        margin-bottom: var(--m-1-5);
+        }
+
+        .work_skills .work .heading::before,
+        .work_skills .skills .heading::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 0.1rem;
+        width: 88%;
+        background: var(--bg6-color);
+        }
+
+        .work_skills .work .primary,
+        .work_skills .work .secondary {
+        position: relative;
+        }
+
+        .work_skills .work .primary h1,
+        .work_skills .work .secondary h1 {
+        font-size: var(--l-fs);
+        color: var(--f3-color);
+        margin-bottom: var(--m-0-6);
+        }
+
+        .work_skills .work .primary span,
+        .work_skills .work .secondary span {
+        position: absolute;
+        top: 0;
+        right: 3rem;
+        font-weight: 700;
+        font-size: var(--s-fs);
+        color: var(--f5-color);
+        background: #e6f2ff;
+        padding: var(--p-0-4) var(--p-1-0);
+        border-radius: 0.4rem;
+        }
+
+        .work_skills .work .primary p,
+        .work_skills .work .secondary p {
+        margin-bottom: var(--m-0-3);
+        font-size: var(--m-fs);
+        color: rgba(0, 0, 0, 0.6);
+        line-height: 1.6rem;
+        }
+
+
+
+        @keyframes skills {
+        0% {
+            width: 50%;
+            filter: hue-rotate(180deg);
+        }
+
+        50% {
+            width: 0;
+        }
+
+        100% {
+            width: 50%;
+            filter: hue-rotate(0);
+        }
+        }
+
+        /* ===== =====>>  User Details Css Start  <<===== ===== */
+        .userDetails {
+        position: relative;
+        padding: var(--p-1-5) var(--p-2-5);
+        }
+
+        .userDetails .userName h1 {
+        font-size: var(--xxxl-fs);
+        }
+
+        .userDetails .userName .map {
+        position: absolute;
+        top: 2.5rem;
+        left: 18.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .userDetails .userName .map .ri {
+        margin-right: var(--m-0-3);
+        font-size: var(--m-fs);
+        }
+
+        .userDetails .userName .map span {
+        font-size: var(--s-fs);
+        color: var(--f3-color);
+        font-weight: 700;
+        }
+
+        .userDetails .userName p {
+        font-size: var(--m-fs);
+        font-weight: 700;
+        color: var(--f5-color);
+        margin-bottom: var(--m-1-8);
+        }
+
+        .userDetails .rank {
+        position: relative;
+        margin-bottom: var(--m-1-8);
+        }
+
+        .userDetails .rank .heading {
+        font-size: var(--xs-fs);
+        color: var(--f4-color);
+        text-transform: uppercase;
+        margin-bottom: var(--m-0-6);
+        }
+
+        .userDetails .rank span {
+        font-size: var(--xxl-fs);
+        font-weight: 700;
+        }
+
+        .userDetails .rank .rating {
+        position: absolute;
+        top: 2.7rem;
+        left: 3.5rem;
+        }
+
+        .userDetails .rank .rating .rate {
+        color: var(--f5-color);
+        font-size: var(--l-fs);
+        }
+
+        .userDetails .rank .rating .underrate {
+        color: var(--f6-color);
+        }
+
+        .userDetails .btns ul,
+        .userDetails .btns ul li {
+        display: flex;
+        align-items: center;
+        margin-top: -5px;
+        }
+
+        .userDetails .btns ul li {
+        margin-right: var(--m-2-5);
+        border-radius: 0.5rem;
+        }
+
+        .userDetails .btns ul li .ri {
+        margin-right: var(--m-0-5);
+        font-size: var(--xl-fs);
+        }
+
+        .userDetails .btns ul li a {
+        font-size: var(--l-fs);
+        color: var(--f2-color);
+        font-weight: 500;
+        }
+
+        .userDetails .btns ul .active {
+        background: #e6f2ff;
+        padding: var(--p-0-5) var(--p-1-5);
+        }
+
+        .userDetails .btns ul .active a,
+        .userDetails .btns ul .active .ri {
+        color: var(--f5-color);
+        }
+
+        /* ===== =====>>  Timeline & About Css Start  <<===== ===== */
+        .timeline_about {
+        padding: var(--p-2-5);
+        }
+
+        .timeline_about .tabs ul {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-bottom: var(--m-2-5);
+        }
+
+        .timeline_about .tabs ul::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--bg7-color);
+        }
+
+        .timeline_about .tabs ul li {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-right: var(--m-2-5);
+        padding-bottom: var(--p-0-8);
+        cursor: pointer;
+        }
+
+        .timeline_about .tabs ul li span {
+        font-size: var(--l-fs);
+        font-weight: 500;
+        }
+
+        .timeline_about .tabs ul li .ri {
+        margin-right: var(--m-0-5);
+        }
+
+        .timeline_about .tabs ul .active::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--bg5-color);
+        }
+
+        .timeline_about .contact_info .heading,
+        .timeline_about .basic_info .heading {
+        font-size: var(--xs-fs);
+        color: var(--f4-color);
+        text-transform: uppercase;
+        margin-bottom: var(--m-1-5);
+        }
+
+        .timeline_about .contact_info ul,
+        .timeline_about .basic_info ul {
+        margin-bottom: var(--m-1-5);
+        }
+
+        .timeline_about .contact_info ul li,
+        .timeline_about .basic_info ul li {
+        display: flex;
+        margin: var(--m-0-5) 0;
+        }
+
+        .timeline_about .contact_info ul li h1,
+        .timeline_about .basic_info ul li h1 {
+        font-weight: 500;
+        font-size: var(--m-fs);
+        min-width: 12rem;
+        }
+
+        .timeline_about .contact_info ul li span,
+        .timeline_about .basic_info ul li span {
+        font-size: var(--m-fs);
+        }
+
+        .timeline_about .contact_info ul .phone span,
+        .timeline_about .contact_info ul .email span,
+        .timeline_about .contact_info ul .site span {
+        color: var(--f5-color);
+        }
+
+        /* buttons */
+
+        button {
+        padding: 4.5px 20px;
+        border: 0;
+        border-radius: 6px;
+        background-color: #2ba8fb;
+        color: #ffffff;
+        font-weight: normal;
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        }
+
+        button:hover {
+        background-color: #6fc5ff;
+        box-shadow: 0 0 20px #6fc5ff50;
+        transform: scale(1.1);
+        }
+
+        button:active {
+        background-color: #3d94cf;
+        transition: all 0.25s;
+        -webkit-transition: all 0.25s;
+        box-shadow: none;
+        transform: scale(0.98);
+        }
+
+       
+        .address,
+        .contact_info {
+        margin: 40px 0 40px 0;
+        }
+
+
+
+
+        /* -----------------------------RESPONSIVENESS------------------------------ */
+
+        @media screen and (max-width: 1024px) {
+        html {
+            font-size: 9px;
+        }
+        }
+
+        @media screen and (max-width: 900px) {
+        html {
+            font-size: 8px;
+        }
+        }
+
+        @media screen and (max-width: 768px) {
+        html {
+            font-size: 10px;
+        }
+
+        /* ===== =====>>  Container Css Start  <<===== ===== */
+        .container {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+            "header"
+            "userProfile"
+            "userDetails"
+            "work_skills"
+            "timeline_about";
+            overflow-x: hidden;
+            overflow-y: inherit;
+            padding: 0;
+            width: 90%;
+            height: 100%;
+            box-shadow: none;
+        }
+
+        /* ===== =====>>  Container Card Css Start  <<===== ===== */
+        .container .card {
+            backdrop-filter: none;
+        }
+
+        .userDetails {
+            margin-bottom: 3rem;
+        }
+
+        .container::before,
+        .container::after {
+            display: none;
+        }
+
+        /* ===== =====>>  Header/Navbar Css Start  <<===== ===== */
+        .container header {
+            padding: 2.5rem;
+        }
+        }
+
+        @media screen and (max-width: 500px) {
+        .container {
+            width: 100%;
+            overflow: initial;
+        }
+        }
+
+        @media screen and (max-width: 350px) {
+        .main_bg {
+            animation: none;
+        }
+}
+    </style>
+</head>
+
+<body>
+    <!-- ===== ===== Body Main-Background ===== ===== -->
+    <span class="main_bg"></span>
+
+
+    <!-- ===== ===== Main-Container ===== ===== -->
+    <div class="container">
+
+        <!-- ===== ===== Header/Navbar ===== ===== -->
+        <header>
+            <div class="brandLogo">
+                {% comment %} <figure><img src="web_logo.jpg" alt="logo" width="40px" height="40px"></figure> {% endcomment %}
+                <span>Kutchi ITI </span>
+            </div>
+        </header>
+
+
+        <!-- ===== ===== User Main-Profile ===== ===== -->
+        <section class="userProfile card">
+            <div class="z`  ">
+                <figure><img src="{% static 'images/myimg.jpg' %}" alt="profile" width="190px" height="250px" style="border-radius: 20px;"></figure>
+            </div>
+        </section>
+
+
+        <!-- ===== ===== Work & Skills Section ===== ===== -->
+        <section class="work_skills card">
+
+            <!-- ===== ===== Work Contaienr ===== ===== -->
+            <div class="work"> 
+                <h1 class="heading" style="font-size: 15px;">Cousre Information</h1>
+                <div class="primary">
+                    <ul>
+                        <li>Course Name: {{ students.coursename }}</li>
+                        <li>Joining Date :{{ students.joiningdate|date:"F d, Y" }}</li>
+                        <li>Compelition Date :{{ students.completiondate|date:"F d, Y" }}</li>
+                        <li>Total Course Duartion : {{duration.years}} Years, {{ duration.months }} Months, {{ duration.days }} Days</li>                 
+                        <li>Batch And Timing : {{students.batch_time}}</;>
+                        {% if students.extendeddate %}
+                            <li  style="background-color:red">Course Extention Date : {{students.extendeddate}}</li>
+                        {% else %}
+                            <li>Course Extention Date : {{students.extendeddate}}</li>
+                        {% endif %}
+                    </ul>
+                    
+                    {% if not students.extendeddate %}
+                        <button class="button" style="background-color: rgb(4, 75, 97);" onclick="location.href='{% url 'edit' students.id %}'">Extend course?</button>
+                    {% endif %}
+                </div>
+
+<br>
+            <!-- ===== ===== Skills Contaienr ===== ===== -->
+            <div class="skills">
+                <h1 class="heading" style="font-size: 15px;">Fees Section</h1>
+                <ul>
+                    <li style="--i:0">Total Fees : &#8377;{{ students.coursefees }}</li>
+                    <li style="--i:3">Initial Amount Paid :  &#8377;{{ students.initial_payment }}</li>
+                    <li style="--i:1">Fees Paid :&#8377;{{ students.feespaid }}</li>
+                    <li style="--i:2">Remaining Amount :  &#8377;{{ remainingBalance }}</li>
+                    <li style="--i:3"> Due Date :</li>
+                </ul>
+                {% if students.feespaid != students.coursefees %}
+                    <button class="button" style="margin-top: 1rem; background-color: rgb(4, 75, 97);" onclick="location.href='{% url 'add_installment' students.id %}'">Add Payment</button>
+                {% endif %}
+                <button class="button" style="margin-top: 1rem; background-color: rgb(4, 75, 97);" onclick="location.href='{% url 'payment_history' students.id %}'">Payment History</button>
+            </div>
+        </section>
+
+
+        <!-- ===== ===== User Details Sections ===== ===== -->
+        <section class="userDetails card">
+            <div class="userName">
+                <h1 class="name">{{students.firstname}} {{ students.lastname }}</h1>
+                <p style="font-size: 15px;">{{ students.coursename }}</p>
+            </div>
+
+            <div class="rank">
+                <span>Academic Information</span>
+                <p>Roll Number : {{students.rollno}}</p>
+                <p>Serial Number : {{students.id}}</p>
+        
+     
+                <div class="rating">
+                    <i class="ri-star-fill rate"></i>
+                    <i class="ri-star-fill rate"></i>
+                    <i class="ri-star-fill rate"></i>
+                    <i class="ri-star-fill rate"></i>
+                    <i class="ri-star-fill rate underrate"></i>
+                </div>
+            </div>
+
+            <div class="btns">
+                <ul>
+                    <li class="sendMsg">
+                        <i class="ri-chat-4-fill ri"></i>
+                        <button class="button" style="background-color: rgb(4, 75, 97);" onclick="location.href='{% url 'edit' students.id %}'">Edit</button>
+                    </li>
+
+                    <li class="sendMsg">
+                        <i class="ri-check-fill ri"></i>
+                        <button class="button" style="background-color: rgb(4, 75, 97);" onclick="location.href='{% url 'delete' students.id %}'">Delete</button>
+                    </li>
+                  
+                    {% if not students.is_admission_canceled %}
+                        <li class="sendMsg">
+                            <form action="{% url 'cancel_admission' students.id %}">
+                                <button class="button" style="background-color: rgb(141, 11, 11);" type="submit">Cancel Admission</button>
+                            </form>
+                        </li>
+                    {% endif %}
+               
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- ===== ===== Timeline & About Sections ===== ===== -->
+        <section class="timeline_about card">
+            <div class="tabs">
+                <ul>
+                    <li class="exam" onclick="showTab('exam-tab')">
+                        <i class="ri-eye-fill ri"></i>
+                        <span>Exam</span>
+                    </li>
+                    <li class="about active">
+                        <i class="ri-user-3-fill ri"></i>
+                        <span>About</span>
+                    </li>
+                    <li class="services">
+                        <i class="ri-user-3-fill ri"></i>
+                        <span>Services</span>
+                    </li>
+                    <li class="remarks">
+                        <i class="ri-user-3-fill ri"></i>
+                        <span>Remarks</span>
+                    </li>
+                </ul>
+            </div>
+
+        <div class="tab-content">
+
+            {% comment %} ---------------------------EXAM TAB CONTENT-------------------- {% endcomment %}
+            <div class="exam-tab" style="display: none;">
+                <h1>Exam and Certification</h1>
+
+                <div class="exam-status">
+                    {% if students.exam_given %}
+                        <p><strong>Exam Status:</strong>  Given</p>
+                    {% else %}
+                        <p><strong>Exam Status:</strong>  Exam Pending</p>
+                    {% endif %}
+                </div>
+                
+                {% comment %} <p><strong>Exam Date:</strong> {{ students.completiondate|add_days:1|date:"F d, Y" }}</p> {% endcomment %}
+                <p><strong>Exam Date:</strong> {{ students.exam_date|date:"F d, Y"  }}</p>
+                <p><strong>Exam Fees:</strong>&#8377;100 </p>
+                <p><strong>Exam Session:</strong> </p>
+                <p><strong>Exam Attempt:</strong> </p>
+                <p><strong>Re-Exam:</strong> </p>
+                <p><strong>Certification:</strong>  {{ students.coursename }}</p>
+                <p><strong>Certification no:</strong> </p>
+                <p><strong>Result Date:</strong> </p>
+            </div>
+
+
+            {% comment %} --------------------------ABOUT TAB CONTENT---------------------------------------- {% endcomment %}
+
+            <div class="about-tab">
+
+                <div class="basicinfo">
+                    <h1>Personal Information</h1>
+                    <p>Full Name : {{students.firstname}} {{ students.lastname }}</p>
+                    <p>Age :  {{ students.age }}</p>
+                    <p>Gender : {{ students.gender }}</p>
+                    <p>Occupation : {{students.occupation}}</p>
+                </div>
+
+                <div class="address">
+                    <h1 class="heading">Adress</h1>
+                    <span class="info"> {{ students.address }} </span>
+                </div>
+                <div class="contact_Info">
+                    <h1 class="heading">Contact Details</h1>
+                    <p>Contact Number : {{ students.phoneno }}</p>
+                    <p>Email Id : {{ students.emailid }}</p>
+                </div>
+               
+            </div>
+
+            {% comment %} ---------------------------SERVICES TAB CONTENT------------------------------------- {% endcomment %}
+            <div class="services-tab" style="display: none;">
+                <h1>Services</h1>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Service Request Date</th>
+                            <th>Type of Services</th>
+                            <th>Request Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in services %}
+                        <tr>
+                            <td>{{ service.request_date }}</td>
+                            <td>
+                                {% if service.change_batch_time %}Change Batch Time<br>{% endif %}
+                                {% if service.extend_batch_time %}Extend Batch Time<br>{% endif %}
+                                {% if service.special_batch %}Special Batch<br>{% endif %}
+                                {% if service.course_rejoin %}Course Rejoin<br>{% endif %}
+                                {% if service.course_extend %}Course Extend<br>{% endif %}
+                                {% if service.course_duration_extend %}Course Duration Extend<br>{% endif %}
+                                {% if service.course_break %}Course Break<br>{% endif %}
+                                {% if service.fast_track %}Fast Track<br>{% endif %}
+                                {% if service.extra_practice %}Extra Practice<br>{% endif %}
+                                {% if service.name_correction %}Name Correction<br>{% endif %}
+                                {% if service.installment_extend %}Extend Installment<br>{% endif %}
+                                {% if service.trust_letter %}Trust Letter<br>{% endif %}
+                                {% if service.duplicate_id %}Duplicate ID<br>{% endif %}
+                                {% if service.duplicate_certificate %}Duplicate Certificate<br>{% endif %}
+                                {% if service.certificate_marksheet_bypost %}Certificate/Marksheet By Post<br>{% endif %}
+                                {% if service.reissue_book %}Reissue Book<br>{% endif %}
+                                {% if service.reissue_hall_ticket %}Reissue Hall Ticket<br>{% endif %}
+                                {% if service.re_exam %}Re-Exam<br>{% endif %}
+                                {% if service.recheck_exampaper %}Recheck Exam Paper<br>{% endif %}
+                                {% if service.attendance_chart %}Attendance Chart<br>{% endif %}
+                                {% if service.mobile_num_change %}Change Mobile Number<br>{% endif %}
+                                {% if service.holiday_leave %}Holiday Leave<br>{% endif %}
+                                {% if service.change_faculty %}Change Faculty<br>{% endif %}
+                                {% if service.fine_or_penalty_waivedoff %}Fine/Penalty Waived Off<br>{% endif %}
+                                {% if service.cancel_admission %}Cancel Admission<br>{% endif %}
+                                {% if service.other_services %}Other Services<br>{% endif %}
+                            </td>
+                            <td>{{ service.request_details }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+            {% comment %} ---------------------------REMARKS TAB CONTENT------------------------------- {% endcomment %}
+            <div class="remarks-tab" style="display: none;">
+                <h3>Remarks</h3>
+                <ul>
+                    {% for remark in students.studentremarks_set.all %}
+                        <li>{{ remark.remark_date|date:"F d, Y" }}: {{ remark.remarks }}</li>
+                    {% endfor %}
+                    <button class="button" style="background-color: rgb(4, 75, 97);" onclick="location.href='{% url 'remarks' students.id %}'">Add a Remark</button>
+                </ul>
+            </div>
+        </div>    
+
+
+        <script>
+            $(document).ready(function() {
+                $(".exam").click(function() {
+                    $(".exam-tab").show();
+                    $(".about-tab").hide();
+                    $(".services-tab").hide();
+                    $(".remarks-tab").hide();
+                    $(".exam").addClass("active");
+                    $(".about").removeClass("active");
+                    $(".services").removeClass("active");
+                    $(".remarks").removeClass("active");
+
+                });
+    
+                $(".about").click(function() {
+                    $(".exam-tab").hide();
+                    $(".services-tab").hide();
+                    $(".remarks-tab").hide();
+                    $(".about-tab").show();
+                    $(".exam").removeClass("active");
+                    $(".services").removeClass("active");
+                    $(".remarks").removeClass("active");
+                    $(".about").addClass("active");
+                });
+
+                $(".services").click(function() {
+                    $(".exam-tab").hide();
+                    $(".about-tab").hide();
+                    $(".services-tab").show();
+                    $(".remarks-tab").hide();
+                    $(".exam").removeClass("active");
+                    $(".about").removeClass("active");
+                    $(".services").addClass("active");
+                    $(".remarks").removeClass("active");
+                });
+
+                $(".remarks").click(function() {
+                    $(".exam-tab").hide();
+                    $(".about-tab").hide();
+                    $(".services-tab").hide();
+                    $(".remarks-tab").show();
+                    $(".exam").removeClass("active");
+                    $(".about").removeClass("active");
+                    $(".services").removeClass("active");
+                    $(".remarks").addClass("active");
+                });
+            });
+        </script>
+        </section>
+    </div>
+
+
+</body>
+
+
+
+{% endblock content %}

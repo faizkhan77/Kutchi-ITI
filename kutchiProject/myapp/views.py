@@ -274,7 +274,8 @@ def studentDetails(request, pk):
         "exam_reports": exam_reports,
         "services": services,
     }
-    return render(request, "myapp/student_details.html", context)
+    # return render(request, "myapp/student_details.html", context)
+    return render(request, "myapp/TestTemplates/new-student-details.html", context)
 
 
 def deleteStudent(request, pk):
