@@ -1,0 +1,880 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Sign in & Sign up Form</title>
+
+
+    <style>
+          @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          body,
+          input {
+            font-family: "Poppins", sans-serif;
+          }
+
+          .container {
+            position: relative;
+            width: 100%;
+            background-color: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+          }
+
+          .forms-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+          }
+
+          .signin-signup {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 75%;
+            width: 50%;
+            transition: 1s 0.7s ease-in-out;
+            display: grid;
+            grid-template-columns: 1fr;
+            z-index: 5;
+          }
+
+          form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 5rem 5rem;
+            transition: all 0.2s 0.7s;
+            overflow: hidden;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+          }
+
+          form.sign-up-form {
+            opacity: 0;
+            z-index: 1;
+          }
+
+          form.sign-in-form {
+            z-index: 2;
+          }
+
+          .title {
+            font-size: 2.2rem;
+            color: #444;
+            margin-bottom: 10px;
+          }
+
+          .input-field {
+            max-width: 380px;
+            width: 100%;
+            background-color: #F1EFF1;
+            margin: 10px 0;
+            height: 55px;
+            border-radius: 50px;
+            display: grid;
+            grid-template-columns: 15% 85%;
+            padding: 0 0.4rem;
+            position: relative;
+          }
+
+          .input-field i {
+            text-align: center;
+            line-height: 55px;
+            color: #acacac;
+            transition: 0.5s;
+            font-size: 1.1rem;
+          }
+
+          .input-field input {
+            background: none;
+            outline: none;
+            border: none;
+            line-height: 1;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+          }
+
+          .input-field input::placeholder {
+            color: #aaa;
+            font-weight: 500;
+          }
+
+          .social-text {
+            padding: 0.7rem 0;
+            font-size: 1rem;
+          }
+
+          .social-media {
+            display: flex;
+            justify-content: center;
+          }
+
+          .social-icon {
+            height: 46px;
+            width: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 0.45rem;
+            color: #333;
+            border-radius: 50%;
+            border: 1px solid #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.3s;
+          }
+
+          .social-icon:hover {
+            color: #4481eb;
+            border-color: #4481eb;
+          }
+
+          .btn {
+            width: 150px;
+            background-color: #5995fd;
+            border: none;
+            outline: none;
+            height: 49px;
+            border-radius: 49px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: 0.5s;
+          }
+
+          .btn:hover {
+            background-color: #4d84e2;
+          }
+
+          .panels-container {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .container:before {
+            content: "";
+            position: absolute;
+            height: 2000px;
+            width: 2000px;
+            top: -10%;
+            right: 48%;
+            transform: translateY(-50%);
+            background: rgb(1, 35, 47);
+            background: linear-gradient(90deg, rgba(1, 35, 47, 1) 0%, rgba(0, 80, 148, 1) 18%, rgba(125, 233, 255, 1) 100%);
+            transition: 1.8s ease-in-out;
+            border-radius: 50%;
+            z-index: 6;
+          }
+
+          .image {
+            width: 100%;
+            transition: transform 1.1s ease-in-out;
+            transition-delay: 0.4s;
+          }
+
+          .panel {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-around;
+            text-align: center;
+            z-index: 6;
+          }
+
+          .left-panel {
+            pointer-events: all;
+            padding: 3rem 17% 2rem 12%;
+          }
+
+          .right-panel {
+            pointer-events: none;
+            padding: 3rem 12% 2rem 17%;
+          }
+
+          .panel .content {
+            color: #fff;
+            transition: transform 0.9s ease-in-out;
+            transition-delay: 0.6s;
+          }
+
+          .panel h3 {
+            font-weight: 600;
+            line-height: 1;
+            font-size: 1.5rem;
+          }
+
+          .panel p {
+            font-size: 0.95rem;
+            padding: 0.7rem 0;
+          }
+
+          .btn.transparent {
+            margin: 0;
+            background: none;
+            border: 2px solid #fff;
+            width: 130px;
+            height: 41px;
+            font-weight: 600;
+            font-size: 0.8rem;
+          }
+
+          .right-panel .image,
+          .right-panel .content {
+            transform: translateX(800px);
+          }
+
+          /* ANIMATION */
+
+          .container.sign-up-mode:before {
+            transform: translate(100%, -50%);
+            right: 52%;
+          }
+
+          .container.sign-up-mode .left-panel .image,
+          .container.sign-up-mode .left-panel .content {
+            transform: translateX(-800px);
+          }
+
+          .container.sign-up-mode .signin-signup {
+            left: 25%;
+          }
+
+          .container.sign-up-mode form.sign-up-form {
+            opacity: 1;
+            z-index: 2;
+          }
+
+          .container.sign-up-mode form.sign-in-form {
+            opacity: 0;
+            z-index: 1;
+          }
+
+          .container.sign-up-mode .right-panel .image,
+          .container.sign-up-mode .right-panel .content {
+            transform: translateX(0%);
+          }
+
+          .container.sign-up-mode .left-panel {
+            pointer-events: none;
+          }
+
+          .container.sign-up-mode .right-panel {
+            pointer-events: all;
+          }
+
+
+
+          /* ------------------BLOB DESIGN--------------------------------- */
+
+
+
+          body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* background: #f1f1f1; */
+          }
+
+          .square {
+            /* border: #333 solid; */
+            position: relative;
+            /* left: -400px; */
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .square span:nth-child(1) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid black;
+            border-radius: 32% 58% 69% 43% / 48% 32% 59% 55%;
+            transition: 0.5s;
+            animation: animate 6s linear infinite;
+          }
+
+
+
+          .twitter:hover span:nth-child(1) {
+            border: none;
+            background: #84cdfa;
+          }
+
+
+          .square span:nth-child(2) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid black;
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            transition: 0.5s;
+            animation: animate 4s linear infinite;
+          }
+
+
+
+          .twitter:hover span:nth-child(2) {
+            border: none;
+            background: #84cdfa;
+          }
+
+
+          .square span:nth-child(3) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid black;
+            border-radius: 31% 45% 74% 35% / 38% 56% 51% 87%;
+            transition: 0.5s;
+            animation: animate2 10s linear infinite;
+          }
+
+
+
+          .twitter:hover span:nth-child(3) {
+            border: none;
+            background: #84cdfa;
+          }
+
+
+
+          .content {
+            position: relative;
+            padding: 40px 60px;
+            color: #4e3d3d;
+            text-align: center;
+            transition: 0.5s;
+            z-index: 1000;
+          }
+
+          .content a {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+            border: 2px solid #4e3d3d;
+            padding: 6px 18px;
+            text-decoration: none;
+            color: #4e3d3d;
+            font-weight: 600;
+            border-radius: 73% 27% 44% 56% / 49% 44% 56% 51%;
+          }
+
+          .content a:hover {
+            background: white;
+            color: #333;
+          }
+
+
+          @keyframes animate {
+            0% {
+              transform: rotate(0deg);
+            }
+
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+          @keyframes animate2 {
+            0% {
+              transform: rotate(360deg);
+            }
+
+            100% {
+              transform: rotate(0deg);
+            }
+          }
+
+
+          @media (max-width: 870px) {
+            .container {
+              min-height: 800px;
+              height: 100vh;
+            }
+
+            .signin-signup {
+              width: 100%;
+              top: 95%;
+              transform: translate(-50%, -100%);
+              transition: 1s 0.8s ease-in-out;
+            }
+
+            .signin-signup,
+            .container.sign-up-mode .signin-signup {
+              left: 50%;
+            }
+
+            .panels-container {
+              grid-template-columns: 1fr;
+              grid-template-rows: 1fr 2fr 1fr;
+            }
+
+            .panel {
+              flex-direction: row;
+              justify-content: space-around;
+              align-items: center;
+              padding: 2.5rem 8%;
+              grid-column: 1 / 2;
+            }
+
+            .right-panel {
+              grid-row: 3 / 4;
+            }
+
+            .left-panel {
+              grid-row: 1 / 2;
+            }
+
+            .image {
+              width: 200px;
+              transition: transform 0.9s ease-in-out;
+              transition-delay: 0.6s;
+            }
+
+            .panel .content {
+              padding-right: 15%;
+              transition: transform 0.9s ease-in-out;
+              transition-delay: 0.8s;
+            }
+
+            .panel h3 {
+              font-size: 1.2rem;
+            }
+
+            .panel p {
+              font-size: 0.7rem;
+              padding: 0.5rem 0;
+            }
+
+            .btn.transparent {
+              width: 110px;
+              height: 35px;
+              font-size: 0.7rem;
+            }
+
+            .container:before {
+              width: 1500px;
+              height: 1500px;
+              transform: translateX(-50%);
+              left: 30%;
+              bottom: 68%;
+              right: initial;
+              top: initial;
+              transition: 2s ease-in-out;
+            }
+
+            .container.sign-up-mode:before {
+              transform: translate(-50%, 100%);
+              bottom: 32%;
+              right: initial;
+            }
+
+            .container.sign-up-mode .left-panel .image,
+            .container.sign-up-mode .left-panel .content {
+              transform: translateY(-300px);
+            }
+
+            .container.sign-up-mode .right-panel .image,
+            .container.sign-up-mode .right-panel .content {
+              transform: translateY(0px);
+            }
+
+            .right-panel .image,
+            .right-panel .content {
+              transform: translateY(300px);
+            }
+
+            .container.sign-up-mode .signin-signup {
+              top: 5%;
+              transform: translate(-50%, 0);
+            }
+          }
+
+          @media (max-width: 570px) {
+            form {
+              padding: 0 1.5rem;
+            }
+
+            .image {
+              display: none;
+            }
+
+            .panel .content {
+              padding: 0.5rem 1rem;
+            }
+
+            .container {
+              padding: 1.5rem;
+            }
+
+            .container:before {
+              bottom: 72%;
+              left: 50%;
+            }
+
+            .container.sign-up-mode:before {
+              bottom: 28%;
+              left: 50%;
+            }
+          }
+
+          .insta-images {
+            height: 60px;
+            width: 60px;
+          }
+
+          #Imagepro {
+            height: 60px;
+            width: 60px;
+          }
+
+
+
+          video {
+            width: 600px;
+          }
+
+          @media (max-width: 430px) {
+            video {
+              margin-top: 90px;
+              width: 480px;
+            }
+          }
+
+
+
+          /* ----------------------------------navbar----------------------------------------------- */
+
+
+          nav {
+            position: absolute;
+            top: 60px;
+            /* Adjust this value as needed */
+            left: 70%;
+            /* Center the nav horizontally */
+            transform: translateX(-50%);
+            width: 43.3vw;
+            height: 50px;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 0;
+            z-index: 10;
+            /* Set a higher z-index to ensure it's above other elements */
+          }
+
+          nav .nava {
+            line-height: 50px;
+            height: 100%;
+            font-size: 15px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            color: darkblue;
+            cursor: pointer;
+          }
+
+          nav .animation {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            z-index: 0;
+            transition: all .5s ease 0s;
+            border-radius: 8px;
+          }
+
+          .nava:nth-child(1) {
+            width: 100px;
+          }
+
+          .nava:nth-child(2) {
+            width: 110px;
+          }
+
+          .nava:nth-child(3) {
+            width: 100px;
+          }
+
+          .nava:nth-child(4) {
+            width: 160px;
+          }
+
+          .nava:nth-child(5) {
+            width: 120px;
+          }
+
+          nav .start-home,
+          .nava:nth-child(1):hover~.animation {
+            width: 100px;
+            left: 0;
+            background-color: #4D85E3;
+          }
+
+          nav .start-about,
+          .nava:nth-child(2):hover~.animation {
+            width: 110px;
+            left: 100px;
+            background-color: #4D85E3;
+          }
+
+          nav .start-blog,
+          .nava:nth-child(3):hover~.animation {
+            width: 100px;
+            left: 210px;
+            background-color: #4D85E3;
+          }
+
+          nav .start-portefolio,
+          .nava:nth-child(4):hover~.animation {
+            width: 160px;
+            left: 310px;
+            background-color: #4D85E3;
+          }
+
+          nav .start-contact,
+          .nava:nth-child(5):hover~.animation {
+            width: 120px;
+            left: 470px;
+            background-color: #4D85E3;
+          }
+
+          body {
+            font-size: 12px;
+            font-family: sans-serif;
+
+          }
+
+
+          span {
+            color: #2BD6B4;
+          }
+
+
+
+
+
+
+          /* Tablet styles */
+          @media screen and (max-width: 768px) {
+            nav {
+              width: 100%;
+              max-width: 400px;
+              margin: 10px auto;
+              padding: 0 10px;
+              font-size: 12px;
+              /* Font size for tablets */
+              display: flex;
+              flex-wrap: nowrap;
+              justify-content: space-between;
+            }
+
+            nav a {
+              width: calc(20% - 10px);
+              text-align: center;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+              font-size: 10px;
+              /* Font size for tablet menu items */
+            }
+
+            nav .animation {
+              transition: all .5s ease 0s;
+              border-radius: 0;
+              transition: none;
+              width: calc(20% - 10px);
+            }
+          }
+
+          /* Mobile styles */
+          @media screen and (max-width: 480px) {
+            nav {
+              max-width: 300px;
+              font-size: 20px;
+              position: absolute;
+              /* Adjust this value as needed */
+              left: 50%;
+              /* Font size for mobile */
+            }
+
+            nav .nava {
+              font-size: 10px;
+              /* Font size for mobile menu items */
+            }
+
+            nav .animation {
+              transition: all .5s ease 0s;
+
+              width: calc(20% - 10px);
+            }
+          }
+
+          /* Full-width navbar at 800px */
+          @media screen and (max-width: 800px) {
+            nav {
+              width: 100%;
+             
+            }
+          }
+    </style>
+    
+  </head>
+  <body>
+
+
+    <div class="container">
+      <div class="forms-container">
+        
+        <div class="signin-signup">
+
+          <form method="POST" class="sign-up-form">
+            {% csrf_token %}
+            <h2 class="title">Login with your credentials</h2>
+            <p>Enroll from KUTCHI ITI to get your credentials</p>
+
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" name="username" placeholder="Username" />
+            </div>
+
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password" placeholder="Password" />
+            </div>
+
+            <button type="submit" class="btn solid">Login</button>
+            
+            <p class="social-text">Or Sign in with social platforms</p>
+            <div class="social-media">
+              <a href="#" class="social-icon">
+                <img src="{% static 'images/login-page-images/Insta GIF.gif' %}" alt="" class="insta-images">
+              </a>
+              <a href="#" class="social-icon">
+                <img src="{% static 'images/login-page-images/Facebook GIF.gif' %}" alt=""  class="insta-images">
+              </a>
+              <a href="#" class="social-icon">
+                <img src="{% static 'images/login-page-images/Twitter GIF.gif' %}" alt=""  class="insta-images">
+              </a>
+              <a href="#" class="social-icon">
+                <img src="{% static 'images/login-page-images/Youtube GIF.gif' %}" alt=""  class="insta-images">
+              </a>
+            </div>
+          </form>
+
+          <form action="#" class="sign-in-form">
+            
+            <div class="video-container">
+              <video loop muted autoplay>
+                <source src="{% static 'images/login-page-images/test.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <nav>
+              {% comment %} <a href="#" class="nava" id="sign-up-btn">Login</a> {% endcomment %}
+              <a href="{% url 'about' %}" class="nava">About</a>
+              <a href="{% url 'course-tab' %}" class="nava">Courses</a>
+              {% comment %} <a href="#" class="nava">Services</a> {% endcomment %}
+              <a href="{% url 'contact' %}" class="nava">Contact</a>
+              <div class="animation start-home"></div>
+            </nav>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>New here ?</h3>
+            <p>
+                Unlock Your Digital Potential where Innovation Meets Education at Kutchi ITI!
+            </p>
+            <button class="btn transparent" id="sign-up-btn">
+              Login
+            </button>
+          </div>
+          <img src="{% static 'images/login-page-images/1st GIF.gif' %}" class="image" alt="" />
+        </div>
+
+
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>KUTCHI ITI</h3>
+            <p>
+                Decades of Excellence: Transforming Dreams at Kutchi ITI, Mumbra's IT Hub!
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              More Info
+            </button>
+          </div>
+          <img src="{% static 'images/login-page-images/2nd GIF.gif' %}" class="image" alt="" />
+        </div>
+      </div>
+
+
+    </div>
+
+    <script>
+      const sign_in_btn = document.querySelector("#sign-in-btn");
+      const sign_up_btn = document.querySelector("#sign-up-btn");
+      const container = document.querySelector(".container");
+
+      sign_up_btn.addEventListener("click", () => {
+        container.classList.add("sign-up-mode");
+      });
+
+      sign_in_btn.addEventListener("click", () => {
+        container.classList.remove("sign-up-mode");
+      });
+
+
+      $(document).ready(function() {
+        $("video").click(function() {
+            // Toggle between 30px and the initial width
+            var targetWidth = ($(this).width() === 60) ? "480px" : "60px";
+            $(this).animate({ width: targetWidth });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -5,27 +5,32 @@
 {% block content %}
 
 <style>
+    
     .studentPage{
-        margin-left: 120px
+        margin-left: -10vw
     }
 
-    .header{
-        background-color: #b20237;
-        color: #fff;
-        text-align: center;
-        padding: 5px;
+    @media (max-width:430px){
+        .studentPage{
+            margin-left: -50vw
+        }
     }
+
+
 
 </style>
 
-<div class="header">
+{% comment %} <div class="header">
     <h1>Registered Students</h1>    
-</div> 
+</div>  {% endcomment %}
 
 <div class="studentPage"> 
+    {% include 'myapp/TestTemplates/student-table.html' %}
 
-    {% include 'myapp/studentlist_inside_studenttab.html' %}
+    {% comment %} {% include 'myapp/studentlist_inside_studenttab.html' %} {% endcomment %}
 
 </div> 
 
 {% endblock content %}
+
+{% block footer %}{% endblock footer %}

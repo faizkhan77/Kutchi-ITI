@@ -19,10 +19,19 @@
         text-align: center
     }
 
-    @media (max-width:700px){
-        .mainbody{
-            margin-left: 0px
+    .blobsmall{
+        display:none;
+    }
+
+
+    @media(max-width:431px){
+        .blobbig{
+            display:display;
         }
+
+        {% comment %} .blobsmall{
+            display:block;
+        } {% endcomment %}
     }
 
 </style>
@@ -30,7 +39,12 @@
         {% comment %} {% include 'myapp/kutchi_logo.html' %} {% endcomment %}
    
         {% if request.user.is_authenticated and request.user.is_superuser %}
-            {% include 'myapp/HomeCarousal.html' %}
+            {% comment %} {% include 'myapp/HomeCarousal.html' %} {% endcomment %}
+           
+            {% comment %} {% include 'myapp/TestTemplates/blob.html' %} {% endcomment %}
+            {% comment %} {% include 'myapp/TestTemplates/dashboard.html' %} {% endcomment %}
+            {% include 'myapp/TestTemplates/in_home.html' %}
+
         {% endif %}
 
         {% if not request.user.is_superuser and request.user.is_authenticated %}
