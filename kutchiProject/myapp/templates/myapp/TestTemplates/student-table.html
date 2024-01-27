@@ -476,7 +476,7 @@
                         <td>&#8377;{{ student.feespaid }}</td>
                         <td>&#8377;{{ student.remaining_balance }}</td>
                         <td>
-                            <p class="status delivered">Active</p>
+                            <p class="{% if student.status == 'pending' %}status pending {% elif student.status == 'active'%}status delivered {% elif student.status == 'cancelled' %}status cancelled {% elif student.status == 'paused' %}status shipped {% else %}delivered{% endif %}">{{student.status}}</p>
                         </td>
                     </tr>
                     {% endfor %}

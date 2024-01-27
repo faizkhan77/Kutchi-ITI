@@ -247,7 +247,7 @@ def studentRegisterForm(request, user_id):
 
     form = StudentModelForm(initial={"user": user})
     if request.method == "POST":
-        form = StudentModelForm(request.POST)
+        form = StudentModelForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("student-tab")

@@ -11,6 +11,7 @@ from .models import (
     contact,
 )
 from django import forms
+from django.forms.widgets import ClearableFileInput
 
 
 class StudentModelForm(ModelForm):
@@ -25,7 +26,9 @@ class StudentModelForm(ModelForm):
             "feespaid",
         ]
         widgets = {
+            "image": ClearableFileInput(attrs={"class": "form-control"}),
             "joiningdate": DateInput(attrs={"type": "date"}),
+            "status": forms.Select(choices=studentsModel.STATUS_CHOICES),
             "completiondate": DateInput(attrs={"type": "date"}),
         }
 

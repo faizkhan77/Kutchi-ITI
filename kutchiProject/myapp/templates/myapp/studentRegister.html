@@ -10,15 +10,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-    .studentReg{
-        margin-left: 120px
-    }
+
 
     button{
         margin-bottom:50px;
         margin-left: 380px;
         height: 50px;
         width: 500px;
+        background-color: rgb(4, 75, 97);
     }
     
 </style>
@@ -32,7 +31,7 @@
             <h2>Student Registration</h2>
         {% endif %}
             
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <hr><br>
@@ -47,6 +46,14 @@
                 <label for="lastname" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="lastname" name="lastname" value="{{ form.instance.lastname }}">
             </div>
+
+            <div class="mb-3">
+                <label for="image">Student Image:</label>
+                {{ form.image }}
+            </div>
+            
+            
+
             <div class="mb-3">
                 <label for="rollno" class="form-label">Roll Number</label>
                 <input type="number" class="form-control" id="rollno" name="rollno" value="{{ form.instance.rollno }}">
@@ -86,6 +93,11 @@
             <div class="mb-3">
                 <label for="joiningdate" class="form-label">Joining Date</label>
                 <input type="date" class="form-control" id="joiningdate" name="joiningdate" value="{{ studentedit.joiningdate|date:'Y-m-d' }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="status">Status:</label>
+                {{ form.status }}
             </div>
             
 

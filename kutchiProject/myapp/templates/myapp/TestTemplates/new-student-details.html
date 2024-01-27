@@ -581,7 +581,13 @@
         <!-- ===== ===== User Main-Profile ===== ===== -->
         <section class="userProfile card">
             <div class="z`  ">
-                <figure><img src="{% static 'images/myimg.jpg' %}" alt="profile" width="190px" height="250px" style="border-radius: 20px;"></figure>
+                <figure> 
+                    {% if students.image %}
+                    <img src="{{students.image.url}}" width="190px" height="250px" style="border-radius: 20px;">
+                    {% else %}
+                    <img src="{% static 'images/default-student.png' %}" width="250px" height="250px" style="border-radius: 20px;">
+                    {% endif %}
+                </figure>
             </div>
         </section>
 
@@ -671,7 +677,11 @@
                             </form>
                         </li>
                     {% endif %}
-               
+
+                    {% if students.is_admission_canceled %}
+                        <h2 style="color:red"><b>ADMISSION FOR THIS STUDENT HAS BEEN CANCELLED</b></h2>
+                    {% endif %}
+                        
                 </ul>
             </div>
         </section>

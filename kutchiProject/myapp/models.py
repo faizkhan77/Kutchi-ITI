@@ -7,6 +7,7 @@ from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 from datetime import date
 
+
 # Create your models here.
 
 
@@ -32,9 +33,22 @@ class Batch(models.Model):
 
 
 class studentsModel(models.Model):
+    STATUS_CHOICES = [
+        ("active", "Active"),
+        ("pending", "Pending"),
+        ("cancelled", "Cancelled"),
+        ("paused", "Paused"),
+    ]
+
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
+    image = models.ImageField(
+        upload_to="student-images/",
+        null=True,
+        blank=True,
+        default="default-student.png",
+    )
     rollno = models.IntegerField(default=0)
     age = models.IntegerField()
     gender = models.CharField(max_length=20)
@@ -45,6 +59,7 @@ class studentsModel(models.Model):
     coursename = models.ForeignKey(Courses, on_delete=models.SET_NULL, null=True)
     joiningdate = models.DateField()
     joiningtime = models.TimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")
     completiondate = models.DateField()
     extendeddate = models.DateField(null=True, blank=True)
     exam_date = models.DateField(null=True, blank=True)
