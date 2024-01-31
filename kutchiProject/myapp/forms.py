@@ -35,8 +35,22 @@ class StudentModelForm(ModelForm):
     coursename = forms.ModelChoiceField(queryset=Courses.objects.all())
 
 
+import os
+
+
 class CourseModelForm(ModelForm):
+    image_folder = "static/images/course-images/"
     file_path = forms.FilePathField(path="pdfs/", required=False)
+
+    image_files = [
+        file
+        for file in os.listdir(image_folder)
+        if file.lower().endswith((".png", ".jpg", ".jpeg"))
+    ]
+
+    image_path = forms.ChoiceField(
+        choices=[(file, file) for file in image_files], required=False
+    )
 
     class Meta:
         model = Courses

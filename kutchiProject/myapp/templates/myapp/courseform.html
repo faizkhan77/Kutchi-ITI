@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% load static %}
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Student Form</title>
@@ -49,14 +52,48 @@
                     <label for=" file_path" class="form-label">Syllabus PDF</label>
                     {{ form.file_path }}
                 </div>
+
+                <div class="mb-3">
+                    <label for="image_path" class="form-label">Selected Image</label>
+                    <p id="selected-image">{{ form.image_path.value }}</p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        Select Image
+                    </button>
+                </div>
     
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
+            <!-- Image Selection Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">Select Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% for image in image_files %}
+                    <img src="{% static 'images/course-images/' %}{{ image }}" alt="{{ image }}" class="img-thumbnail" style="cursor: pointer;" onclick="selectImage('{{ image }}')">
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
         </div>
     
         <!-- Add Bootstrap 5 JS and Popper.js scripts here -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </div>
-
+    <script>
+        function selectImage(image) {
+            document.getElementById('selected-image').innerHTML = image;
+            document.getElementById('id_image_path').value = image;
+            $('#imageModal').modal('hide');
+        }
+    </script>
 {% endblock content %}
 {% block footer %}{% endblock footer %}
