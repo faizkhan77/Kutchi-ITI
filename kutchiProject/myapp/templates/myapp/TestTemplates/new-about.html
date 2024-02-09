@@ -1,0 +1,613 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Kutchi ITI{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="django-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% comment %} <link rel="stylesheet" href="style.css"> {% endcomment %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        
+        @media print {
+        
+            .table,
+            .table__body {
+                overflow: visible;
+                height: auto !important;
+                width: auto !important;
+            }
+        }
+        
+        /*@page {
+                    size: landscape;
+                    margin: 0; 
+                }*/
+        
+        .myimg {
+            text-align: center;
+            margin-top: 45px;
+            margin-bottom: 30px;
+        }
+        
+        #abbassirimg {
+            border-radius: 50px;
+        }
+        
+        .padding {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: whit;
+        
+        }
+        
+        body {
+            min-height: 100vh;
+            background: url({% static 'images/bg.jpg' %});
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        main.table {
+            margin-top:30px;
+            width: 82vw;
+            /* height: 90vh; */
+            background-color: #fff5;
+            margin-right: 2rem;
+            backdrop-filter: blur(7px);
+            box-shadow: 0 .4rem .8rem #0005;
+            border-radius: .8rem;
+            padding-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        
+        
+        .table__header h1 {
+            font-size: 24px;
+        }
+        
+        .table__header {
+            width: 100%;
+            height: 10%;
+            background-color: #fff4;
+            padding: .8rem 1rem;
+        
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .table__header .input-group {
+            width: 35%;
+            height: 100%;
+            background-color: #fff5;
+            padding: 0 .8rem;
+            border-radius: 2rem;
+        
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        
+            transition: .2s;
+        }
+        
+        .table__header .input-group:hover {
+            width: 45%;
+            background-color: #fff8;
+            box-shadow: 0 .1rem .4rem #0002;
+        }
+        
+        .table__header .input-group img {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+        
+        .table__header .input-group input {
+            width: 100%;
+            padding: 0 .5rem 0 .3rem;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+        
+        .table__body {
+            width: 95%;
+            max-height: calc(89% - 1.6rem);
+            background-color: transparent;
+        
+            margin: .8rem auto;
+            border-radius: .6rem;
+        
+            overflow: auto;
+            overflow: overlay;
+        }
+        
+        
+        .table__body::-webkit-scrollbar {
+            width: 0.5rem;
+            height: 0.5rem;
+        }
+        
+        .table__body::-webkit-scrollbar-thumb {
+            border-radius: .5rem;
+            background-color: #0004;
+            visibility: hidden;
+        }
+        
+        .table__body:hover::-webkit-scrollbar-thumb {
+            visibility: visible;
+        }
+        
+        
+        table {
+            width: 100%;
+        }
+        
+        td img {
+            width: 36px;
+            height: 36px;
+            margin-right: .5rem;
+            border-radius: 50%;
+        
+            vertical-align: middle;
+        }
+        
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        thead th {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-color: #d5d1defe;
+            cursor: pointer;
+            text-transform: capitalize;
+        }
+        
+        tbody tr:nth-child(even) {
+            background-color: #0000000b;
+        }
+        
+        tbody tr {
+            --delay: .1s;
+            transition: .5s ease-in-out var(--delay), background-color 0s;
+        }
+        
+        tbody tr.hide {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        
+        tbody tr:hover {
+            background-color: #fff6 !important;
+        }
+        
+        tbody tr td,
+        tbody tr td p,
+        tbody tr td img {
+            transition: .2s ease-in-out;
+        }
+        
+        tbody tr.hide td,
+        tbody tr.hide td p {
+            padding: 0;
+            font: 0 / 0 sans-serif;
+            transition: .2s ease-in-out .5s;
+        }
+        
+        tbody tr.hide td img {
+            width: 0;
+            height: 0;
+            transition: .2s ease-in-out .5s;
+        }
+        
+        .status {
+            padding: .4rem 0;
+            border-radius: 2rem;
+            text-align: center;
+        }
+        
+        .status.delivered {
+            background-color: #86e49d;
+            color: #006b21;
+        }
+        
+        .status.cancelled {
+            background-color: #d893a3;
+            color: #b30021;
+        }
+        
+        .status.pending {
+            background-color: #ebc474;
+        }
+        
+        .status.shipped {
+            background-color: #6fcaea;
+        }
+        
+        
+        @media (max-width: 1000px) {
+            td:not(:first-of-type) {
+                min-width: 12.1rem;
+            }
+        }
+        
+        thead th span.icon-arrow {
+            display: inline-block;
+            width: 1.3rem;
+            height: 1.3rem;
+            border-radius: 50%;
+            border: 1.4px solid transparent;
+        
+            text-align: center;
+            font-size: 1rem;
+        
+            margin-left: .5rem;
+            transition: .2s ease-in-out;
+        }
+        
+        thead th:hover span.icon-arrow {
+            border: 1.4px solid #6c00bd;
+        }
+        
+        thead th:hover {
+            color: #6c00bd;
+        }
+        
+        thead th.active span.icon-arrow {
+            background-color: #6c00bd;
+            color: #fff;
+        }
+        
+        thead th.asc span.icon-arrow {
+            transform: rotate(180deg);
+        }
+        
+        thead th.active,
+        tbody td.active {
+            color: #6c00bd;
+        }
+        
+        .export__file {
+            position: relative;
+        }
+        
+        .export__file .export__file-btn {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            background: #fff6 url(images/export.png) center / 80% no-repeat;
+            border-radius: 50%;
+            transition: .2s ease-in-out;
+        }
+        
+        .export__file .export__file-btn:hover {
+            background-color: #fff;
+            transform: scale(1.15);
+            cursor: pointer;
+        }
+        
+        .export__file input {
+            display: none;
+        }
+        
+        .export__file .export__file-options {
+            position: absolute;
+            right: 0;
+        
+            width: 12rem;
+            border-radius: .5rem;
+            overflow: hidden;
+            text-align: center;
+        
+            opacity: 0;
+            transform: scale(.8);
+            transform-origin: top right;
+        
+            box-shadow: 0 .2rem .5rem #0004;
+        
+            transition: .2s;
+        }
+        
+        .export__file input:checked+.export__file-options {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 100;
+        }
+        
+        .export__file .export__file-options label {
+            display: block;
+            width: 100%;
+            padding: .6rem 0;
+            background-color: #f2f2f2;
+        
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        
+            transition: .2s ease-in-out;
+        }
+        
+        .export__file .export__file-options label:first-of-type {
+            padding: 1rem 0;
+            background-color: #86e49d !important;
+        }
+        
+        .export__file .export__file-options label:hover {
+            transform: scale(1.05);
+            background-color: #fff;
+            cursor: pointer;
+        }
+        
+        .export__file .export__file-options img {
+            width: 2rem;
+            height: auto;
+        }
+        
+        tbody tr a {
+            text-decoration: none;
+            color: black;
+        
+        }
+        
+        tbody tr a:hover {
+            color: black;
+        }
+        
+        
+        
+        @media (max-width:430px) {
+        
+        
+            tbody tr {
+                padding: 20px;
+            }
+        
+            body {
+        
+                display: block;
+        
+            }
+        
+            #coursetitle {
+                display: none;
+            }
+        
+            main.table {
+                margin-top: 1rem;
+                margin-left: 1rem;
+                width: 92vw;
+                height: 90vh;
+                background-color: #fff5;
+                backdrop-filter: none;
+                box-shadow: 0 0.4rem 0.8rem #0005;
+                border-radius: 0.8rem;
+                overflow: hidden;
+        
+            }
+        
+        
+        
+            .table__header h1 {
+                font-size: 15px;
+            }
+        
+            .table__header .input-group {
+                width: 65%;
+                height: 60%;
+                margin-right: 1rem;
+            }
+        
+            .export__file .export__file-btn {
+                display: none;
+            }
+        }
+        
+        button {
+            border: 2px solid #24b4fb;
+            background-color: #24b4fb;
+            border-radius: 0.9em;
+        
+                {
+                % comment %
+            }
+        
+            padding: 0.8em 1.2em 0.8em 1em;
+        
+                {
+                % endcomment %
+            }
+        
+            transition: all ease-in-out 0.2s;
+            font-size: 12px;
+        }
+        
+        button span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        button:hover {
+            background-color: #0071e2;
+        }
+        
+        
+        
+        
+        .pagination {
+            display: flex;
+            padding-left: 0;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+        
+        .pagination a.active {
+            background-color: lightblue;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+        
+        
+        .current {
+            margin-right: auto;
+            margin-top: 10px
+        }
+    </style>
+</head>
+<body>
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1 id="coursetitle">Welcome To Kutchi I.T.I</h1>
+        </section>
+        <section class="table__body">
+            <table>
+                <div class="myimg">
+                  <img id="abbassirimg" src="{% static 'images/about-us-img.jpg' %}" alt="About Us Image" >
+                </div>
+                <div class="container1">
+                    <h2 class="padding">About Kutchi-ITI</h2>
+                    <p>
+                        At Kutchi ITI, we are more than just an educational institution – we are a legacy of excellence,
+                        innovation, and commitment in the field of Information Technology. For over three decades, we have
+                        been at the forefront of shaping IT education, providing a comprehensive spectrum of courses that
+                        cater to the dynamic demands of the industry.
+                        <br><br>
+                        Serving Man is like serving God. The power of knowledge is passed from generation to another generation<br><br>
+
+                        Without knowledge a normal man can never grow. Through Knowledge only one can reach his goal easily and fulfill his dream. Knowledge is the only way through which one will come to now about his own power.<br><br>
+
+                        A knowledge able man is capable of passing through bad time easily, and is successfully in clearing all the hurdles which comes in his way.<br><br>
+
+                        Knowledge plays a key role in founding a good and sophisticated society having responsible citizens.<br><br>
+
+                        For the bright future of the students and to reach there goal, we are providing them a helping hand so that they become a respectful citizen of the society.<br><br>
+
+                        For the same reason, to help the students of Mumbai and Thane and, to give them good knowledge and good talent we have taken this step. And with the blessing of our teacher and help of our beloved friends on 1st May 1994 we have established Kutchi I.T.I. And with your help and support we have completed 26 years successfully and in the 27 year we have broken all records. We are certified by the institute of I.T.E.S vocational and engineering examination board and is 9001:2008 certified and registered by District Industrial Center Service Industry Government of Maharashtra.<br><br>
+
+                        We give full assurance that in our institute the students will come to know about the competitive world and how to get success in. We will also teach them technical course through which they will be able to live successfully in this competitive world.<br><br>
+
+                        In our institute with technical knowledge we also give them chance to know about the living of illiterate people and the facilities provided to the illiterate people by the Government. Many students of this institute got successful not only in India but also in foreign countries.<br><br>
+
+                        This happened only by the blessing of our teacher and help of our friends and also from the support of ex-students of this institute.<br><br>
+
+                        They give us their idea and also confidence on how to provide more facilities to students. There is no doubt that this institute will make news in the world of technical world. We take care of our belonging but knowledge take care of us. We hope that you will give a favorable reply and extend your support to us and help us to move ahead.
+                    </p>
+                    <h2 class="padding">Our Journey</h2>
+                    <p>
+                        Established three decades ago, Kutchi ITI has evolved into a pioneering institution, synonymous with
+                        quality education in the IT domain. Our unwavering dedication to delivering cutting-edge knowledge and
+                        industry-relevant skills has set us apart as a trusted and respected name in the field.
+                    </p>
+                    <h2 class="padding">Our Courses</h2>
+                    <p>
+                        With a rich array of courses spanning MSCIT, Programming, Hardware, Web Development, Graphic Design,
+                        and various other high-level IT disciplines, Kutchi ITI offers a diverse portfolio that equips our
+                        students with the skills needed to thrive in a competitive landscape.
+                    </p>
+                    <h2 class="padding">Our Commitment</h2>
+                    <p>
+                        At Kutchi ITI, we recognize that success in the IT sector is rooted in a strong foundation of knowledge
+                        and skill. Therefore, we are committed to delivering education that goes beyond textbooks, fostering
+                        critical thinking, problem-solving, and real-world application. Our courses are designed by industry experts
+                        and seasoned educators, ensuring that our students are prepared to tackle the challenges of the ever-evolving
+                        IT landscape.
+                    </p>
+                    <h2 class="padding">Placement</h2>
+                    <p>Kutchi-ITI has so far trained more than 1 lakhs students who are currently successfully working in the industry today. We have a full time placement cell working to identify the best opportunities for the students.</p>
+                    <h2>Corporate Training</h2>
+                    <p>
+                        In the current scenario of Global Competition, Organizations have realized the role of IT & Soft Skills Training in Development and Growth of Companies. With ever increasing pressure on Companies to reach their Quarterly Bench Marks, we at Kutchi-ITI helps you save on operational cost and increase productivity with Customized Training Tracks, a solution which most MNCs are looking for. We deliver Corporate Trainings On-Site, Off-Site or at our Institute. Schedule of Training is designed as per Client requirements so that it minimizes impact on production and operational cost. We also create customized syllabus as per Client's need. All programs contain interactive exercise, self assessment quizzes and exhaustive assignments. Our teams of Expert Faculties help the Organization in achieving their strategic goals. Our Methodology includes real-time interaction, in depth information, personalized interaction, practical training & easy to understand reference material to reach your desired output.
+                    </p>
+                    <h2 class="padding">Why Choose Kutchi ITI?</h2>
+                    <ul>
+                        <li><strong>Legacy of Excellence:</strong> Our 30-year journey is a testament to our commitment to excellence
+                            in IT education.</li>
+                        <li><strong>Comprehensive Courses:</strong> We offer an extensive range of courses that cater to various IT
+                            disciplines, ensuring a holistic learning experience.</li>
+                        <li><strong>Industry-Relevant Skills:</strong> Our curriculum is aligned with industry trends, equipping
+                            students with practical skills that are in high demand.</li>
+                        <li><strong>Expert Faculty:</strong> Our faculty comprises industry experts and educators who bring real-world
+                            experience to the classroom.</li>
+                        <li><strong>State-of-the-Art Facilities:</strong> Our modern infrastructure and well-equipped labs provide
+                            an optimal learning environment.</li>
+                        <li><strong>Holistic Development:</strong> Beyond technical skills, we focus on nurturing soft skills, teamwork,
+                            and leadership qualities.</li>
+                    </ul>
+                    <h4>Advantages</h4>
+                    <ul>
+                        <li>EMPOWERED OVER 1,00,000 PROFESSIONALS</li>
+                        <li>MORE THAN 5+ Kutchi-ITI CENTERS ACROSS INDIA IN THE PAST 2 YRS.</li>
+                        <li>OUR FRANCHISE SUCCESS RATE IS 95%.</li>
+                        <li>ACCREDITED BY INDUSTRY LEADERS</li>
+                        <li>DUAL TRAINING METHODOLOGY</li>
+                        <li>COMPREHENSIVE STUDY MATERIALS</li>
+                        <li>Mumbra's only institute which provides Professional cum Individual Training with Complete Job Assistance.</li>
+                        <li>Fully I.T.E.S., Vocational & Engineering Exam Board Syllabus</li>
+                        <li>Govt. / University / I.T.E.S. Board Exam / U.S.A.Exam / MSBTE - Mkcl's Authorized Learning Center</li>
+                        <li>Full & Part Time Engineering / Degree / Diploma / Master Diploma / Certificate Courses</li>
+                        <li>Electronics, Electricals, Mechanical, A/c & Refrigeration, Automobile, Civil & Mechanical, Draughtsman, Professional Board Exams also.</li>
+                        <li>Special Fast Track Courses for Service & Businessmen</li>
+                        <li>High-standards of training process by experienced industry professionals</li>
+                        <li>Hands-on soft skills development for new and experienced students</li>
+                        <li>One-on-one interaction with each student.</li>
+                        <li>Anytime broadband internet access.</li>
+                        <li>Training carried on projectors for real application feel.</li>
+                        <li>Regularly updated course material to offer the latest and train with latest technologies.</li>
+                        <li>Library & Lab Facility open for 7 days a week for the students.</li>
+                        <li>Scholarship for needy, poor and orphans.</li>
+                        <li>Certificate can be verified Online by any individual/company in India/Abroad you apply for a job.</li>
+                        <li>Batch Timing: 7 am to 10 pm, Monday to Saturday</li>
+                        <li>Sunday: Special Batch for working people - Morning 9 am to 1 pm</li>
+                        <li>YCMOU University Mark Sheet will be awarded to all learners who have completed the KLiC Course From MKCL</li>
+                    </ul>
+                    
+                    <p>
+                        Join us at Kutchi ITI and embark on a transformative journey that will empower you to navigate the complex IT
+                        landscape with confidence and expertise. Your aspirations are our inspiration, and together, we will shape a
+                        future that is technologically advanced and full of promise.
+                    </p>
+                </div>
+                </div>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </section>
+    </main>
+</html>
+{% endblock content %}

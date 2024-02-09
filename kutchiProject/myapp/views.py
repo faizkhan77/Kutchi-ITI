@@ -178,7 +178,8 @@ def contactTab(request):
 
 
 def aboutTab(request):
-    return render(request, "myapp/about.html")
+    # return render(request, "myapp/about.html")
+    return render(request, "myapp/TestTemplates/new-about.html")
 
 
 def enquiryTab(request):
@@ -461,9 +462,9 @@ def DownloadSyllabus(request, pk):
                     response = FileResponse(
                         open(pdf_path, "rb"), content_type="application/pdf"
                     )
-                    response[
-                        "Content-Disposition"
-                    ] = f'attachment; filename="{course.coursename}_syllabus.pdf"'
+                    response["Content-Disposition"] = (
+                        f'attachment; filename="{course.coursename}_syllabus.pdf"'
+                    )
                     return response
                 except FileNotFoundError:
                     # Handle if the file is not found
@@ -488,9 +489,9 @@ def download_pdf(request, pk):
             response = FileResponse(
                 open(pdf_path, "rb"), content_type="application/pdf"
             )
-            response[
-                "Content-Disposition"
-            ] = f'attachment; filename="{course.coursename}.pdf"'
+            response["Content-Disposition"] = (
+                f'attachment; filename="{course.coursename}.pdf"'
+            )
             return response
         except FileNotFoundError:
             # Handle if the file is not found
