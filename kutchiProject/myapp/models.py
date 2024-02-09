@@ -19,6 +19,30 @@ class Courses(models.Model):
     file_path = models.CharField(max_length=200, null=True, blank=True)
     # updated = models.DateTimeField(auto_now=True)
     # created = models.DateTimeField(auto_now_add=True)
+    image_1 = models.ImageField(
+        upload_to="course-images/",
+        blank=True,
+        null=True,
+        default="default-course-img1.jpg",
+    )
+    image_2 = models.ImageField(
+        upload_to="course-images/",
+        blank=True,
+        null=True,
+        default="default-course-img2.jpg",
+    )
+    image_3 = models.ImageField(
+        upload_to="course-images/",
+        blank=True,
+        null=True,
+        default="default-course-img3.jpg",
+    )
+    image_4 = models.ImageField(
+        upload_to="course-images/",
+        blank=True,
+        null=True,
+        default="default-course-img4.jpg",
+    )
 
     def __str__(self):
         return self.coursename

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -134,9 +135,9 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 
-MEDIA_URL = "student-images/"
+MEDIA_URL = "images/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "static/student-images")
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 

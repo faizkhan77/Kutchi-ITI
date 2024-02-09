@@ -309,13 +309,13 @@ def addCourse(request):
     page = "addcourse"
     courseform = CourseModelForm()
 
-    # Get the list of image files from the 'images' folder
-    image_folder = os.path.join(settings.BASE_DIR, "static/images/course-images")
-    image_files = [
-        file
-        for file in os.listdir(image_folder)
-        if file.lower().endswith((".png", ".jpg", ".jpeg"))
-    ]
+    # # Get the list of image files from the 'images' folder
+    # image_folder = os.path.join(settings.BASE_DIR, "static/images/course-images")
+    # image_files = [
+    #     file
+    #     for file in os.listdir(image_folder)
+    #     if file.lower().endswith((".png", ".jpg", ".jpeg"))
+    # ]
 
     # Get the list of PDF files from the 'pdfs' folder
     pdf_folder = os.path.join(settings.BASE_DIR, "pdfs")
@@ -326,12 +326,12 @@ def addCourse(request):
         if courseform.is_valid():
             courseform.save()
 
-            # After saving, update the list of image files
-            image_files = [
-                file
-                for file in os.listdir(image_folder)
-                if file.lower().endswith((".png", ".jpg", ".jpeg"))
-            ]
+            # # After saving, update the list of image files
+            # image_files = [
+            #     file
+            #     for file in os.listdir(image_folder)
+            #     if file.lower().endswith((".png", ".jpg", ".jpeg"))
+            # ]
 
             # After saving, update the list of PDF files
             pdf_files = [
@@ -344,7 +344,7 @@ def addCourse(request):
         "form": courseform,
         "pdf_files": pdf_files,
         "page": page,
-        "image_files": image_files,
+        # "image_files": image_files,
     }
     return render(request, "myapp/courseform.html", context)
 

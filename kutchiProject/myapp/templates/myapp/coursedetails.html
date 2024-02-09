@@ -261,6 +261,23 @@
                     <p>{{ obj.coursedetails|linebreaks|urlize }}</p>
                 </div>
             </div>
+{% comment %} 
+            <div class="student-details" style="display: flex; justify-content: center;">
+                <div class="image-container">
+                    {% if obj.image_1 %}
+                        <img src="{{ obj.image_1.url }}" alt="Image 1">
+                    {% endif %}
+                    {% if obj.image_2 %}
+                        <img src="{{ obj.image_2.url }}" alt="Image 2">
+                    {% endif %}
+                    {% if obj.image_3 %}
+                        <img src="{{ obj.image_3.url }}" alt="Image 3">
+                    {% endif %}
+                    {% if obj.image_4 %}
+                        <img src="{{ obj.image_4.url }}" alt="Image 4">
+                    {% endif %}
+                </div>
+            </div> {% endcomment %}
 
 
             {% if obj.file_path %}
