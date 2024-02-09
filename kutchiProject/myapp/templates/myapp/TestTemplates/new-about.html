@@ -374,8 +374,17 @@
             color: black;
         }
         
+        @media (max-width:700px){
+            .myimg img{
+                width: 80vw
+            }
+        }
         
-        
+        @media (max-width:630px){
+            .aboutblob{
+                display:none;
+            }
+        }
         @media (max-width:430px) {
         
         
@@ -390,7 +399,7 @@
             }
         
             #coursetitle {
-                display: none;
+                font-size:30px
             }
         
             main.table {
@@ -490,6 +499,10 @@
     </style>
 </head>
 <body>
+        <div class="aboutblob">
+            {% include 'myapp/TestTemplates/blob.html' %} 
+        </div>
+    
     <main class="table" id="customers_table">
         <section class="table__header">
             <h1 id="coursetitle">Welcome To Kutchi I.T.I</h1>
@@ -497,7 +510,7 @@
         <section class="table__body">
             <table>
                 <div class="myimg">
-                  <img id="abbassirimg" src="{% static 'images/about-us-img.jpg' %}" alt="About Us Image" >
+                    <img src="{% static 'images/about-us-img.jpg' %}" alt="About Us Image">
                 </div>
                 <div class="container1">
                     <h2 class="padding">About Kutchi-ITI</h2>
